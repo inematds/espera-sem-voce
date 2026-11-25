@@ -1,0 +1,7 @@
+[Unit]
+Description=vigia: confere os trabalhos que estão esperando e abre a fase 2
+
+[Service]
+Type=oneshot
+# ajuste o caminho; VIGIA_AVISO pode chamar o seu bot (ex.: curl para a API do Telegram)
+ExecStart=/usr/bin/python3 %h/espera-sem-voce/vigia/vigia.py rodada
