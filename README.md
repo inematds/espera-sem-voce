@@ -25,7 +25,7 @@ Abra o Claude Code ou o Codex na pasta do seu projeto e cole:
 | Quem espera | um programa à parte, sem IA | o próprio bot, fase por fase | o próprio assistente, tarefa por tarefa |
 | Bom para | trabalho de uma vez começado numa conversa com a IA | produção que se repete, com aprovação no meio | pedidos do dia a dia que precisam sobreviver a um reinício |
 | Confere | a cada 5 min | a cada 1 a 5 min (definido por fase) | especialistas a cada 15–20 s; sinal de vida a cada 30 s |
-| Desiste | 8 h sem ficar pronto (ajustável) | no limite da fase (10 h no r7ex, 40 h no avatar) | pedido de chat/agente: 1 tentativa; caiu → `failed` + aviso, retoma com `/job N`. Tarefa agendada: 2 tentativas (nova após 30 s) |
+| Desiste | 8 h sem ficar pronto (ajustável) | no limite de cada fase (1 h a 40 h; 10 h no r7ex, 40 h no avatar do promoavatar) | pedido de chat/agente: 1 tentativa; caiu → `failed` + aviso, retoma com `/job N`. Tarefa agendada: 2 tentativas (nova após 30 s) |
 | Aprovação no meio | não (as ordens vão no bilhete) | sim, no portão | não; retomar depois com `/job` |
 | Origem | vigia `continua` (projeto interno, privado) → cópia em [`vigia/`](vigia/) | [inemaccbot](https://github.com/inematds/inemaccbot) | [openpcbotv3](https://github.com/inematds/openpcbotv3) |
 
@@ -53,7 +53,7 @@ O teste cobre: (1) não pronto → continua esperando; (2) pronto → abre a fas
 
 ```bash
 # 1. na pasta do trabalho, o bilhete da fase 2 (o que falta, ordens, travas)
-cp vigia/CONTINUAR.exemplo.md ~/trabalhos/video-x/CONTINUAR.md
+mkdir -p ~/trabalhos/video-x && cp vigia/CONTINUAR.exemplo.md ~/trabalhos/video-x/CONTINUAR.md
 
 # 2. registrar: o --confere é qualquer comando cuja ÚLTIMA linha seja "pronto" quando ficar pronto
 python3 vigia/vigia.py add ~/trabalhos/video-x \
@@ -61,7 +61,7 @@ python3 vigia/vigia.py add ~/trabalhos/video-x \
 
 # 3. o timer chama a rodada a cada 5 min
 cp vigia/systemd/vigia.service vigia/systemd/vigia.timer ~/.config/systemd/user/
-# ajuste o caminho do vigia.py no vigia.service
+# o vigia.service supõe o kit em ~/espera-sem-voce: ajuste o caminho do vigia.py se clonou em outro lugar
 systemctl --user daemon-reload && systemctl --user enable --now vigia.timer
 
 python3 vigia/vigia.py status
@@ -80,7 +80,7 @@ export VIGIA_AVISO='curl -s "https://api.telegram.org/bot$TG_TOKEN/sendMessage" 
 | Arquivo | O que é |
 |---|---|
 | `vigia/vigia.py` | o vigia (add, rodada, status) |
-| `vigia/testar.sh` | teste sem IA, 3 casos |
+| `vigia/testar.sh` | teste sem IA, 4 casos |
 | `vigia/CONTINUAR.exemplo.md` | modelo do bilhete da fase 2 |
 | `vigia/systemd/` | timer de 5 em 5 min |
 | `guia/` | a página com os diagramas animados (PT, `en/`, `es/`) |
