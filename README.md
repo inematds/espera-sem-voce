@@ -60,7 +60,7 @@ python3 vigia/vigia.py add ~/trabalhos/video-x \
   --confere '[ -f saida/final.mp4 ] && echo pronto || echo aguardando' --teto-h 8
 
 # 3. o timer chama a rodada a cada 5 min
-cp vigia/systemd/vigia.service vigia/systemd/vigia.timer ~/.config/systemd/user/
+mkdir -p ~/.config/systemd/user && cp vigia/systemd/vigia.service vigia/systemd/vigia.timer ~/.config/systemd/user/
 # o vigia.service supõe o kit em ~/espera-sem-voce: ajuste o caminho do vigia.py se clonou em outro lugar
 systemctl --user daemon-reload && systemctl --user enable --now vigia.timer
 
@@ -72,6 +72,8 @@ Variáveis: `VIGIA_ESTADO` (arquivo de estado), `VIGIA_FASE2` (comando da fase 2
 ```bash
 export VIGIA_AVISO='curl -s "https://api.telegram.org/bot$TG_TOKEN/sendMessage" --data-urlencode chat_id=$TG_CHAT --data-urlencode text="$MSG" > /dev/null'
 ```
+
+O timer do systemd não vê o `export` do terminal: ponha a mesma linha no `vigia.service`, como `Environment=VIGIA_AVISO=...` (com `TG_TOKEN` e `TG_CHAT`), ou num `EnvironmentFile=`, e rode `systemctl --user daemon-reload`.
 
 **Permissão da fase 2:** o padrão é `claude -p --permission-mode bypassPermissions`, porque sem ninguém na frente da tela ela não pode parar para pedir licença. O bilhete é a autorização: rode numa pasta só do trabalho e escreva as travas no `CONTINUAR.md`. Quer outro motor? `VIGIA_FASE2='codex exec --full-auto "Leia $PASTA/CONTINUAR.md …"'`.
 

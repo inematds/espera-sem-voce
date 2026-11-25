@@ -174,7 +174,7 @@
 <div class="glow"></div>
 <div class="wrap">
 <div class="h-top"><span class="chip">Kit grátis · 3 jeitos de esperar · com diagramas animados</span>
-<h1>Você dispara o trabalho demorado e sai da frente da tela. <span class="amb">Espera sem você</span>: ele segue sozinho e te avisa no fim</h1></div>
+<h1>Você dispara o trabalho demorado e sai da frente da tela. <span class="amb">Espera sem você</span>: o trabalho segue sozinho e te avisa no fim</h1></div>
 <figure class="f2"><img alt="Espera sem você: o trabalho longo segue sozinho e te avisa no fim" src="assets/banner.jpg"/></figure>
 <div class="h-bot"><p class="lead">O vídeo com avatar leva uma hora para ficar pronto, a montagem final leva a tarde. Hoje você fica com a conversa da IA aberta, olhando a tela, e cada "já ficou pronto?" gasta a cota da sua assinatura. Aqui estão os três jeitos que a INEMA usa todo dia para a IA esperar sem você e sem gastar: o vigia, o fluxo com portão e a fila que retoma.</p>
 <div class="cta">
@@ -218,7 +218,7 @@
 <div class="grid g3">
 <div class="card"><h3>🎥 Vídeo com avatar</h3><p><strong>Hoje:</strong> você espera o avatar com a conversa aberta, ou esquece e só volta à noite.</p><p><strong>Com o vigia:</strong> você fecha; ele confere a cada 5 minutos, chama a IA quando fica pronto e o vídeo sai publicado.</p></div>
 <div class="card"><h3>🧾 Texto antes de gastar</h3><p><strong>Hoje:</strong> a IA gera tudo de uma vez e você descobre o erro no fim, com o crédito gasto.</p><p><strong>Com o portão:</strong> o fluxo para depois do roteiro; você lê no celular, aprova, e só então ele gasta.</p></div>
-<div class="card"><h3>🔌 A máquina reiniciou</h3><p><strong>Hoje:</strong> o trabalho some sem aviso e você recomeça do zero.</p><p><strong>Com a fila:</strong> o pedido fica guardado; se cair no meio, chega o aviso de falha e você pede "continue de onde parou", com a conversa salva.</p></div>
+<div class="card"><h3>🔌 A máquina reiniciou</h3><p><strong>Hoje:</strong> o trabalho some sem aviso e você recomeça do zero.</p><p><strong>Com a fila:</strong> o pedido fica guardado; se cair no meio, chega o aviso de falha e você manda /job, o número do pedido e "continue de onde parou", com a conversa salva.</p></div>
 </div>
 <div style="margin-top:28px">
 <ol class="tl">
@@ -318,7 +318,7 @@
 <span class="num">Jeito 3 · a fila que retoma</span>
 <h3>Uma fila que guarda cada pedido e nunca falha calada</h3>
 <p>É como o assistente pessoal da INEMA (o Jarvis no Telegram) espera. Cada pedido vira uma tarefa <strong>guardada</strong> numa fila: se a máquina reinicia enquanto ele espera a vez, ele continua lá. Quando o agente chama especialistas (outros agentes, cada um com uma parte do trabalho), ele <strong>espera todos terminarem</strong>, conferindo a cada 15 a 20 segundos, antes de responder.</p>
-<p>Enquanto trabalha, o agente manda um <strong>sinal de vida</strong> a cada 30 segundos. Se o sinal some no meio (a máquina caiu), o pedido não some junto: ele é marcado como falho e <strong>chega um aviso</strong>. Você responde no chat com o número do pedido e "continue de onde parou", e ele retoma com a conversa salva (ou, se ela se perdeu, a partir do pedido original). As tarefas automáticas, como as agendadas, ainda tentam de novo sozinhas, uma vez, depois de 30 segundos. É também o lugar onde chegam os avisos dos outros dois jeitos.</p>
+<p>Enquanto trabalha, o agente manda um <strong>sinal de vida</strong> a cada 30 segundos. Se o sinal some no meio (a máquina caiu), o pedido não some junto: ele é marcado como falho e <strong>chega um aviso</strong>. Você manda no chat /job, o número do pedido e "continue de onde parou", e ele retoma com a conversa salva (ou, se ela se perdeu, a partir do pedido original). As tarefas automáticas, como as agendadas, ainda tentam de novo sozinhas, uma vez, depois de 30 segundos. É também o lugar onde chegam os avisos dos outros dois jeitos.</p>
 <div class="analog"><b>Como no dia a dia:</b> a senha do banco. Você pega a senha e senta; mesmo que o sistema reinicie, a sua senha continua na fila. Se o atendimento cair no meio, o banco te liga avisando, e você volta com o mesmo número de protocolo, sem contar tudo de novo.</div>
 <div class="prazos"><span>sinal de vida: <b>30 s</b></span><span>espera os especialistas: a cada <b>15 a 20 s</b></span><span>aviso "ainda trabalhando": <b>25 min</b></span></div>
 <p class="origem">De onde vem: a fila do <a href="https://github.com/inematds/openpcbotv3" rel="noopener" target="_blank">openpcbotv3</a> (código aberto), o assistente da INEMA no Telegram.</p>
@@ -368,7 +368,7 @@
 <ol class="tl">
 <li><b>Vigia:</b> 179 trabalhos de 09/11 a 25/11/2026. 124 terminaram feitos, 50 falharam com aviso e motivo, 5 pararam no limite de espera. A espera do meio até ficar pronto foi de 92 minutos.</li>
 <li><b>Fluxo com portão:</b> 193 fluxos de 31/07 a 20/11/2026. 151 terminaram, 15 falharam e 27 foram cancelados por quem pediu.</li>
-<li><b>Fila que retoma:</b> perto de 150 mil tarefas concluídas no assistente (quase todas automáticas, mais 183 pedidos longos de agente); 13 falharam, e cada falha gerou um aviso no chat.</li>
+<li><b>Fila que retoma:</b> perto de 150 mil tarefas concluídas no assistente (quase todas automáticas, mais 170 pedidos longos de agente); 13 falharam, e cada falha gerou um aviso no chat.</li>
 <li><b>Vigia de exemplo deste kit:</b> o teste roda quatro casos em poucos segundos, sem IA: espera enquanto não está pronto, chama a fase 2 quando fica, para com aviso no limite de espera e encerra a fase 2 que passa de 3 horas. Quatro de quatro passaram.</li>
 </ol>
 <blockquote>As falhas também contam a favor: em todas elas o aviso chegou com o motivo, em vez de o trabalho ficar parado sem ninguém saber.</blockquote>
