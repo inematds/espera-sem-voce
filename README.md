@@ -23,9 +23,9 @@ Abra o Claude Code ou o Codex na pasta do seu projeto e cole:
 | | Vigia | Fluxo com portão | Fila que retoma |
 |---|---|---|---|
 | Quem espera | um programa à parte, sem IA | o próprio bot, fase por fase | o próprio assistente, tarefa por tarefa |
-| Bom para | trabalho de uma vez começado numa conversa com a IA | produção que se repete, com aprovação no meio | pedidos do dia a dia, com erro passageiro |
-| Confere | a cada 5 min | a cada 1 a 5 min (definido por fase) | sinal de vida a cada 30 s |
-| Desiste | 8 h sem ficar pronto (ajustável) | no limite da fase (10 h no r7ex, 40 h no avatar longo) | depois das tentativas (30 s × 2ⁿ entre elas) |
+| Bom para | trabalho de uma vez começado numa conversa com a IA | produção que se repete, com aprovação no meio | pedidos do dia a dia que precisam sobreviver a um reinício |
+| Confere | a cada 5 min | a cada 1 a 5 min (definido por fase) | especialistas a cada 15–20 s; sinal de vida a cada 30 s |
+| Desiste | 8 h sem ficar pronto (ajustável) | no limite da fase (10 h no r7ex, 40 h no avatar) | pedido de chat/agente: 1 tentativa; caiu → `failed` + aviso, retoma com `/job N`. Tarefa agendada: 2 tentativas (nova após 30 s) |
 | Aprovação no meio | não (as ordens vão no bilhete) | sim, no portão | não; retomar depois com `/job` |
 | Origem | vigia `continua` (projeto interno, privado) → cópia em [`vigia/`](vigia/) | [inemaccbot](https://github.com/inematds/inemaccbot) | [openpcbotv3](https://github.com/inematds/openpcbotv3) |
 
@@ -35,18 +35,19 @@ Abra o Claude Code ou o Codex na pasta do seu projeto e cole:
 
 ### Pré-requisitos
 
-- Linux ou macOS com Python 3.9+ (só biblioteca padrão).
+- Linux ou macOS com Python 3.9+ (só biblioteca padrão). Timer: systemd do usuário no Linux; no macOS, `cron` (`*/5 * * * * python3 …/vigia.py rodada`).
+- A máquina fica ligada e sem suspender enquanto espera (notebook com a tampa fechada costuma dormir).
 - Para a fase 2 padrão: o `claude` (Claude Code) logado pela assinatura. Dá para trocar por qualquer comando com `VIGIA_FASE2` (ex.: `codex exec`).
 - Opcional: systemd do usuário para o timer (ou cron).
 
-### Testar o vigia (2 s, sem IA)
+### Testar o vigia (poucos segundos, sem IA)
 
 ```bash
 git clone https://github.com/inematds/espera-sem-voce && cd espera-sem-voce
-bash vigia/testar.sh        # 3 de 3 ok
+bash vigia/testar.sh        # 4 de 4 ok
 ```
 
-O teste cobre: (1) não pronto → continua esperando; (2) pronto → abre a fase 2 → fecha como feito; (3) passou do teto → para e avisa.
+O teste cobre: (1) não pronto → continua esperando; (2) pronto → abre a fase 2 → fecha como feito; (3) passou do teto → para e avisa; (4) fase 2 passou de 3 h → encerrada e avisada.
 
 ### Usar com um trabalho seu
 
@@ -66,7 +67,13 @@ systemctl --user daemon-reload && systemctl --user enable --now vigia.timer
 python3 vigia/vigia.py status
 ```
 
-Variáveis: `VIGIA_ESTADO` (arquivo de estado), `VIGIA_FASE2` (comando da fase 2, recebe `$PASTA`), `VIGIA_AVISO` (comando que avisa, recebe `$MSG`, por exemplo um `curl` para o seu bot do Telegram).
+Variáveis: `VIGIA_ESTADO` (arquivo de estado), `VIGIA_FASE2` (comando da fase 2, recebe `$PASTA`), `VIGIA_AVISO` (comando que avisa, recebe `$MSG`). Sem `VIGIA_AVISO` o aviso só vai para o log; para chegar no celular, ligue o seu bot do Telegram:
+
+```bash
+export VIGIA_AVISO='curl -s "https://api.telegram.org/bot$TG_TOKEN/sendMessage" --data-urlencode chat_id=$TG_CHAT --data-urlencode text="$MSG" > /dev/null'
+```
+
+**Permissão da fase 2:** o padrão é `claude -p --permission-mode bypassPermissions`, porque sem ninguém na frente da tela ela não pode parar para pedir licença. O bilhete é a autorização: rode numa pasta só do trabalho e escreva as travas no `CONTINUAR.md`. Quer outro motor? `VIGIA_FASE2='codex exec --full-auto "Leia $PASTA/CONTINUAR.md …"'`.
 
 ### Arquivos
 
@@ -86,12 +93,12 @@ Variáveis: `VIGIA_ESTADO` (arquivo de estado), `VIGIA_FASE2` (comando da fase 2
 | Uma conferência | até 25 min | conta como "ainda não" |
 | Espera | 8 h (`--teto-h`) | 🟥 aviso "esperou N h" |
 | Trabalho morto (`--log` parado e nenhum processo da pasta) | 20 min | 🟥 aviso antes do teto |
-| Fase 2 | até 3 h | 🟥 se acabar sem `CONTINUAR.resultado` |
+| Fase 2 | até 3 h (conferido na rodada) | 🟥 se passar de 3 h ou acabar sem `CONTINUAR.resultado` |
 
 ### Onde está cada peça nos projetos de origem
 
 - **Fluxo com portão (inemaccbot):** fase de espera = `espera: {intervalo, timeout}` em `src/dominio/flow.ts`; portão = `pausa_apos`; a fase que baixa o vídeo do HeyGen, achando-o pelo título (o que permite retomar depois de uma queda), em `src/fila/tarefas/heygen.ts`. Como plugar: `docs/plugar-fluxo.md`.
-- **Fila que retoma (openpcbotv3):** estados `queued | running | done | failed | canceled` em `src/fila/types.ts`; lease de 120 s renovado a cada 30 s e nova tentativa com espera de 30 s × 2ⁿ em `src/fila/store.ts`; `aindaNao` reagenda sem gastar tentativa; `/status` e `/job N continue` em `src/orquestrador/comandos.ts`.
+- **Fila que retoma (openpcbotv3):** estados `queued | running | done | failed | canceled` em `src/fila/types.ts`; lease de 120 s renovado a cada 30 s em `src/index.ts`; lease vencido volta para `queued` se ainda há tentativa, senão `failed` com aviso (`recuperarLeasesVencidos` em `src/fila/store.ts`). Pedidos de chat e agente entram com `max_tentativas: 1` (`src/orquestrador/orquestrador.ts`); tarefas agendadas com 2, e a nova tentativa espera 30 s × 2ⁿ⁻¹. O líder espera os especialistas com `aindaNao` a cada 15–20 s (`src/orquestrador/tarefas-fila.ts`); `/status` e `/job N continue de onde parou` em `src/orquestrador/comandos.ts`.
 - **Vigia (continua):** repositório privado da INEMA; o desenho está reproduzido aqui em `vigia/vigia.py`, sem as partes da máquina (aviso no bot, fila em série, motor de IA configurável).
 
 ## O processo, do início ao fim

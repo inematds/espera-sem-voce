@@ -30,7 +30,10 @@ ESTADO = Path(os.environ.get("VIGIA_ESTADO", Path.home() / ".local/share/vigia/e
 TETO_FASE2_S = 3 * 3600          # a sessão nova tem até 3 h
 TEMPO_CONFERE_S = 25 * 60        # uma conferência pode levar até 25 min
 CADEIA_MORTA_S = 20 * 60         # log parado há 20 min e nenhum processo da pasta = morreu
-FASE2_PADRAO = ('claude -p --max-turns 200 "Leia $PASTA/CONTINUAR.md e faça só o que está lá, até o fim. '
+# A fase 2 roda sem ninguém na frente da tela, então não pode parar para pedir licença: o bilhete
+# (CONTINUAR.md) é a autorização. Use uma pasta só para o trabalho e escreva as travas no bilhete.
+FASE2_PADRAO = ('claude -p --permission-mode bypassPermissions --max-turns 200 '
+                '"Leia $PASTA/CONTINUAR.md e faça só o que está lá, até o fim, respeitando as travas. '
                 'No fim grave $PASTA/CONTINUAR.resultado com FEITO: <o quê> ou FALHOU: <passo> — <motivo>."')
 
 
@@ -87,9 +90,16 @@ def cadeia_morta(it):
 def abrir_fase2(nome, it):
     cmd = os.environ.get("VIGIA_FASE2", FASE2_PADRAO)
     lg = open(Path(it["pasta"]) / "vigia-fase2.log", "a")
-    p = subprocess.Popen(["timeout", str(TETO_FASE2_S), "bash", "-c", cmd], cwd=it["pasta"],
+    p = subprocess.Popen(["bash", "-c", cmd], cwd=it["pasta"],
                          env={**os.environ, "PASTA": it["pasta"]}, stdout=lg, stderr=lg, start_new_session=True)
-    return p.pid
+    return p.pid   # o teto de 3 h é conferido na rodada (sem depender do `timeout`, que o macOS não tem)
+
+
+def encerrar(pid):
+    try:
+        os.killpg(pid, 15)
+    except OSError:
+        pass
 
 
 def vivo(pid):
@@ -111,7 +121,7 @@ def rodada(_a=None):
             except subprocess.TimeoutExpired:
                 ult = "tempo esgotado"
             if ult == "pronto":
-                it.update(estado="rodando", inicio=agora(), pid=abrir_fase2(nome, it))
+                it.update(estado="rodando", inicio=agora(), inicio_ts=time.time(), pid=abrir_fase2(nome, it))
                 print(f"{nome}: pronto → fase 2")
             elif cadeia_morta(it):
                 it["estado"] = "parado"
@@ -119,6 +129,10 @@ def rodada(_a=None):
             elif (datetime.now() - datetime.strptime(it["desde"], "%Y-%m-%d %H:%M")).total_seconds() > it["teto_h"] * 3600:
                 it["estado"] = "parado"
                 avisar(f"🟥 FALHOU {nome}: esperou {it['teto_h']:g} h e não ficou pronto.")
+        elif it["estado"] == "rodando" and vivo(it.get("pid")) and time.time() - it.get("inicio_ts", time.time()) > TETO_FASE2_S:
+            encerrar(it["pid"])
+            it.update(estado="falhou", fim=agora(), resultado="passou de 3 h")
+            avisar(f"🟥 FALHOU {nome}: a fase 2 passou de {TETO_FASE2_S // 3600} h e foi encerrada.")
         elif it["estado"] == "rodando" and not vivo(it.get("pid")):
             res = Path(it["pasta"]) / "CONTINUAR.resultado"
             txt = res.read_text().strip() if res.exists() else ""

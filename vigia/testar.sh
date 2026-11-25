@@ -28,4 +28,14 @@ EOF
 saida=$($V rodada)
 grep -q '"estado": "parado"' "$VIGIA_ESTADO" && echo "$saida" | grep -q "FALHOU job2" && ok "teto → parado + aviso" || ruim "devia parar no teto"
 
-[ $falha = 0 ] && echo "3 de 3 ok" || { echo "teste falhou"; exit 1; }
+# 4. fase 2 que passa de 3 h → encerrada e avisada (sem depender do comando `timeout`)
+mkdir -p "$T/job3"; echo "# demora demais" > "$T/job3/CONTINUAR.md"
+$V add "$T/job3" --nome job3 --confere 'echo pronto' > /dev/null
+VIGIA_FASE2='sleep 30' $V rodada > /dev/null
+python3 - "$VIGIA_ESTADO" <<'EOF'
+import json,sys; p=sys.argv[1]; d=json.load(open(p)); d["job3"]["inicio_ts"]=0; json.dump(d,open(p,"w"))
+EOF
+saida=$($V rodada)
+python3 -c "import json,sys;d=json.load(open('$VIGIA_ESTADO'));sys.exit(0 if d['job3']['estado']=='falhou' else 1)" && echo "$saida" | grep -q "FALHOU job3" && ok "fase 2 passou de 3 h → encerrada + aviso" || ruim "devia encerrar a fase 2"
+
+[ $falha = 0 ] && echo "4 de 4 ok" || { echo "teste falhou"; exit 1; }

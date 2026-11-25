@@ -3,5 +3,7 @@ Description=vigia: confere os trabalhos que estão esperando e abre a fase 2
 
 [Service]
 Type=oneshot
+# o systemd do usuário tem PATH curto: inclua a pasta onde está o claude (ou o codex)
+Environment=PATH=%h/.local/bin:%h/.npm-global/bin:/usr/local/bin:/usr/bin:/bin
 # ajuste o caminho; VIGIA_AVISO pode chamar o seu bot (ex.: curl para a API do Telegram)
 ExecStart=/usr/bin/python3 %h/espera-sem-voce/vigia/vigia.py rodada
