@@ -58,7 +58,7 @@
   .tgl:hover{border-color:var(--amb)}
   .btn{display:inline-block;background:var(--fill);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
-  @media(max-width:1180px){nav .links a.opt{display:none}}
+  @media(max-width:1500px){nav .links a.opt{display:none}}
   @media(max-width:860px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
   .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
@@ -125,6 +125,8 @@
   .jeito .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   #silencio .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
+  #bilhete .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
+  @media(max-width:640px){#bilhete .cmp td[data-l]::before{content:attr(data-l) ": ";font:600 .8rem Sora;color:var(--amb)} body.light #bilhete .cmp td[data-l]::before{color:var(--txt)}}
   .prazos span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.35em .85em;font:600 .82rem Sora}
   .prazos span b{color:var(--amb)} body.light .prazos span b{color:var(--txt)}
   .diag{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px 10px 6px;position:relative}
@@ -165,6 +167,7 @@
 <a class="sec" href="#explicado">O ganho</a>
 <a class="sec" href="#como">Os três jeitos</a>
 <a class="sec" href="#silencio">E se travar?</a>
+<a class="sec opt" href="#bilhete">O bilhete</a>
 <a class="sec" href="#comecar">Como começar</a>
 <a class="sec opt" href="#prova">A prova</a>
 <span class="lang"><a class="on" href="./">PT</a><a href="en/">EN</a><a href="es/">ES</a></span>
@@ -263,7 +266,7 @@
 <div>
 <span class="num">Jeito 1 · o vigia</span>
 <h3>Você sai, um vigia espera, uma IA nova termina</h3>
-<p>A conversa com você vai até mandar o trabalho demorado (o avatar, a montagem do vídeo). Antes de sair, a IA deixa um <strong>bilhete</strong> num arquivo: o que falta fazer, as suas ordens e o que não pode. Aí entra um <strong>vigia</strong>: um programinha que não é IA e não gasta nada. A cada 5 minutos ele pergunta "ficou pronto?".</p>
+<p>A conversa com você vai até mandar o trabalho demorado (o avatar, a montagem do vídeo). Antes de sair, a IA deixa um <a href="#bilhete"><strong>bilhete</strong></a> num arquivo: o que falta fazer, as suas ordens e o que não pode. Aí entra um <strong>vigia</strong>: um programinha que não é IA e não gasta nada. A cada 5 minutos ele pergunta "ficou pronto?".</p>
 <p>Quando fica, ele abre uma <strong>conversa nova</strong> da IA, que lê só o bilhete e vai até o fim: monta, revisa, publica. Você recebe um aviso com o resultado.</p>
 <div class="analog"><b>Como no dia a dia:</b> você deixa o carro na oficina com um bilhete ("trocar o óleo, não mexer no rádio") e vai embora. O porteiro olha de tempos em tempos se a peça chegou; quando chega, chama o mecânico, que lê o bilhete e faz o serviço. Você só recebe a mensagem "carro pronto".</div>
 <div class="prazos"><span>confere a cada <b>5 min</b></span><span>espera até <b>8 h</b></span><span>trabalho que morreu: aviso em <b>20 min</b></span><span>IA nova tem até <b>3 h</b></span></div>
@@ -351,6 +354,25 @@
 <div class="card"><h3>🔦 O vigia que parou de vigiar</h3><p>Aqui o vigia não pode te avisar, porque quem avisa é ele mesmo. Por isso entra uma <strong>vistoria</strong>: outro programinha, também sem IA, com o seu próprio relógio. <strong>De hora em hora</strong> ela confere três coisas: se o vigia rodou nos últimos 15 minutos, se algum trabalho passou do limite sem aviso e se alguma IA nova morreu sem fechar o trabalho. Só fala se achar problema, repete o aviso a cada 6 h enquanto não resolver e avisa quando volta ao normal.</p><div class="prazos"><span>vistoria: <b>de hora em hora</b></span><span>vigia parado: <b>15 min</b> sem rodar</span><span>relatório: <b>1 por dia</b></span></div><p class="origem">Toda manhã, às 08:00, chega um <strong>relatório</strong> curto. Se ele não chegar, algo grave aconteceu (a máquina caiu ou os avisos pararam): a falta do relatório também é um aviso.</p></div>
 </div>
 <div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Como no dia a dia:</b> o porteiro do prédio sabe que o pacote tem prazo e liga para você quando ele estoura. Mas se o porteiro dormir, ninguém liga. Então o síndico passa de hora em hora com a lanterna para ver se ele está no posto, e de manhã deixa um bilhete com o resumo da noite.</div>
+</div></section>
+<section id="bilhete"><div class="wrap">
+<span class="chip">O arquivo de passagem</span>
+<h2>Como a próxima conversa sabe o que já foi feito <span class="amb">e não começa de novo</span></h2>
+<p class="sub">Você fecha a conversa e a IA esquece tudo: sem um arquivo de passagem, ao voltar ela pode refazer o que já estava pronto ou esquecer o que você pediu. Por isso, antes de sair, ela escreve esse arquivo. Na INEMA são dois: o <strong>bilhete</strong>, para a IA nova que o vigia chama quando o trabalho fica pronto, e a <strong>passagem de sessão</strong>, para quando você mesmo volta à conversa outro dia.</p>
+<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="De madrugada, o robô porteiro da noite veste o casaco e entrega um cartão dobrado, que brilha em âmbar, ao robô que chega para o turno da manhã; na mesa, um pacote já conferido com um carimbo de visto e dois ainda esperando; à direita, um arquivo de madeira com uma gaveta aberta cheia de pastas datadas e lacradas" loading="lazy" src="assets/bilhete-handoff.jpg" style="width:100%;display:block"/></figure>
+<div class="grid g2">
+<div class="card"><h3>📝 O bilhete (CONTINUAR.md)</h3><p>Fica na pasta do trabalho. Quem lê é uma IA <strong>nova, que não sabe nada além dele</strong>, por isso o bilhete é curto e tem quatro partes:</p><ul><li><strong>O que já foi feito:</strong> cada coisa pronta e onde ela está (o roteiro aprovado, o vídeo já enviado ao gerador). É essa lista que impede a IA nova de refazer.</li><li><strong>O que falta:</strong> os passos em ordem, cada um com o que deve sair (um arquivo, um link ou uma conferência).</li><li><strong>As suas ordens, citadas:</strong> suas frases entre aspas, do jeito que você disse ("só não listado"), para ninguém reinterpretar.</li><li><strong>As travas:</strong> o que não pode acontecer ("não gastar crédito novo") e a obrigação de, no fim, escrever <strong>FEITO</strong> ou <strong>FALHOU</strong> com o motivo.</li></ul><p class="origem">Além do bilhete, o vigia anota em que ponto cada trabalho está: esperando, rodando, feito, falhou ou parado. Trabalho que já está esperando ou rodando não é aberto de novo, então ele roda uma vez só. Ele termina quando a IA nova escreve FEITO ou FALHOU, ou quando o vigia desiste sozinho (o trabalho passou do limite, morreu calado ou a IA nova acabou sem escrever nada) e te manda o aviso vermelho.</p></div>
+<div class="card"><h3>🗂️ A passagem de sessão (handoff)</h3><p>Serve para quando você limpa a conversa, ela fica cheia ou você troca de IA (Claude ↔ Codex). Cada passagem vira um arquivo novo com data e hora, <strong>nunca apagado nem sobrescrito</strong>, e um índice mostra o que ainda está aberto. Dentro, sempre na mesma ordem:</p><ul><li><strong>O que está pronto, com prova:</strong> só entra o que foi conferido, e cada item aponta onde conferir (a versão salva, o teste que passou, o arquivo).</li><li><strong>O que foi tentado e não confirmado</strong>, para não ser tratado como pronto.</li><li><strong>As decisões e o que não fazer:</strong> inclusive os caminhos que você recusou.</li><li><strong>O que ficou pela metade e a próxima ação exata</strong>, dizendo se ela precisa do seu sim.</li><li><strong>Cinco perguntas-teste</strong> (tarefa, última decisão, o que não pode mudar, o que está pela metade, próximo passo): a conversa nova responde, e a resposta é conferida.</li></ul><p class="origem">No fim do arquivo vai uma espécie de impressão digital de cada arquivo citado, tirada no momento da passagem. Se alguém mexeu depois, a IA percebe ao voltar: em vez de confiar no texto, ela checa o que está feito.</p></div>
+</div>
+<div class="cmpwrap"><table class="cmp">
+<thead><tr><th></th><th>Bilhete</th><th>Passagem de sessão</th></tr></thead>
+<tbody>
+<tr><td>Quem continua</td><td data-l="Bilhete">uma IA nova, sozinha, chamada pelo vigia</td><td data-l="Passagem de sessão">você, ou uma IA numa conversa nova</td></tr>
+<tr><td>Quando é escrito</td><td data-l="Bilhete">antes de fechar, com o trabalho lá fora em andamento</td><td data-l="Passagem de sessão">antes de limpar a conversa, ou quando ela enche</td></tr>
+<tr><td>Tamanho</td><td data-l="Bilhete">curto: feito, falta, ordens, travas</td><td data-l="Passagem de sessão">completo: provas, decisões e perguntas-teste</td></tr>
+<tr><td>Como termina</td><td data-l="Bilhete">com FEITO ou FALHOU escrito na pasta, ou com o aviso vermelho se o vigia desistir</td><td data-l="Passagem de sessão">com a próxima ação e se ela precisa do seu sim</td></tr>
+</tbody></table></div>
+<div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Como no dia a dia:</b> o porteiro da noite deixa um cartão para quem chega de manhã: "o pacote do 12 já foi entregue, faltam dois, o síndico disse para não aceitar nada sem nota". O de manhã não abre o pacote já entregue. E o livro da portaria guarda cada turno em uma página própria, que ninguém arranca.</div>
 </div></section>
 <section id="comecar"><div class="wrap">
 <span class="chip">Como começar</span>

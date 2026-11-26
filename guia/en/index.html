@@ -58,7 +58,7 @@
   .tgl:hover{border-color:var(--amb)}
   .btn{display:inline-block;background:var(--fill);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
-  @media(max-width:1180px){nav .links a.opt{display:none}}
+  @media(max-width:1500px){nav .links a.opt{display:none}}
   @media(max-width:860px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
   .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
@@ -125,6 +125,8 @@
   .jeito .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   #silencio .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
+  #bilhete .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
+  @media(max-width:640px){#bilhete .cmp td[data-l]::before{content:attr(data-l) ": ";font:600 .8rem Sora;color:var(--amb)} body.light #bilhete .cmp td[data-l]::before{color:var(--txt)}}
   .prazos span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.35em .85em;font:600 .82rem Sora}
   .prazos span b{color:var(--amb)} body.light .prazos span b{color:var(--txt)}
   .diag{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px 10px 6px;position:relative}
@@ -165,6 +167,7 @@
 <a class="sec" href="#explicado">The gain</a>
 <a class="sec" href="#como">The three ways</a>
 <a class="sec" href="#silencio">What if it stalls?</a>
+<a class="sec opt" href="#bilhete">The note</a>
 <a class="sec" href="#comecar">How to start</a>
 <a class="sec opt" href="#prova">The proof</a>
 <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
@@ -263,7 +266,7 @@
 <div>
 <span class="num">Way 1 · the watcher</span>
 <h3>You leave, a watcher waits, a new AI finishes</h3>
-<p>The chat with you goes up to sending off the long job (the avatar, the video edit). Before leaving, the AI writes a <strong>note</strong> in a file: what's left to do, your instructions and what's not allowed. Then a <strong>watcher</strong> steps in: a small program that isn't AI and costs nothing. Every 5 minutes it asks "is it ready?".</p>
+<p>The chat with you goes up to sending off the long job (the avatar, the video edit). Before leaving, the AI writes a <a href="#bilhete"><strong>note</strong></a> in a file: what's left to do, your instructions and what's not allowed. Then a <strong>watcher</strong> steps in: a small program that isn't AI and costs nothing. Every 5 minutes it asks "is it ready?".</p>
 <p>When it is, it opens a <strong>new AI chat</strong>, which reads only the note and goes all the way to the end: assembles, reviews, publishes. You get an alert with the result.</p>
 <div class="analog"><b>Like in everyday life:</b> you drop your car at the garage with a note ("change the oil, don't touch the radio") and leave. The doorman checks now and then whether the part has arrived; when it does, they call the mechanic, who reads the note and does the work. You just get the message "car ready".</div>
 <div class="prazos"><span>checks every <b>5 min</b></span><span>waits up to <b>8 h</b></span><span>dead job: alert in <b>20 min</b></span><span>new AI has up to <b>3 h</b></span></div>
@@ -351,6 +354,25 @@
 <div class="card"><h3>🔦 The watcher that stopped watching</h3><p>Here the watcher can't alert you, because it is the one that does the alerting. That's why an <strong>inspection</strong> comes in: another small program, also without AI, with its own clock. <strong>Every hour</strong> it checks three things: whether the watcher ran in the last 15 minutes, whether any job went past the limit without an alert, and whether any new AI died without closing the job. It only speaks up if it finds a problem, repeats the alert every 6 h until it's solved, and lets you know when things are back to normal.</p><div class="prazos"><span>inspection: <b>every hour</b></span><span>watcher stopped: <b>15 min</b> without running</span><span>report: <b>1 per day</b></span></div><p class="origem">Every morning, at 08:00, a short <strong>report</strong> arrives. If it doesn't arrive, something serious happened (the machine went down or the alerts stopped): a missing report is also an alert.</p></div>
 </div>
 <div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Just like in everyday life:</b> the building's doorman knows the package has a deadline and calls you when it runs out. But if the doorman falls asleep, nobody calls. So the building manager comes by every hour with a lantern to see whether the doorman is at the post, and in the morning leaves a note with a summary of the night.</div>
+</div></section>
+<section id="bilhete"><div class="wrap">
+<span class="chip">The handoff file</span>
+<h2>How the next conversation knows what's already done <span class="amb">and doesn't start over</span></h2>
+<p class="sub">You close the conversation and the AI forgets everything: without a handoff file, when you come back it may redo what was already finished or forget what you asked for. So before leaving, it writes that file. At INEMA there are two: the <strong>note</strong>, for the new AI that the watcher calls when the work is ready, and the <strong>session handoff</strong>, for when you come back to the conversation yourself another day.</p>
+<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="In the early hours, the night doorman robot puts on its coat and hands a folded card, glowing amber, to the robot arriving for the morning shift; on the desk, one package already checked and stamped with an approval mark and two still waiting; on the right, a wooden filing cabinet with an open drawer full of dated, sealed folders" loading="lazy" src="assets/bilhete-handoff.jpg" style="width:100%;display:block"/></figure>
+<div class="grid g2">
+<div class="card"><h3>📝 The note (CONTINUAR.md)</h3><p>It sits in the work folder. Its reader is a <strong>new AI that knows nothing beyond it</strong>, so the note is short and has four parts:</p><ul><li><strong>What's already done:</strong> each finished item and where it is (the approved script, the video already sent to the generator). This list is what keeps the new AI from redoing things.</li><li><strong>What's left:</strong> the steps in order, each with what should come out of it (a file, a link or a check).</li><li><strong>Your orders, quoted:</strong> your sentences in quotation marks, just as you said them ("unlisted only"), so nobody reinterprets them.</li><li><strong>The guardrails:</strong> what must not happen ("don't spend new credit") and the obligation to write <strong>DONE</strong> or <strong>FAILED</strong> with the reason at the end.</li></ul><p class="origem">Besides the note, the watcher records where each job stands: waiting, running, done, failed or stopped. A job that is already waiting or running isn't opened again, so it runs only once. It ends when the new AI writes DONE or FAILED, or when the watcher gives up on its own (the job went over the limit, died silently or the new AI finished without writing anything) and sends you the red alert.</p></div>
+<div class="card"><h3>🗂️ The session handoff</h3><p>It's for when you clear the conversation, it fills up or you switch AIs (Claude ↔ Codex). Each handoff becomes a new file with date and time, <strong>never deleted or overwritten</strong>, and an index shows what is still open. Inside, always in the same order:</p><ul><li><strong>What's finished, with proof:</strong> only what has been checked goes in, and each item points to where to check it (the saved version, the test that passed, the file).</li><li><strong>What was tried and not confirmed</strong>, so it isn't treated as finished.</li><li><strong>The decisions and what not to do:</strong> including the paths you rejected.</li><li><strong>What was left halfway and the exact next action</strong>, saying whether it needs your yes.</li><li><strong>Five test questions</strong> (task, last decision, what can't change, what is halfway, next step): the new conversation answers, and the answer is checked.</li></ul><p class="origem">At the end of the file goes a kind of fingerprint of each file mentioned, taken at the moment of the handoff. If someone changed it afterward, the AI notices when it returns: instead of trusting the text, it checks what is actually done.</p></div>
+</div>
+<div class="cmpwrap"><table class="cmp">
+<thead><tr><th></th><th>Note</th><th>Session handoff</th></tr></thead>
+<tbody>
+<tr><td>Who continues</td><td data-l="Note">a new AI, on its own, called by the watcher</td><td data-l="Session handoff">you, or an AI in a new conversation</td></tr>
+<tr><td>When it's written</td><td data-l="Note">before closing, with the outside work still in progress</td><td data-l="Session handoff">before clearing the conversation, or when it fills up</td></tr>
+<tr><td>Size</td><td data-l="Note">short: done, left, orders, guardrails</td><td data-l="Session handoff">complete: proof, decisions and test questions</td></tr>
+<tr><td>How it ends</td><td data-l="Note">with DONE or FAILED written in the folder, or with the red alert if the watcher gives up</td><td data-l="Session handoff">with the next action and whether it needs your yes</td></tr>
+</tbody></table></div>
+<div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Like in everyday life:</b> the night doorman leaves a card for whoever arrives in the morning: "the package for 12 has already been delivered, two to go, the building manager said not to accept anything without an invoice". The morning doorman doesn't open the package that was already delivered. And the front desk logbook keeps each shift on its own page, which nobody tears out.</div>
 </div></section>
 <section id="comecar"><div class="wrap">
 <span class="chip">How to start</span>

@@ -58,7 +58,7 @@
   .tgl:hover{border-color:var(--amb)}
   .btn{display:inline-block;background:var(--fill);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
-  @media(max-width:1180px){nav .links a.opt{display:none}}
+  @media(max-width:1500px){nav .links a.opt{display:none}}
   @media(max-width:860px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
   .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
@@ -125,6 +125,8 @@
   .jeito .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   #silencio .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
+  #bilhete .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
+  @media(max-width:640px){#bilhete .cmp td[data-l]::before{content:attr(data-l) ": ";font:600 .8rem Sora;color:var(--amb)} body.light #bilhete .cmp td[data-l]::before{color:var(--txt)}}
   .prazos span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.35em .85em;font:600 .82rem Sora}
   .prazos span b{color:var(--amb)} body.light .prazos span b{color:var(--txt)}
   .diag{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px 10px 6px;position:relative}
@@ -165,6 +167,7 @@
 <a class="sec" href="#explicado">La ganancia</a>
 <a class="sec" href="#como">Las tres formas</a>
 <a class="sec" href="#silencio">¿Y si se traba?</a>
+<a class="sec opt" href="#bilhete">La nota</a>
 <a class="sec" href="#comecar">Cómo empezar</a>
 <a class="sec opt" href="#prova">La prueba</a>
 <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
@@ -263,7 +266,7 @@
 <div>
 <span class="num">Forma 1 · el vigía</span>
 <h3>Tú sales, un vigía espera, una IA nueva termina</h3>
-<p>La conversación contigo llega hasta enviar el trabajo lento (el avatar, el montaje del video). Antes de salir, la IA deja una <strong>nota</strong> en un archivo: lo que falta hacer, tus órdenes y lo que no se puede. Ahí entra un <strong>vigía</strong>: un programita que no es IA y no gasta nada. Cada 5 minutos pregunta "¿ya está listo?".</p>
+<p>La conversación contigo llega hasta enviar el trabajo lento (el avatar, el montaje del video). Antes de salir, la IA deja una <a href="#bilhete"><strong>nota</strong></a> en un archivo: lo que falta hacer, tus órdenes y lo que no se puede. Ahí entra un <strong>vigía</strong>: un programita que no es IA y no gasta nada. Cada 5 minutos pregunta "¿ya está listo?".</p>
 <p>Cuando lo está, abre una <strong>conversación nueva</strong> de la IA, que lee solo la nota y llega hasta el final: monta, revisa, publica. Recibes un aviso con el resultado.</p>
 <div class="analog"><b>Como en la vida diaria:</b> dejas el auto en el taller con una nota ("cambiar el aceite, no tocar la radio") y te vas. El portero mira cada cierto tiempo si llegó el repuesto; cuando llega, llama al mecánico, que lee la nota y hace el trabajo. Tú solo recibes el mensaje "auto listo".</div>
 <div class="prazos"><span>revisa cada <b>5 min</b></span><span>espera hasta <b>8 h</b></span><span>trabajo que murió: aviso en <b>20 min</b></span><span>la IA nueva tiene hasta <b>3 h</b></span></div>
@@ -351,6 +354,25 @@
 <div class="card"><h3>🔦 El vigía que dejó de vigilar</h3><p>Aquí el vigía no puede avisarte, porque quien avisa es él mismo. Por eso entra una <strong>inspección</strong>: otro programita, también sin IA, con su propio reloj. <strong>Cada hora</strong> revisa tres cosas: si el vigía se ejecutó en los últimos 15 minutos, si algún trabajo superó el límite sin aviso y si alguna IA nueva murió sin cerrar el trabajo. Solo habla si encuentra un problema, repite el aviso cada 6 h mientras no se resuelva y te avisa cuando todo vuelve a la normalidad.</p><div class="prazos"><span>inspección: <b>cada hora</b></span><span>vigía detenido: <b>15 min</b> sin ejecutarse</span><span>informe: <b>1 por día</b></span></div><p class="origem">Cada mañana, a las 08:00, llega un <strong>informe</strong> corto. Si no llega, pasó algo grave (la máquina se cayó o los avisos se detuvieron): la falta del informe también es un aviso.</p></div>
 </div>
 <div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Como en el día a día:</b> el portero del edificio sabe que el paquete tiene un plazo y te llama cuando se vence. Pero si el portero se duerme, nadie llama. Entonces el administrador pasa cada hora con la linterna para ver si está en su puesto, y por la mañana deja una nota con el resumen de la noche.</div>
+</div></section>
+<section id="bilhete"><div class="wrap">
+<span class="chip">El archivo de traspaso</span>
+<h2>Cómo sabe la próxima conversación lo que ya está hecho <span class="amb">y no empieza de nuevo</span></h2>
+<p class="sub">Cierras la conversación y la IA lo olvida todo: sin un archivo de traspaso, al volver puede rehacer lo que ya estaba listo u olvidar lo que pediste. Por eso, antes de salir, escribe ese archivo. En INEMA son dos: la <strong>nota</strong>, para la IA nueva que el vigía llama cuando el trabajo queda listo, y el <strong>traspaso de sesión</strong>, para cuando tú mismo vuelves a la conversación otro día.</p>
+<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="De madrugada, el robot portero de noche se pone el abrigo y entrega una tarjeta doblada, que brilla en ámbar, al robot que llega para el turno de la mañana; en la mesa, un paquete ya revisado con un sello de visto bueno y dos todavía en espera; a la derecha, un archivador de madera con un cajón abierto lleno de carpetas fechadas y selladas" loading="lazy" src="assets/bilhete-handoff.jpg" style="width:100%;display:block"/></figure>
+<div class="grid g2">
+<div class="card"><h3>📝 La nota (CONTINUAR.md)</h3><p>Queda en la carpeta del trabajo. Quien la lee es una IA <strong>nueva, que no sabe nada aparte de ella</strong>, por eso la nota es corta y tiene cuatro partes:</p><ul><li><strong>Lo que ya está hecho:</strong> cada cosa lista y dónde está (el guion aprobado, el video ya enviado al generador). Esta lista es la que impide que la IA nueva lo rehaga.</li><li><strong>Lo que falta:</strong> los pasos en orden, cada uno con lo que debe salir (un archivo, un enlace o una comprobación).</li><li><strong>Tus órdenes, citadas:</strong> tus frases entre comillas, tal como las dijiste ("solo no listado"), para que nadie las reinterprete.</li><li><strong>Los límites:</strong> lo que no puede pasar ("no gastar crédito nuevo") y la obligación de, al final, escribir <strong>HECHO</strong> o <strong>FALLÓ</strong> con el motivo.</li></ul><p class="origem">Además de la nota, el vigía registra en qué punto está cada trabajo: en espera, en ejecución, hecho, fallido o detenido. Un trabajo que ya está en espera o en ejecución no se vuelve a abrir, así que se ejecuta una sola vez. Termina cuando la IA nueva escribe HECHO o FALLÓ, o cuando el vigía se rinde por su cuenta (el trabajo superó el límite, murió sin avisar o la IA nueva terminó sin escribir nada) y te envía el aviso rojo.</p></div>
+<div class="card"><h3>🗂️ El traspaso de sesión (handoff)</h3><p>Sirve para cuando limpias la conversación, esta se llena o cambias de IA (Claude ↔ Codex). Cada traspaso se convierte en un archivo nuevo con fecha y hora, <strong>que nunca se borra ni se sobrescribe</strong>, y un índice muestra lo que sigue abierto. Dentro, siempre en el mismo orden:</p><ul><li><strong>Lo que está listo, con pruebas:</strong> solo entra lo que se ha comprobado, y cada elemento indica dónde comprobarlo (la versión guardada, la prueba que pasó, el archivo).</li><li><strong>Lo que se intentó y no se confirmó</strong>, para que no se dé por hecho.</li><li><strong>Las decisiones y lo que no hay que hacer:</strong> incluidos los caminos que rechazaste.</li><li><strong>Lo que quedó a medias y la siguiente acción exacta</strong>, indicando si necesita tu sí.</li><li><strong>Cinco preguntas de prueba</strong> (tarea, última decisión, lo que no puede cambiar, lo que está a medias, siguiente paso): la conversación nueva responde, y la respuesta se comprueba.</li></ul><p class="origem">Al final del archivo va una especie de huella digital de cada archivo citado, tomada en el momento del traspaso. Si alguien lo modificó después, la IA lo nota al volver: en vez de confiar en el texto, revisa qué está hecho.</p></div>
+</div>
+<div class="cmpwrap"><table class="cmp">
+<thead><tr><th></th><th>Nota</th><th>Traspaso de sesión</th></tr></thead>
+<tbody>
+<tr><td>Quién continúa</td><td data-l="Nota">una IA nueva, sola, llamada por el vigía</td><td data-l="Traspaso de sesión">tú, o una IA en una conversación nueva</td></tr>
+<tr><td>Cuándo se escribe</td><td data-l="Nota">antes de cerrar, con el trabajo externo en marcha</td><td data-l="Traspaso de sesión">antes de limpiar la conversación, o cuando se llena</td></tr>
+<tr><td>Tamaño</td><td data-l="Nota">corta: hecho, pendiente, órdenes, límites</td><td data-l="Traspaso de sesión">completo: pruebas, decisiones y preguntas de prueba</td></tr>
+<tr><td>Cómo termina</td><td data-l="Nota">con HECHO o FALLÓ escrito en la carpeta, o con el aviso rojo si el vigía se rinde</td><td data-l="Traspaso de sesión">con la siguiente acción y si necesita tu sí</td></tr>
+</tbody></table></div>
+<div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Como en el día a día:</b> el portero de noche deja una tarjeta para quien llega por la mañana: "el paquete del 12 ya se entregó, faltan dos, el administrador dijo que no se acepte nada sin factura". El de la mañana no abre el paquete ya entregado. Y el libro de la portería guarda cada turno en su propia página, que nadie arranca.</div>
 </div></section>
 <section id="comecar"><div class="wrap">
 <span class="chip">Cómo empezar</span>
