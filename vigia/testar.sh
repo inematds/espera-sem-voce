@@ -38,4 +38,14 @@ EOF
 saida=$($V rodada)
 python3 -c "import json,sys;d=json.load(open('$VIGIA_ESTADO'));sys.exit(0 if d['job3']['estado']=='falhou' else 1)" && echo "$saida" | grep -q "FALHOU job3" && ok "fase 2 passou de 3 h → encerrada + aviso" || ruim "devia encerrar a fase 2"
 
-[ $falha = 0 ] && echo "4 de 4 ok" || { echo "teste falhou"; exit 1; }
+# 5. vistoria: vigia rodando → nada a avisar; vigia parado há 1 h → avisa; voltou → avisa que voltou
+S="python3 $AQUI/vistoria.py"
+$V rodada > /dev/null
+s1=$($S hora)
+touch -d '1 hour ago' "$T/ultima-rodada"
+s2=$($S hora); s3=$($S hora)
+$V rodada > /dev/null; s4=$($S hora)
+[ -z "$s1" ] && echo "$s2" | grep -q "última rodada do vigia foi há 60 min" && [ -z "$s3" ] && echo "$s4" | grep -q "voltou" \
+  && ok "vistoria: vigia parado → aviso uma vez, voltou → aviso" || ruim "a vistoria devia ver o vigia parado"
+
+[ $falha = 0 ] && echo "5 de 5 ok" || { echo "teste falhou"; exit 1; }

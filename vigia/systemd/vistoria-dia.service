@@ -1,0 +1,7 @@
+[Unit]
+Description=vistoria do vigia: relatório do dia
+
+[Service]
+Type=oneshot
+# mesmas variáveis do vigia.service (VIGIA_AVISO, VIGIA_ESTADO), senão o aviso só vai para o log
+ExecStart=/usr/bin/python3 %h/espera-sem-voce/vigia/vistoria.py dia

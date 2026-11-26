@@ -124,6 +124,7 @@
   .jeito .analog b{color:var(--txt)}
   .jeito .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  #silencio .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.35em .85em;font:600 .82rem Sora}
   .prazos span b{color:var(--amb)} body.light .prazos span b{color:var(--txt)}
   .diag{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px 10px 6px;position:relative}
@@ -163,6 +164,7 @@
 <div class="links">
 <a class="sec" href="#explicado">La ganancia</a>
 <a class="sec" href="#como">Las tres formas</a>
+<a class="sec" href="#silencio">¿Y si se traba?</a>
 <a class="sec" href="#comecar">Cómo empezar</a>
 <a class="sec opt" href="#prova">La prueba</a>
 <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
@@ -339,6 +341,17 @@
 <div class="card"><h3>🚫 Lo que no promete</h3><ul><li>instalar el bot o el asistente de INEMA (cada uno tiene su página en GitHub)</li><li>revisar por sí solo un servicio que no dice si está listo: alguien tiene que decirle al vigía cómo preguntar</li><li>gastar cero en la fase final: la IA nueva trabaja con tu suscripción</li><li>avisar en el celular por sí solo: el aviso va por tu bot de Telegram, que tu IA conecta con tu sí</li></ul></div>
 </div>
 </div></section>
+<section id="silencio"><div class="wrap">
+<span class="chip">Cuando no llega nada</span>
+<h2>¿Y si el trabajo nunca vuelve, <span class="amb">o el vigía se detiene?</span></h2>
+<p class="sub">La mitad de los trabajos tarda más de 92 minutos en estar listo, y tú no estás mirando, así que el peligro es el silencio: no llega nada y crees que todo sigue en espera. Son dos casos, y cada uno tiene una respuesta diferente.</p>
+<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="De noche, un robot portero vigila el estante de paquetes; un paquete tiene el reloj de arena vacío y una etiqueta roja, y un segundo robot entra con linterna y portapapeles para comprobar si el portero está en su puesto" loading="lazy" src="../assets/vigia-vistoria.jpg" style="width:100%;display:block"/></figure>
+<div class="grid g2">
+<div class="card"><h3>⏳ El trabajo que nunca vuelve</h3><p>El vigía no espera para siempre. Cada trabajo tiene un <strong>límite</strong>; si lo supera, el vigía se rinde y te manda el <strong>aviso rojo con el motivo</strong>. También detecta el trabajo que murió en silencio, cuando el trabajo deja un registro (un archivo de log): si ese registro dejó de avanzar hace 20 minutos y no hay nada más corriendo en esa carpeta, te avisa sin esperar el límite. Sin registro, el aviso llega en el límite.</p><div class="prazos"><span>límite: <b>8 h</b> (tú lo ajustas)</span><span>murió en silencio: <b>20 min</b></span><span>la IA que termina: hasta <b>3 h</b></span></div><p class="origem">En el paquete de la imagen, el reloj de arena ya se vació: es la hora del aviso rojo. De los 179 trabajos medidos, 5 se detuvieron en el límite, y el aviso llegó en cada uno.</p></div>
+<div class="card"><h3>🔦 El vigía que dejó de vigilar</h3><p>Aquí el vigía no puede avisarte, porque quien avisa es él mismo. Por eso entra una <strong>inspección</strong>: otro programita, también sin IA, con su propio reloj. <strong>Cada hora</strong> revisa tres cosas: si el vigía se ejecutó en los últimos 15 minutos, si algún trabajo superó el límite sin aviso y si alguna IA nueva murió sin cerrar el trabajo. Solo habla si encuentra un problema, repite el aviso cada 6 h mientras no se resuelva y te avisa cuando todo vuelve a la normalidad.</p><div class="prazos"><span>inspección: <b>cada hora</b></span><span>vigía detenido: <b>15 min</b> sin ejecutarse</span><span>informe: <b>1 por día</b></span></div><p class="origem">Cada mañana, a las 08:00, llega un <strong>informe</strong> corto. Si no llega, pasó algo grave (la máquina se cayó o los avisos se detuvieron): la falta del informe también es un aviso.</p></div>
+</div>
+<div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Como en el día a día:</b> el portero del edificio sabe que el paquete tiene un plazo y te llama cuando se vence. Pero si el portero se duerme, nadie llama. Entonces el administrador pasa cada hora con la linterna para ver si está en su puesto, y por la mañana deja una nota con el resumen de la noche.</div>
+</div></section>
 <section id="comecar"><div class="wrap">
 <span class="chip">Cómo empezar</span>
 <h2>No instalas nada <span class="amb">a mano</span></h2>
@@ -367,9 +380,10 @@
 <div class="prova">
 <ol class="tl">
 <li><b>Vigía:</b> 179 trabajos del 09/11 al 25/11/2026. 124 terminaron hechos, 50 fallaron con aviso y motivo, 5 se detuvieron en el límite de espera. La espera del medio hasta estar listo fue de 92 minutos.</li>
+<li><b>Inspección del vigía:</b> activada el 25/11/2026. El primer informe contó 286 rondas del vigía en las 24 horas anteriores, con un intervalo máximo de 6 minutos, y ningún trabajo perdido.</li>
 <li><b>Flujo con compuerta:</b> 193 flujos del 31/07 al 20/11/2026. 151 terminaron, 15 fallaron y 27 fueron cancelados por quien los pidió.</li>
 <li><b>Fila que retoma:</b> cerca de 150 mil tareas completadas en el asistente (casi todas automáticas, más 170 pedidos largos de agente); 13 fallaron, y cada falla generó un aviso en el chat.</li>
-<li><b>Vigía de ejemplo de este kit:</b> la prueba ejecuta cuatro casos en pocos segundos, sin IA: espera mientras no está listo, llama a la fase 2 cuando lo está, se detiene con aviso en el límite de espera y cierra la fase 2 que pasa de 3 horas. Pasaron cuatro de cuatro.</li>
+<li><b>Vigía de ejemplo de este kit:</b> la prueba ejecuta cinco casos en pocos segundos, sin IA: espera mientras no está listo, llama a la fase 2 cuando lo está, se detiene con aviso en el límite de espera, cierra la fase 2 que pasa de 3 horas, y la inspección detecta el vigía detenido (avisa una vez y de nuevo cuando vuelve). Cinco de cinco pasaron.</li>
 </ol>
 <blockquote>Las fallas también suman a favor: en todas llegó el aviso con el motivo, en lugar de que el trabajo quedara detenido sin que nadie lo supiera.</blockquote>
 <p class="fonte">Conteos tomados de las bases de datos y del estado de cada sistema el 25/11/2026, Linux.</p>
@@ -383,7 +397,7 @@
 <div class="card"><h3>¿Cuesta algo?</h3><p>El kit es gratis y abierto. La espera no gasta nada. La fase final usa tu IA (la suscripción de Claude o de Codex), como cualquier otro trabajo suyo.</p></div>
 <div class="card"><h3>¿Debo dejar la computadora encendida?</h3><p>Sí. La máquina donde corre el vigía queda encendida y sin suspenderse; lo que cierras es la conversación. En una laptop, cerrar la tapa suele suspender todo: configúrala para que no se suspenda, o usa una mini PC o un servidor alquilado.</p></div>
 <div class="card"><h3>¿Cuál de las tres uso?</h3><p>Trabajo que empiezas conversando con la IA: el vigía. Producción que se repite con aprobación: el flujo con compuerta. Pedido del día a día: la fila. El pedido de "Cómo empezar" hace que la IA elija contigo.</p></div>
-<div class="card"><h3>¿Y si el generador nunca termina?</h3><p>Cada forma tiene un límite. Si se pasa, recibes el aviso rojo con el motivo, en lugar de esperar para siempre.</p></div>
+<div class="card"><h3>¿Y si el generador nunca termina?</h3><p>Cada forma tiene un límite. Si se pasa, recibes el aviso rojo con el motivo, en lugar de esperar para siempre. Y si el propio vigía se detiene, la inspección de cada hora te avisa: mira <a href="#silencio">¿Y si se traba?</a></p></div>
 <div class="card"><h3>¿Funciona con otra IA?</h3><p>Sí. El vigía llama al comando que elijas para la fase 2; el ejemplo usa Claude Code, y se puede cambiar por Codex.</p></div>
 </div>
 <p class="sub" style="margin-top:28px">¿Qué trabajo tuyo todavía te tiene esperando frente a la pantalla? Ven a contarlo y a ver otros kits gratis en <a href="https://inema.club" rel="noopener" target="_blank">inema.club</a>, directo en internet.</p>

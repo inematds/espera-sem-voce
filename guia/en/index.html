@@ -124,6 +124,7 @@
   .jeito .analog b{color:var(--txt)}
   .jeito .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  #silencio .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.35em .85em;font:600 .82rem Sora}
   .prazos span b{color:var(--amb)} body.light .prazos span b{color:var(--txt)}
   .diag{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px 10px 6px;position:relative}
@@ -163,6 +164,7 @@
 <div class="links">
 <a class="sec" href="#explicado">The gain</a>
 <a class="sec" href="#como">The three ways</a>
+<a class="sec" href="#silencio">What if it stalls?</a>
 <a class="sec" href="#comecar">How to start</a>
 <a class="sec opt" href="#prova">The proof</a>
 <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
@@ -339,6 +341,17 @@
 <div class="card"><h3>🚫 What it doesn't promise</h3><ul><li>to install INEMA's bot or assistant (each has its own page on GitHub)</li><li>to check on its own a service that doesn't say whether it's ready: someone has to tell the watcher how to ask</li><li>to spend zero in the final phase: the new AI works on your subscription</li><li>to alert your phone on its own: the alert goes through your Telegram bot, which your AI connects once you say yes</li></ul></div>
 </div>
 </div></section>
+<section id="silencio"><div class="wrap">
+<span class="chip">When nothing arrives</span>
+<h2>What if the job never comes back, <span class="amb">or the watcher stops?</span></h2>
+<p class="sub">Half of the jobs take more than 92 minutes to be ready, and you aren't looking, so the danger is silence: nothing arrives and you think everything is still waiting. There are two cases, and each one has a different answer.</p>
+<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="At night, a doorman robot watches over the package shelf; one package has an empty hourglass and a red tag, and a second robot walks in with a lantern and a clipboard to check that the doorman is at the post" loading="lazy" src="../assets/vigia-vistoria.jpg" style="width:100%;display:block"/></figure>
+<div class="grid g2">
+<div class="card"><h3>⏳ The job that never comes back</h3><p>The watcher doesn't wait forever. Each job has a <strong>limit</strong>; once it goes past that, the watcher gives up and sends you the <strong>red alert with the reason</strong>. It also notices the job that died silently, when the job leaves a record (a log file): if that record stopped moving 20 minutes ago and nothing else is running in that folder, it alerts you without waiting for the limit. Without a record, the alert comes at the limit.</p><div class="prazos"><span>limit: <b>8 h</b> (you can adjust it)</span><span>died silently: <b>20 min</b></span><span>the AI that finishes: up to <b>3 h</b></span></div><p class="origem">On the package in the picture, the hourglass has already run out: it's time for the red alert. Of the 179 jobs measured, 5 stopped at the limit, and the alert arrived for each one.</p></div>
+<div class="card"><h3>🔦 The watcher that stopped watching</h3><p>Here the watcher can't alert you, because it is the one that does the alerting. That's why an <strong>inspection</strong> comes in: another small program, also without AI, with its own clock. <strong>Every hour</strong> it checks three things: whether the watcher ran in the last 15 minutes, whether any job went past the limit without an alert, and whether any new AI died without closing the job. It only speaks up if it finds a problem, repeats the alert every 6 h until it's solved, and lets you know when things are back to normal.</p><div class="prazos"><span>inspection: <b>every hour</b></span><span>watcher stopped: <b>15 min</b> without running</span><span>report: <b>1 per day</b></span></div><p class="origem">Every morning, at 08:00, a short <strong>report</strong> arrives. If it doesn't arrive, something serious happened (the machine went down or the alerts stopped): a missing report is also an alert.</p></div>
+</div>
+<div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Just like in everyday life:</b> the building's doorman knows the package has a deadline and calls you when it runs out. But if the doorman falls asleep, nobody calls. So the building manager comes by every hour with a lantern to see whether the doorman is at the post, and in the morning leaves a note with a summary of the night.</div>
+</div></section>
 <section id="comecar"><div class="wrap">
 <span class="chip">How to start</span>
 <h2>You don't install anything <span class="amb">by hand</span></h2>
@@ -367,9 +380,10 @@
 <div class="prova">
 <ol class="tl">
 <li><b>Watcher:</b> 179 jobs from 09/11 to 25/11/2026. 124 finished successfully, 50 failed with an alert and a reason, 5 stopped at the waiting limit. The median wait until ready was 92 minutes.</li>
+<li><b>Watcher inspection:</b> turned on on November 25, 2026. The first report counted 286 watcher runs in the previous 24 hours, with a longest gap of 6 minutes, and no lost jobs.</li>
 <li><b>Gated flow:</b> 193 flows from 31/07 to 20/11/2026. 151 finished, 15 failed and 27 were canceled by whoever requested them.</li>
 <li><b>Queue that resumes:</b> close to 150,000 tasks completed in the assistant (almost all automatic, plus 170 long agent requests); 13 failed, and each failure produced an alert in the chat.</li>
-<li><b>This kit's sample watcher:</b> the test runs four cases in a few seconds, without AI: it waits while not ready, calls phase 2 when ready, stops with an alert at the waiting limit and ends a phase 2 that goes over 3 hours. Four out of four passed.</li>
+<li><b>This kit's example watcher:</b> the test runs five cases in a few seconds, without AI: it waits while things are not ready, calls phase 2 when they are, stops with an alert at the waiting limit, ends a phase 2 that goes over 3 hours, and the inspection notices a stopped watcher (it warns once, and again when the watcher is back). Five out of five passed.</li>
 </ol>
 <blockquote>The failures count in its favor too: in every one of them the alert arrived with the reason, instead of the job sitting stalled with nobody knowing.</blockquote>
 <p class="fonte">Counts taken from each system's databases and state on 25/11/2026, Linux.</p>
@@ -383,7 +397,7 @@
 <div class="card"><h3>Does it cost anything?</h3><p>The kit is free and open. Waiting spends nothing. The final phase uses your AI (your Claude or Codex subscription), like any other work it does.</p></div>
 <div class="card"><h3>Do I need to leave the computer on?</h3><p>Yes. The machine the watcher runs on stays on and awake; what you close is the chat. On a laptop, closing the lid usually suspends everything: set it not to sleep, or use a mini PC or a rented server.</p></div>
 <div class="card"><h3>Which of the three do I use?</h3><p>A job you start by chatting with the AI: the watcher. Repeating production with approval: the gated flow. An everyday request: the queue. The request in "How to start" has the AI choose with you.</p></div>
-<div class="card"><h3>What if the generator never finishes?</h3><p>Each way has a limit. Once it's passed, you get the red alert with the reason, instead of waiting forever.</p></div>
+<div class="card"><h3>What if the generator never finishes?</h3><p>Each way has a limit. Once it goes past it, you get the red alert with the reason, instead of waiting forever. And if the watcher itself stops, the hourly inspection warns you: see <a href="#silencio">What if it stalls?</a></p></div>
 <div class="card"><h3>Does it work with another AI?</h3><p>Yes. The watcher calls whatever command you choose for phase 2; the example uses Claude Code, and you can swap it for Codex.</p></div>
 </div>
 <p class="sub" style="margin-top:28px">Which of your jobs still keeps you waiting in front of the screen? Come tell us and see other free kits at <a href="https://inema.club" rel="noopener" target="_blank">inema.club</a>, right on the web.</p>

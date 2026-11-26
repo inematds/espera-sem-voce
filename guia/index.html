@@ -124,6 +124,7 @@
   .jeito .analog b{color:var(--txt)}
   .jeito .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  #silencio .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
   .prazos span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.35em .85em;font:600 .82rem Sora}
   .prazos span b{color:var(--amb)} body.light .prazos span b{color:var(--txt)}
   .diag{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px 10px 6px;position:relative}
@@ -163,6 +164,7 @@
 <div class="links">
 <a class="sec" href="#explicado">O ganho</a>
 <a class="sec" href="#como">Os três jeitos</a>
+<a class="sec" href="#silencio">E se travar?</a>
 <a class="sec" href="#comecar">Como começar</a>
 <a class="sec opt" href="#prova">A prova</a>
 <span class="lang"><a class="on" href="./">PT</a><a href="en/">EN</a><a href="es/">ES</a></span>
@@ -339,6 +341,17 @@
 <div class="card"><h3>🚫 O que ele não promete</h3><ul><li>instalar o bot ou o assistente da INEMA (cada um tem a sua página no GitHub)</li><li>conferir sozinho um serviço que não diz se ficou pronto: alguém precisa dizer ao vigia como perguntar</li><li>gastar zero na fase final: a IA nova trabalha pela sua assinatura</li><li>avisar no celular sozinho: o aviso vai pelo seu bot do Telegram, que a sua IA liga com o seu sim</li></ul></div>
 </div>
 </div></section>
+<section id="silencio"><div class="wrap">
+<span class="chip">Quando nada chega</span>
+<h2>E se o trabalho nunca voltar, <span class="amb">ou o vigia parar?</span></h2>
+<p class="sub">Metade dos trabalhos leva mais de 92 minutos para ficar pronto, e você não está olhando, então o perigo é o silêncio: nada chega e você acha que ainda está tudo esperando. São dois casos, e cada um tem uma resposta diferente.</p>
+<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="À noite, um robô porteiro vigia a prateleira de pacotes; um pacote tem a ampulheta vazia e uma etiqueta vermelha, e um segundo robô entra com lanterna e prancheta para conferir se o porteiro está no posto" loading="lazy" src="assets/vigia-vistoria.jpg" style="width:100%;display:block"/></figure>
+<div class="grid g2">
+<div class="card"><h3>⏳ O trabalho que nunca volta</h3><p>O vigia não espera para sempre. Cada trabalho tem um <strong>limite</strong>; passou dele, o vigia desiste e te manda o <strong>aviso vermelho com o motivo</strong>. Ele também percebe o trabalho que morreu calado, quando o trabalho deixa um registro (um arquivo de log): se esse registro parou de andar há 20 minutos e nada mais roda naquela pasta, ele avisa sem esperar o limite. Sem registro, o aviso vem no limite.</p><div class="prazos"><span>limite: <b>8 h</b> (você ajusta)</span><span>morreu calado: <b>20 min</b></span><span>a IA que termina: até <b>3 h</b></span></div><p class="origem">No pacote da imagem, a ampulheta já esvaziou: é a hora do aviso vermelho. Dos 179 trabalhos medidos, 5 pararam no limite, e o aviso chegou em cada um.</p></div>
+<div class="card"><h3>🔦 O vigia que parou de vigiar</h3><p>Aqui o vigia não pode te avisar, porque quem avisa é ele mesmo. Por isso entra uma <strong>vistoria</strong>: outro programinha, também sem IA, com o seu próprio relógio. <strong>De hora em hora</strong> ela confere três coisas: se o vigia rodou nos últimos 15 minutos, se algum trabalho passou do limite sem aviso e se alguma IA nova morreu sem fechar o trabalho. Só fala se achar problema, repete o aviso a cada 6 h enquanto não resolver e avisa quando volta ao normal.</p><div class="prazos"><span>vistoria: <b>de hora em hora</b></span><span>vigia parado: <b>15 min</b> sem rodar</span><span>relatório: <b>1 por dia</b></span></div><p class="origem">Toda manhã, às 08:00, chega um <strong>relatório</strong> curto. Se ele não chegar, algo grave aconteceu (a máquina caiu ou os avisos pararam): a falta do relatório também é um aviso.</p></div>
+</div>
+<div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Como no dia a dia:</b> o porteiro do prédio sabe que o pacote tem prazo e liga para você quando ele estoura. Mas se o porteiro dormir, ninguém liga. Então o síndico passa de hora em hora com a lanterna para ver se ele está no posto, e de manhã deixa um bilhete com o resumo da noite.</div>
+</div></section>
 <section id="comecar"><div class="wrap">
 <span class="chip">Como começar</span>
 <h2>Você não instala nada <span class="amb">à mão</span></h2>
@@ -367,9 +380,10 @@
 <div class="prova">
 <ol class="tl">
 <li><b>Vigia:</b> 179 trabalhos de 09/11 a 25/11/2026. 124 terminaram feitos, 50 falharam com aviso e motivo, 5 pararam no limite de espera. A espera do meio até ficar pronto foi de 92 minutos.</li>
+<li><b>Vistoria do vigia:</b> ligada em 25/11/2026. O primeiro relatório contou 286 rodadas do vigia nas 24 horas anteriores, com o maior intervalo de 6 minutos, e nenhum trabalho perdido.</li>
 <li><b>Fluxo com portão:</b> 193 fluxos de 31/07 a 20/11/2026. 151 terminaram, 15 falharam e 27 foram cancelados por quem pediu.</li>
 <li><b>Fila que retoma:</b> perto de 150 mil tarefas concluídas no assistente (quase todas automáticas, mais 170 pedidos longos de agente); 13 falharam, e cada falha gerou um aviso no chat.</li>
-<li><b>Vigia de exemplo deste kit:</b> o teste roda quatro casos em poucos segundos, sem IA: espera enquanto não está pronto, chama a fase 2 quando fica, para com aviso no limite de espera e encerra a fase 2 que passa de 3 horas. Quatro de quatro passaram.</li>
+<li><b>Vigia de exemplo deste kit:</b> o teste roda cinco casos em poucos segundos, sem IA: espera enquanto não está pronto, chama a fase 2 quando fica, para com aviso no limite de espera, encerra a fase 2 que passa de 3 horas, e a vistoria percebe o vigia parado (avisa uma vez e de novo quando ele volta). Cinco de cinco passaram.</li>
 </ol>
 <blockquote>As falhas também contam a favor: em todas elas o aviso chegou com o motivo, em vez de o trabalho ficar parado sem ninguém saber.</blockquote>
 <p class="fonte">Contagens tiradas dos bancos e do estado de cada sistema em 25/11/2026, Linux.</p>
@@ -383,7 +397,7 @@
 <div class="card"><h3>Custa alguma coisa?</h3><p>O kit é grátis e aberto. A espera não gasta nada. A fase final usa a sua IA (a assinatura do Claude ou do Codex), como qualquer outro trabalho dela.</p></div>
 <div class="card"><h3>Preciso deixar o computador ligado?</h3><p>Sim. A máquina onde o vigia roda fica ligada e sem dormir; o que você fecha é a conversa. Num notebook, fechar a tampa costuma suspender tudo: ajuste para não dormir, ou use um mini PC ou um servidor alugado.</p></div>
 <div class="card"><h3>Qual dos três eu uso?</h3><p>Trabalho que você começa conversando com a IA: o vigia. Produção que se repete com aprovação: o fluxo com portão. Pedido do dia a dia: a fila. O pedido do "Como começar" faz a IA escolher com você.</p></div>
-<div class="card"><h3>E se o gerador nunca terminar?</h3><p>Cada jeito tem um limite. Passou dele, você recebe o aviso vermelho com o motivo, em vez de esperar para sempre.</p></div>
+<div class="card"><h3>E se o gerador nunca terminar?</h3><p>Cada jeito tem um limite. Passou dele, você recebe o aviso vermelho com o motivo, em vez de esperar para sempre. E se o próprio vigia parar, a vistoria de hora em hora avisa: veja <a href="#silencio">E se travar?</a></p></div>
 <div class="card"><h3>Funciona com outra IA?</h3><p>Sim. O vigia chama o comando que você escolher para a fase 2; o exemplo usa o Claude Code, e dá para trocar pelo Codex.</p></div>
 </div>
 <p class="sub" style="margin-top:28px">Qual trabalho seu ainda prende você na frente da tela esperando? Venha contar e ver outros kits grátis no <a href="https://inema.club" rel="noopener" target="_blank">inema.club</a>, direto na internet.</p>

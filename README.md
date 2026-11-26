@@ -44,7 +44,7 @@ Abra o Claude Code ou o Codex na pasta do seu projeto e cole:
 
 ```bash
 git clone https://github.com/inematds/espera-sem-voce && cd espera-sem-voce
-bash vigia/testar.sh        # 4 de 4 ok
+bash vigia/testar.sh        # 5 de 5 ok
 ```
 
 O teste cobre: (1) não pronto → continua esperando; (2) pronto → abre a fase 2 → fecha como feito; (3) passou do teto → para e avisa; (4) fase 2 passou de 3 h → encerrada e avisada.
@@ -64,7 +64,12 @@ mkdir -p ~/.config/systemd/user && cp vigia/systemd/vigia.service vigia/systemd/
 # o vigia.service supõe o kit em ~/espera-sem-voce: ajuste o caminho do vigia.py se clonou em outro lugar
 systemctl --user daemon-reload && systemctl --user enable --now vigia.timer
 
-python3 vigia/vigia.py status
+# 4. quem vigia o vigia: vistoria de hora em hora (só avisa se tiver problema) + relatório às 08:00
+cp vigia/systemd/vistoria-*.service vigia/systemd/vistoria-*.timer ~/.config/systemd/user/
+systemctl --user daemon-reload && systemctl --user enable --now vistoria-hora.timer vistoria-dia.timer
+
+python3 vigia/vigia.py status      # mostra a hora da última rodada
+python3 vigia/vistoria.py ver      # o relatório, sem avisar
 ```
 
 Variáveis: `VIGIA_ESTADO` (arquivo de estado), `VIGIA_FASE2` (comando da fase 2, recebe `$PASTA`), `VIGIA_AVISO` (comando que avisa, recebe `$MSG`). Sem `VIGIA_AVISO` o aviso só vai para o log; para chegar no celular, ligue o seu bot do Telegram:
@@ -73,7 +78,7 @@ Variáveis: `VIGIA_ESTADO` (arquivo de estado), `VIGIA_FASE2` (comando da fase 2
 export VIGIA_AVISO='curl -s "https://api.telegram.org/bot$TG_TOKEN/sendMessage" --data-urlencode chat_id=$TG_CHAT --data-urlencode text="$MSG" > /dev/null'
 ```
 
-O timer do systemd não vê o `export` do terminal: ponha a mesma linha no `vigia.service`, como `Environment=VIGIA_AVISO=...` (com `TG_TOKEN` e `TG_CHAT`), ou num `EnvironmentFile=`, e rode `systemctl --user daemon-reload`.
+O timer do systemd não vê o `export` do terminal: ponha a mesma linha no `vigia.service` (e nos dois `vistoria-*.service`), como `Environment=VIGIA_AVISO=...` (com `TG_TOKEN` e `TG_CHAT`), ou num `EnvironmentFile=`, e rode `systemctl --user daemon-reload`.
 
 **Permissão da fase 2:** o padrão é `claude -p --permission-mode bypassPermissions`, porque sem ninguém na frente da tela ela não pode parar para pedir licença. O bilhete é a autorização: rode numa pasta só do trabalho e escreva as travas no `CONTINUAR.md`. Quer outro motor? `VIGIA_FASE2='codex exec --full-auto "Leia $PASTA/CONTINUAR.md …"'`.
 
@@ -82,9 +87,10 @@ O timer do systemd não vê o `export` do terminal: ponha a mesma linha no `vigi
 | Arquivo | O que é |
 |---|---|
 | `vigia/vigia.py` | o vigia (add, rodada, status) |
-| `vigia/testar.sh` | teste sem IA, 4 casos |
+| `vigia/vistoria.py` | quem vigia o vigia (hora, dia, ver) |
+| `vigia/testar.sh` | teste sem IA, 5 casos |
 | `vigia/CONTINUAR.exemplo.md` | modelo do bilhete da fase 2 |
-| `vigia/systemd/` | timer de 5 em 5 min |
+| `vigia/systemd/` | timer de 5 em 5 min + vistoria de hora em hora e às 08:00 |
 | `guia/` | a página com os diagramas animados (PT, `en/`, `es/`) |
 
 ### Prazos do vigia
@@ -96,12 +102,15 @@ O timer do systemd não vê o `export` do terminal: ponha a mesma linha no `vigi
 | Espera | 8 h (`--teto-h`) | 🟥 aviso "esperou N h" |
 | Trabalho morto (`--log` parado e nenhum processo da pasta) | 20 min | 🟥 aviso antes do teto |
 | Fase 2 | até 3 h (conferido na rodada) | 🟥 se passar de 3 h ou acabar sem `CONTINUAR.resultado` |
+| Vigia parado (`ultima-rodada` sem mudar) | 15 min, conferido de hora em hora pela `vistoria.py` | 🟥 aviso da vistoria (repete no máx. a cada 6 h) e ✅ quando volta |
+| Trabalho esquecido / fase 2 sumida | teto + 30 min / processo morto há 15 min | 🟥 aviso da vistoria |
+| Relatório do dia | 08:00 | se não chegar, a máquina caiu |
 
 ### Onde está cada peça nos projetos de origem
 
 - **Fluxo com portão (inemaccbot):** fase de espera = `espera: {intervalo, timeout}` em `src/dominio/flow.ts`; portão = `pausa_apos`; a fase que baixa o vídeo do HeyGen, achando-o pelo título (o que permite retomar depois de uma queda), em `src/fila/tarefas/heygen.ts`. Como plugar: `docs/plugar-fluxo.md`.
 - **Fila que retoma (openpcbotv3):** estados `queued | running | done | failed | canceled` em `src/fila/types.ts`; lease de 120 s renovado a cada 30 s em `src/index.ts`; lease vencido volta para `queued` se ainda há tentativa, senão `failed` com aviso (`recuperarLeasesVencidos` em `src/fila/store.ts`). Pedidos de chat e agente entram com `max_tentativas: 1` (`src/orquestrador/orquestrador.ts`); tarefas agendadas com 2, e a nova tentativa espera 30 s × 2ⁿ⁻¹. O líder espera os especialistas com `aindaNao` a cada 15–20 s (`src/orquestrador/tarefas-fila.ts`); `/status` e `/job N continue de onde parou` em `src/orquestrador/comandos.ts`.
-- **Vigia (continua):** repositório privado da INEMA; o desenho está reproduzido aqui em `vigia/vigia.py`, sem as partes da máquina (aviso no bot, fila em série, motor de IA configurável).
+- **Vigia (continua):** repositório privado da INEMA; o desenho está reproduzido aqui em `vigia/vigia.py`, sem as partes da máquina (aviso no bot, fila em série, motor de IA configurável). A vistoria de lá (`continua/vistoria.py`, desde 25/11/2026) lê o journal do systemd em vez do arquivo `ultima-rodada`; a daqui usa o arquivo para rodar também com cron no macOS.
 
 ## O processo, do início ao fim
 
@@ -116,6 +125,7 @@ O timer do systemd não vê o `export` do terminal: ponha a mesma linha no `vigi
 | 5 | Pronto | última linha do `--confere` = `pronto` → abre a fase 2 (até 3 h) | ⚙️ |
 | 6 | Fase 2 | a IA nova lê só o `CONTINUAR.md`, termina e grava `CONTINUAR.resultado` | 🤖 |
 | 7 | Fechar | o vigia lê o resultado e avisa: ✅ feito ou 🟥 falhou (também no teto e no trabalho morto) | ⚙️ |
+| 8 | Vistoria | `vistoria.py hora` de hora em hora: vigia parado, trabalho esquecido, fase 2 sumida → 🟥; `vistoria.py dia` às 08:00 manda o relatório | ⚙️ |
 
 ## Licença
 

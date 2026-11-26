@@ -44,7 +44,7 @@ Open Claude Code or Codex in your project folder and paste:
 
 ```bash
 git clone https://github.com/inematds/espera-sem-voce && cd espera-sem-voce
-bash vigia/testar.sh        # 4 of 4 ok
+bash vigia/testar.sh        # 5 of 5 ok
 ```
 
 The test covers: (1) not ready → keeps waiting; (2) ready → starts phase 2 → closes as done; (3) exceeded the time limit → stops and notifies; (4) phase 2 ran past 3 h → terminated and notified.
@@ -64,7 +64,12 @@ mkdir -p ~/.config/systemd/user && cp vigia/systemd/vigia.service vigia/systemd/
 # vigia.service assumes the kit is in ~/espera-sem-voce: adjust the path to vigia.py if you cloned it elsewhere
 systemctl --user daemon-reload && systemctl --user enable --now vigia.timer
 
-python3 vigia/vigia.py status
+# 4. who watches the watcher: hourly inspection (only warns if there is a problem) + report at 08:00
+cp vigia/systemd/vistoria-*.service vigia/systemd/vistoria-*.timer ~/.config/systemd/user/
+systemctl --user daemon-reload && systemctl --user enable --now vistoria-hora.timer vistoria-dia.timer
+
+python3 vigia/vigia.py status      # shows the time of the last run
+python3 vigia/vistoria.py ver      # the report, without sending alerts
 ```
 
 Variables: `VIGIA_ESTADO` (state file), `VIGIA_FASE2` (phase 2 command, receives `$PASTA`), `VIGIA_AVISO` (command that sends the notice, receives `$MSG`). Without `VIGIA_AVISO` the notice only goes to the log; to get it on your phone, connect your Telegram bot:
@@ -73,7 +78,7 @@ Variables: `VIGIA_ESTADO` (state file), `VIGIA_FASE2` (phase 2 command, receives
 export VIGIA_AVISO='curl -s "https://api.telegram.org/bot$TG_TOKEN/sendMessage" --data-urlencode chat_id=$TG_CHAT --data-urlencode text="$MSG" > /dev/null'
 ```
 
-The systemd timer does not see a terminal `export`: put the same line in `vigia.service` as `Environment=VIGIA_AVISO=...` (with `TG_TOKEN` and `TG_CHAT`), or in an `EnvironmentFile=`, then run `systemctl --user daemon-reload`.
+The systemd timer does not see a terminal `export`: put the same line in `vigia.service` (and in both `vistoria-*.service`) as `Environment=VIGIA_AVISO=...` (with `TG_TOKEN` and `TG_CHAT`), or in an `EnvironmentFile=`, then run `systemctl --user daemon-reload`.
 
 **Phase 2 permissions:** the default is `claude -p --permission-mode bypassPermissions`, because with nobody in front of the screen it can't stop to ask for permission. The handoff note is the authorization: run it in a folder dedicated to that job and write the guardrails in `CONTINUAR.md`. Want another engine? `VIGIA_FASE2='codex exec --full-auto "Leia $PASTA/CONTINUAR.md …"'`.
 
@@ -82,9 +87,10 @@ The systemd timer does not see a terminal `export`: put the same line in `vigia.
 | File | What it is |
 |---|---|
 | `vigia/vigia.py` | the watcher (add, rodada, status) |
-| `vigia/testar.sh` | test without AI, 4 cases |
+| `vigia/vistoria.py` | who watches the watcher (hora, dia, ver) |
+| `vigia/testar.sh` | test without AI, 5 cases |
 | `vigia/CONTINUAR.exemplo.md` | template for the phase 2 handoff note |
-| `vigia/systemd/` | timer that runs every 5 min |
+| `vigia/systemd/` | timer every 5 min + inspection every hour and at 08:00 |
 | `guia/` | the page with the animated diagrams (PT, `en/`, `es/`) |
 
 ### Watcher time limits
@@ -96,12 +102,15 @@ The systemd timer does not see a terminal `export`: put the same line in `vigia.
 | Waiting | 8 h (`--teto-h`) | 🟥 "waited N h" notice |
 | Dead job (`--log` stalled and no process from the folder) | 20 min | 🟥 notice before the time limit |
 | Phase 2 | up to 3 h (checked during the round) | 🟥 if it runs past 3 h or ends without `CONTINUAR.resultado` |
+| Watcher stopped (`ultima-rodada` not changing) | 15 min, checked every hour by `vistoria.py` | 🟥 inspection alert (repeats at most every 6 h) and ✅ when it is back |
+| Forgotten job / missing phase 2 | cap + 30 min / process dead for 15 min | 🟥 inspection alert |
+| Daily report | 08:00 | if it does not arrive, the machine is down |
 
 ### Where each piece lives in the source projects
 
 - **Flow with a gate (inemaccbot):** waiting phase = `espera: {intervalo, timeout}` in `src/dominio/flow.ts`; gate = `pausa_apos`; the phase that downloads the HeyGen video, finding it by title (which makes it possible to resume after a crash), in `src/fila/tarefas/heygen.ts`. How to plug in: `docs/plugar-fluxo.md`.
 - **Queue that resumes (openpcbotv3):** states `queued | running | done | failed | canceled` in `src/fila/types.ts`; 120 s lease renewed every 30 s in `src/index.ts`; an expired lease goes back to `queued` if there are attempts left, otherwise `failed` with a notice (`recuperarLeasesVencidos` in `src/fila/store.ts`). Chat and agent requests are queued with `max_tentativas: 1` (`src/orquestrador/orquestrador.ts`); scheduled tasks with 2, and the retry waits 30 s × 2ⁿ⁻¹. The lead waits for the specialists using `aindaNao` every 15–20 s (`src/orquestrador/tarefas-fila.ts`); `/status` and `/job N continue de onde parou` in `src/orquestrador/comandos.ts`.
-- **Watcher (continua):** private INEMA repository; the design is reproduced here in `vigia/vigia.py`, without the machine-specific parts (bot notices, serial queue, configurable AI engine).
+- **Watcher (continua):** private INEMA repository; the design is reproduced here in `vigia/vigia.py`, without the machine-specific parts (bot notices, serial queue, configurable AI engine). The inspection over there (`continua/vistoria.py`, since November 25, 2026) reads the systemd journal instead of the `ultima-rodada` file; the one here uses the file so it also runs with cron on macOS.
 
 ## The process, start to finish
 
@@ -116,6 +125,7 @@ The systemd timer does not see a terminal `export`: put the same line in `vigia.
 | 5 | Ready | last line of `--confere` = `pronto` → starts phase 2 (up to 3 h) | ⚙️ |
 | 6 | Phase 2 | the new AI reads only `CONTINUAR.md`, finishes the job and writes `CONTINUAR.resultado` | 🤖 |
 | 7 | Close | the watcher reads the result and notifies you: ✅ done or 🟥 failed (also on time limit and dead job) | ⚙️ |
+| 8 | Inspection | `vistoria.py hora` every hour: watcher stopped, forgotten job, missing phase 2 → 🟥; `vistoria.py dia` at 08:00 sends the report | ⚙️ |
 
 ## License
 

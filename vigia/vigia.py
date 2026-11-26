@@ -17,6 +17,7 @@ uso:
   vigia.py add <pasta> --confere "<cmd que imprime pronto>" [--nome X] [--teto-h 8] [--log <arquivo>]
   vigia.py rodada        (o timer chama este)
   vigia.py status
+Quem vigia o vigia: vistoria.py (outro timer) confere de hora em hora se as rodadas continuam.
 Variáveis:
   VIGIA_ESTADO   arquivo de estado            (padrão ~/.local/share/vigia/estado.json)
   VIGIA_FASE2    comando da fase 2; recebe a pasta em $PASTA  (padrão: claude -p lendo o CONTINUAR.md)
@@ -27,6 +28,7 @@ from datetime import datetime
 from pathlib import Path
 
 ESTADO = Path(os.environ.get("VIGIA_ESTADO", Path.home() / ".local/share/vigia/estado.json"))
+ULTIMA = ESTADO.with_name("ultima-rodada")   # a vistoria.py lê a hora deste arquivo: vigia parado = arquivo velho
 TETO_FASE2_S = 3 * 3600          # a sessão nova tem até 3 h
 TEMPO_CONFERE_S = 25 * 60        # uma conferência pode levar até 25 min
 CADEIA_MORTA_S = 20 * 60         # log parado há 20 min e nenhum processo da pasta = morreu
@@ -142,9 +144,12 @@ def rodada(_a=None):
             else:
                 avisar(f"🟥 FALHOU {nome}: {txt[:300] or 'a fase 2 terminou sem CONTINUAR.resultado'}")
     gravar(d)
+    ULTIMA.write_text(agora() + "\n")   # só no fim: rodada que quebrou no meio não conta como viva
 
 
 def status(_a=None):
+    if ULTIMA.exists():
+        print(f"última rodada: {ULTIMA.read_text().strip()} (há {(time.time() - ULTIMA.stat().st_mtime) / 60:.0f} min)")
     for nome, it in ler().items():
         print(f"{nome:30} {it['estado']:10} desde {it['desde']}  teto {it['teto_h']:g} h")
 
