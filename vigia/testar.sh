@@ -63,5 +63,7 @@ assert [x["estado"] for x in t] == ["feito", "falhou"], t
 assert t[1]["mudou"] == "mesma entrada, nova chance" and it["mudou"] == "bilhete alterado: legenda incluída", it
 assert (pasta / "CONTINUAR.resultado.t1").read_text().startswith("FEITO") and not (pasta / "CONTINUAR.resultado").exists()
 EOF2
+$S ver | grep -q "tentativas de novo: 1 cadeia" && $S ver | grep -q "t2 falhou · mesma entrada, nova chance" \
+  && ok "relatório do dia mostra a cadeia e o que mudou" || ruim "o relatório do dia devia listar as tentativas"
 
-[ $falha = 0 ] && echo "6 de 6 ok" || { echo "teste falhou"; exit 1; }
+[ $falha = 0 ] && echo "7 de 7 ok" || { echo "teste falhou"; exit 1; }
