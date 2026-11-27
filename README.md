@@ -68,9 +68,11 @@ systemctl --user daemon-reload && systemctl --user enable --now vigia.timer
 cp vigia/systemd/vistoria-*.service vigia/systemd/vistoria-*.timer ~/.config/systemd/user/
 systemctl --user daemon-reload && systemctl --user enable --now vistoria-hora.timer vistoria-dia.timer
 
-python3 vigia/vigia.py status      # mostra a hora da última rodada
+python3 vigia/vigia.py status      # última rodada + a cadeia de tentativas de cada trabalho
 python3 vigia/vistoria.py ver      # o relatório, sem avisar
 ```
+
+**Nova tentativa = mesma cadeia.** Registrar de novo o mesmo `--nome` depois de falhar, parar ou terminar abre a tentativa seguinte da mesma cadeia: o ID da cadeia fica, a tentativa ganha número (`video-x#t2` em todo aviso e no log), a anterior vai para o histórico com o resultado, e o `CONTINUAR.resultado` velho vira `CONTINUAR.resultado.t1` (a tentativa nova nunca herda o resultado da outra). O que mudou é anotado sozinho pelo hash do `CONTINUAR.md`: igual = "mesma entrada, nova chance"; diferente = o texto de `--mudou "<o quê>"`. O `status` mostra a cadeia inteira, uma linha por tentativa. Dentro da fase 2, cada passo refeito vira uma linha `REFEITO: <passo> — <o que trocou>` no resultado.
 
 Variáveis: `VIGIA_ESTADO` (arquivo de estado), `VIGIA_FASE2` (comando da fase 2, recebe `$PASTA`), `VIGIA_AVISO` (comando que avisa, recebe `$MSG`). Sem `VIGIA_AVISO` o aviso só vai para o log; para chegar no celular, ligue o seu bot do Telegram:
 
@@ -120,7 +122,7 @@ O timer do systemd não vê o `export` do terminal: ponha a mesma linha no `vigi
 |---|---|---|---|
 | 1 | Fase 1 | a IA faz a parte que pensa (roteiro, aprovação) e dispara o trabalho demorado | 🧠 |
 | 2 | Bilhete | escreve `<pasta>/CONTINUAR.md`: o que falta, as suas ordens citadas, as travas | 🧠 |
-| 3 | Registrar | `vigia.py add <pasta> --confere "<cmd>" [--teto-h 8]` → aviso "Fase 1 concluída, pode fechar" | 🧠 |
+| 3 | Registrar | `vigia.py add <pasta> --confere "<cmd>" [--teto-h 8] [--mudou "…"]` → aviso "Fase 1 concluída, pode fechar" | 🧠 |
 | 4 | Esperar | o timer roda `vigia.py rodada` a cada 5 min; nenhuma IA ligada | ⚙️ |
 | 5 | Pronto | última linha do `--confere` = `pronto` → abre a fase 2 (até 3 h) | ⚙️ |
 | 6 | Fase 2 | a IA nova lê só o `CONTINUAR.md`, termina e grava `CONTINUAR.resultado` | 🤖 |

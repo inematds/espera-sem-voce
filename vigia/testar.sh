@@ -48,4 +48,20 @@ $V rodada > /dev/null; s4=$($S hora)
 [ -z "$s1" ] && echo "$s2" | grep -q "última rodada do vigia foi há 60 min" && [ -z "$s3" ] && echo "$s4" | grep -q "voltou" \
   && ok "vistoria: vigia parado → aviso uma vez, voltou → aviso" || ruim "a vistoria devia ver o vigia parado"
 
-[ $falha = 0 ] && echo "5 de 5 ok" || { echo "teste falhou"; exit 1; }
+# 6. nova tentativa do mesmo trabalho = mesma cadeia: arquiva a anterior, diz o que mudou, não herda o resultado velho
+$V add "$T/job1" --nome job1 --confere 'echo pronto' > /dev/null          # mesmo bilhete, fase 2 que não grava nada
+VIGIA_FASE2='true' $V rodada > /dev/null; sleep 1; saida=$($V rodada)
+echo "# monte o vídeo, agora com a legenda" > "$T/job1/CONTINUAR.md"
+$V add "$T/job1" --nome job1 --confere 'echo aguardando' --mudou "legenda incluída" > /dev/null
+python3 - "$VIGIA_ESTADO" "$T/job1" <<'EOF2' && echo "$saida" | grep -q "FALHOU job1#t2: a fase 2 terminou sem" \
+  && $V status | grep -q "t2 falhou    mesma entrada, nova chance" && ok "nova tentativa → mesma cadeia, t1/t2 arquivadas, mudança anotada" \
+  || ruim "a nova tentativa devia ficar na mesma cadeia"
+import json,sys; from pathlib import Path
+it=json.load(open(sys.argv[1]))["job1"]; t=it["tentativas"]; pasta=Path(sys.argv[2])
+assert it["tentativa"] == 3 and len(t) == 2 and it["cadeia"].startswith("job1-"), it
+assert [x["estado"] for x in t] == ["feito", "falhou"], t
+assert t[1]["mudou"] == "mesma entrada, nova chance" and it["mudou"] == "bilhete alterado: legenda incluída", it
+assert (pasta / "CONTINUAR.resultado.t1").read_text().startswith("FEITO") and not (pasta / "CONTINUAR.resultado").exists()
+EOF2
+
+[ $falha = 0 ] && echo "6 de 6 ok" || { echo "teste falhou"; exit 1; }

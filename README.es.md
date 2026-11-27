@@ -68,9 +68,11 @@ systemctl --user daemon-reload && systemctl --user enable --now vigia.timer
 cp vigia/systemd/vistoria-*.service vigia/systemd/vistoria-*.timer ~/.config/systemd/user/
 systemctl --user daemon-reload && systemctl --user enable --now vistoria-hora.timer vistoria-dia.timer
 
-python3 vigia/vigia.py status      # muestra la hora de la última ronda
+python3 vigia/vigia.py status      # última ronda + la cadena de intentos de cada trabajo
 python3 vigia/vistoria.py ver      # el informe, sin avisar
 ```
+
+**Nuevo intento = misma cadena.** Registrar de nuevo el mismo `--nome` después de fallar, detenerse o terminar abre el siguiente intento de la misma cadena: el ID de la cadena se mantiene, el intento recibe un número (`video-x#t2` en todos los avisos y en el log), el anterior pasa al historial con su resultado, y el `CONTINUAR.resultado` antiguo pasa a ser `CONTINUAR.resultado.t1` (el intento nuevo nunca hereda el resultado del otro). Lo que cambió se anota automáticamente mediante el hash de `CONTINUAR.md`: igual = "mesma entrada, nova chance" (misma entrada, nueva oportunidad); distinto = el texto de `--mudou "<qué>"`. `status` muestra la cadena completa, una línea por intento. Dentro de la fase 2, cada paso rehecho se convierte en una línea `REFEITO: <paso> — <qué cambió>` en el resultado.
 
 Variables: `VIGIA_ESTADO` (archivo de estado), `VIGIA_FASE2` (comando de la fase 2, recibe `$PASTA`), `VIGIA_AVISO` (comando que avisa, recibe `$MSG`). Sin `VIGIA_AVISO` el aviso solo va al log; para que llegue a tu celular, conecta tu bot de Telegram:
 
@@ -120,7 +122,7 @@ El timer de systemd no ve el `export` de la terminal: pon la misma línea en `vi
 |---|---|---|---|
 | 1 | Fase 1 | la IA hace la parte que requiere pensar (guion, aprobación) y lanza el trabajo que tarda | 🧠 |
 | 2 | Nota | escribe `<pasta>/CONTINUAR.md`: lo que falta, tus órdenes citadas, los candados | 🧠 |
-| 3 | Registrar | `vigia.py add <pasta> --confere "<cmd>" [--teto-h 8]` → aviso "Fase 1 concluída, pode fechar" | 🧠 |
+| 3 | Registrar | `vigia.py add <pasta> --confere "<cmd>" [--teto-h 8] [--mudou "…"]` → aviso "Fase 1 concluída, pode fechar" | 🧠 |
 | 4 | Esperar | el timer ejecuta `vigia.py rodada` cada 5 min; ninguna IA encendida | ⚙️ |
 | 5 | Listo | última línea de `--confere` = `pronto` → abre la fase 2 (hasta 3 h) | ⚙️ |
 | 6 | Fase 2 | la IA nueva lee solo `CONTINUAR.md`, termina y guarda `CONTINUAR.resultado` | 🤖 |

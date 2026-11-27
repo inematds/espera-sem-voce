@@ -68,9 +68,11 @@ systemctl --user daemon-reload && systemctl --user enable --now vigia.timer
 cp vigia/systemd/vistoria-*.service vigia/systemd/vistoria-*.timer ~/.config/systemd/user/
 systemctl --user daemon-reload && systemctl --user enable --now vistoria-hora.timer vistoria-dia.timer
 
-python3 vigia/vigia.py status      # shows the time of the last run
+python3 vigia/vigia.py status      # last run + each job's chain of attempts
 python3 vigia/vistoria.py ver      # the report, without sending alerts
 ```
+
+**New attempt = same chain.** Registering the same `--nome` again after it fails, stops or finishes opens the next attempt in the same chain: the chain ID stays, the attempt gets a number (`video-x#t2` in every notice and in the log), the previous one goes to the history with its result, and the old `CONTINUAR.resultado` becomes `CONTINUAR.resultado.t1` (the new attempt never inherits the other one's result). What changed is noted automatically from the hash of `CONTINUAR.md`: same = "mesma entrada, nova chance" (same input, new chance); different = the text from `--mudou "<what>"`. `status` shows the whole chain, one line per attempt. Within phase 2, each redone step becomes a `REFEITO: <step> — <what changed>` line in the result.
 
 Variables: `VIGIA_ESTADO` (state file), `VIGIA_FASE2` (phase 2 command, receives `$PASTA`), `VIGIA_AVISO` (command that sends the notice, receives `$MSG`). Without `VIGIA_AVISO` the notice only goes to the log; to get it on your phone, connect your Telegram bot:
 
@@ -120,7 +122,7 @@ The systemd timer does not see a terminal `export`: put the same line in `vigia.
 |---|---|---|---|
 | 1 | Phase 1 | the AI does the thinking part (script, approval) and launches the long-running job | 🧠 |
 | 2 | Handoff note | writes `<pasta>/CONTINUAR.md`: what's left, your instructions as quoted, the guardrails | 🧠 |
-| 3 | Register | `vigia.py add <pasta> --confere "<cmd>" [--teto-h 8]` → notice "Phase 1 complete, you can close it" | 🧠 |
+| 3 | Register | `vigia.py add <pasta> --confere "<cmd>" [--teto-h 8] [--mudou "…"]` → notice "Phase 1 complete, you can close it" | 🧠 |
 | 4 | Wait | the timer runs `vigia.py rodada` every 5 min; no AI running | ⚙️ |
 | 5 | Ready | last line of `--confere` = `pronto` → starts phase 2 (up to 3 h) | ⚙️ |
 | 6 | Phase 2 | the new AI reads only `CONTINUAR.md`, finishes the job and writes `CONTINUAR.resultado` | 🤖 |
