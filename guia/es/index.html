@@ -6,10 +6,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vigia — Espera sin ti: dejas la pantalla, la IA termina, el aviso llega</title>
-<meta name="description" content="Kit gratis de INEMA. Le pides a la IA el trabajo largo y cierras la conversación. Un Vigia revisa cada 5 minutos, una conversación nueva de la IA termina y llega el aviso: hecho o falló.">
+<title>Vigia — Espera sin ti: te alejas de la pantalla, la IA termina, el aviso llega</title>
+<meta name="description" content="Kit gratis de INEMA. Le pides el trabajo largo a la IA y cierras la conversación. Un vigía revisa cada 5 minutos, una conversación nueva de la IA termina y el aviso llega: hecho o falló.">
 <meta property="og:title" content="Vigia — Espera sin ti">
-<meta property="og:description" content="Dejas la pantalla. La IA termina. El aviso llega. Kit gratis en inema.club, directo en internet.">
+<meta property="og:description" content="Te alejas de la pantalla. La IA termina. El aviso llega. Kit gratis en inema.club, directo en internet.">
 <meta property="og:image" content="https://inematds.github.io/espera-sem-voce/guia/assets/banner-es.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -332,6 +332,22 @@
     .tabela-wrap{position:relative;background:linear-gradient(to left,rgba(250,204,21,.18),transparent 28px) right/28px 100% no-repeat}
     .tabela-wrap::before{content:"\2194";position:sticky;left:0;display:block;text-align:right;padding:6px 10px 0;color:var(--amb-t);font:700 1rem Sora,sans-serif}
   }
+  /* v2.5 */
+  .kicker{font:800 clamp(1.35rem,2.6vw,1.75rem)/1.1 Sora,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--amb-t);margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid var(--fill);display:inline-block}
+  .frase{font-size:clamp(1.1rem,1.6vw,1.25rem);line-height:1.6}
+  .tres-j{margin:16px 0;padding-left:1.2em;display:grid;gap:8px;font-size:1.05rem}
+  .tres-j b{color:var(--amb-t)}
+  .jeitos-l{display:grid;gap:40px;margin-top:32px}
+  .jeito-l{display:grid;grid-template-columns:340px minmax(0,1fr);gap:32px;align-items:start;padding-bottom:40px;border-bottom:1px solid var(--line)}
+  .jl-txt{display:flex;flex-direction:column;gap:12px}
+  .jl-txt .num{font:600 .8rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .jl-txt h3{font-size:1.5rem;font-weight:800}
+  .jl-txt .bom{font-weight:600}
+  .jl-txt .origem{color:var(--mut);font-size:.9rem}
+  .jl-txt .analogia{margin-top:4px}
+  .cartoes3{display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px}
+  .cartoes3 h3{font-size:1.05rem;margin-bottom:6px}
+  @media (max-width:900px){.jeito-l{grid-template-columns:1fr}.jl-diag{max-width:380px;width:100%;margin:0 auto}}
 </style>
 </head>
 <body>
@@ -357,10 +373,10 @@
   <div class="h-top">
     <h1>
       <span class="marcao"><span class="vigia">Vigia</span> <span class="esp">Espera sin ti</span></span><span class="vh">: </span>
-      <span class="manchete"><span class="l">Dejas la pantalla.</span> <span class="l">La IA termina.</span> <span class="l"><em>El aviso llega.</em></span></span>
+      <span class="manchete"><span class="l">Te alejas de la pantalla.</span> <span class="l">La IA termina.</span> <span class="l"><em>El aviso llega.</em></span></span>
     </h1>
   
-    <p class="lead">Deja de mirar la pantalla mientras el video se termina. Le pides a la IA el trabajo largo y cierras la conversación. El Vigia, un programa sin IA, revisa cada 5 minutos y abre una conversación nueva de la IA para terminar. Al final llega el aviso al celular: hecho o falló.</p>
+    <p class="lead">Deja de quedarte mirando la pantalla mientras el video se termina de hacer. Le pides el trabajo largo a la IA y cierras la conversación. El vigía, un programa sin IA, revisa cada 5 minutos y abre una conversación nueva de la IA para terminar. Al final te llega el aviso al celular: hecho o falló.</p>
   </div>
   <figure class="f2"><img src="../assets/banner-es.jpg" alt="Vigia — Espera sin ti: el trabajo largo sigue solo y te avisa al final" width="1400" height="788"></figure>
   <div class="h-bot">
@@ -373,7 +389,7 @@
     <ul class="fatos">
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Kit gratis y abierto. Sin saber programar: pegas un pedido.</span></li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Necesitas una computadora encendida y la suscripción de Claude o de Codex.</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Medido: 179 trabajos esperados en 17 días, y cada final llegó con aviso.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Medido: 179 trabajos esperados en 17 días, y todos los finales llegaron con aviso.</span></li>
     </ul>
   </div>
   <figure class="f1"><img src="../assets/hero.jpg" alt="Robots trabajando solos en una central iluminada, sin nadie mirando la pantalla" width="1100" height="734"></figure>
@@ -381,154 +397,118 @@
 
 <main>
 
+<!-- ========== EM UMA FRASE ========== -->
+<section id="resumo"><div class="wrap"><div class="col">
+  <p class="kicker">En una frase</p>
+  <p class="frase"><strong>Quieres pedirle un trabajo largo a la IA, irte a hacer tu vida y recibir solo el aviso de que terminó.</strong> Este kit gratuito muestra las tres formas que INEMA usa todos los días para esperar sin nadie mirando la pantalla, y trae una de ellas lista para que la uses:</p>
+  <ul class="tres-j">
+    <li><b>el vigía</b>: revisa cada cierto tiempo y llama a una conversación nueva de la IA cuando está listo;</li>
+    <li><b>el flujo con compuerta</b>: se detiene en los puntos costosos y espera tu "puedes seguir";</li>
+    <li><b>la cola que retoma</b>: guarda cada pedido y avisa si algo se cae a la mitad.</li>
+  </ul>
+  <p class="mut">La computadora donde funciona se queda encendida; quien se va eres tú.</p>
+</div></div></section>
+
 <!-- ========== PARA QUEM É ========== -->
 <section id="quem"><div class="wrap">
   <p class="kicker">Para quién</p>
   <h2>Es para ti si…</h2>
   <div class="publicos">
-    <article class="pub"><img src="../assets/quem-criador.jpg" alt="Creadora de contenido sale de casa mientras el video se termina" loading="lazy" width="760" height="506">
+    <article class="pub"><img src="../assets/quem-criador.jpg" alt="Creadora de contenido sale de casa mientras el video se termina de hacer" loading="lazy" width="760" height="506">
       <h3>Haces videos con IA</h3>
-      <p>Envías el avatar o el montaje y te vas. El video se monta y se publica cuando está listo, incluso de madrugada. Si el generador se traba, lo sabes en el momento, no al día siguiente.</p>
-      <p class="usa">Usa: <b>el Vigia</b></p></article>
+      <p>Mandas el avatar o el montaje y te vas. El video se monta y se publica cuando está listo, incluso de madrugada. Si el generador se traba, te enteras en el momento, no al día siguiente.</p>
+      <p class="usa">Usa: <b>el vigía</b></p></article>
     <article class="pub"><img src="../assets/quem-gestor.jpg" alt="Persona aprueba desde el celular el siguiente paso de un trabajo" loading="lazy" width="760" height="506">
-      <h3>Necesitas aprobar a mitad de camino</h3>
-      <p>El trabajo se detiene en los puntos caros, antes de gastar créditos y antes de publicar, y espera tu "puedes seguir" desde el celular. Nada sale sin que veas el texto.</p>
+      <h3>Necesitas aprobar a la mitad</h3>
+      <p>El trabajo se detiene en los puntos costosos, antes de gastar créditos y antes de publicar, y espera tu "puedes seguir" desde el celular. Nada sale sin que veas el texto.</p>
       <p class="usa">Usa: <b>el flujo con compuerta</b></p></article>
     <article class="pub"><img src="../assets/quem-tecnico.jpg" alt="Técnico observa un pequeño servidor trabajando solo" loading="lazy" width="760" height="506">
       <h3>Armas automatizaciones</h3>
-      <p>Tres diseños probados en producción para elegir el correcto, los plazos de cada uno medidos, y un Vigia listo, sin dependencias, para adaptar.</p>
+      <p>Tres diseños probados en producción para elegir el correcto, los plazos de cada uno medidos, y un vigía listo, sin dependencias, para adaptar.</p>
       <p class="usa">Usa: <b>los tres</b>, y la cola en el día a día</p></article>
   </div>
 </div></section>
 
 <!-- ========== COMO FUNCIONA O VIGIA: 4 passos ========== -->
 <section id="passos"><div class="wrap">
-  <figure class="largo topo-sec"><img src="../assets/banner-grade-es.jpg" alt="Las tres formas de esperar: Vigia, flujo con compuerta y cola que retoma" loading="lazy" width="1400" height="788"></figure>
+  <figure class="largo topo-sec"><img src="../assets/banner-grade-es.jpg" alt="Las tres formas de esperar: vigía, flujo con compuerta y cola que retoma" loading="lazy" width="1400" height="788"></figure>
   <hr class="risco">
   <p class="kicker">Cómo funciona</p>
-  <h2>Cómo funciona el Vigia, en 4 pasos</h2>
+  <h2>Cómo funciona el vigía, en 4 pasos</h2>
   <p class="sub">Tú solo trabajas en el paso 1. Después cierras la conversación y esperas el aviso.</p>
   <div class="passos">
     <article class="passo">
       <header><span class="n">1</span><h3>Pide el trabajo y revisa la nota</h3></header>
-      <div class="quem"><span class="tag">Tú</span><p>Acuerdas el trabajo con la IA y apruebas lo necesario, como el guion del video.</p></div>
-      <div class="quem"><span class="tag ia">La IA</span><p>Lanza la parte larga y escribe la nota: lo que ya se hizo, lo que falta, tus órdenes entre comillas y lo que no puede pasar.</p></div>
+      <div class="quem"><span class="tag">Tú</span><p>Acuerdas el trabajo con la IA y apruebas lo que haga falta, como el guion del video.</p></div>
+      <div class="quem"><span class="tag ia">La IA</span><p>Pone en marcha la parte larga y escribe la nota: lo que ya se hizo, lo que falta, tus órdenes entre comillas y lo que no puede pasar.</p></div>
       <p class="porque"><span>Por qué</span>Quien va a terminar es una conversación nueva, que solo sabe lo que está en la nota.</p>
     </article>
     <article class="passo">
       <header><span class="n">2</span><h3>Cierra la conversación y vete</h3></header>
-      <div class="quem"><span class="tag">Tú</span><p>Cierras la conversación y sigues con tu vida. La computadora queda encendida, sin suspenderse.</p></div>
-      <div class="quem"><span class="tag vigia">El Vigia</span><p>Cada 5 minutos pregunta "¿ya está listo?". Espera hasta 8 horas.</p></div>
-      <p class="porque"><span>Por qué</span>El Vigia es un programa común, no una IA. Mientras espera, no se gasta nada.</p>
+      <div class="quem"><span class="tag">Tú</span><p>Cierras la conversación y te vas a hacer tu vida. La computadora se queda encendida, sin suspenderse.</p></div>
+      <div class="quem"><span class="tag vigia">El vigía</span><p>Cada 5 minutos pregunta "¿ya está listo?". Espera hasta 8 horas.</p></div>
+      <p class="porque"><span>Por qué</span>El vigía es un programa común, no una IA. Mientras espera, no se gasta nada.</p>
     </article>
     <article class="passo">
       <header><span class="n">3</span><h3>La IA nueva termina</h3></header>
       <div class="quem"><span class="tag">Tú</span><p>No haces nada. Esta es la parte sin ti.</p></div>
-      <div class="quem"><span class="tag ia">La IA</span><p>Cuando está listo, el Vigia abre una conversación nueva. Ella lee solo la nota y llega hasta el final (monta, revisa, publica), con hasta 3 horas para eso.</p></div>
+      <div class="quem"><span class="tag ia">La IA</span><p>Cuando está listo, el vigía abre una conversación nueva. Ella lee solo la nota y llega hasta el final (monta, revisa, publica), con hasta 3 horas para eso.</p></div>
       <p class="porque"><span>Por qué</span>Sin nadie en la pantalla, no se detiene a pedir permiso. Vale lo que está escrito en la nota.</p>
     </article>
     <article class="passo">
-      <header><span class="n">4</span><h3>Llega el aviso: hecho o falló</h3></header>
-      <div class="quem"><span class="tag vigia">El Vigia</span><p>Lee el resultado y envía el aviso al celular: verde si salió bien, rojo con el motivo si falló.</p></div>
-      <div class="quem"><span class="tag">Tú</span><p>Lees el aviso. Si falló, el motivo viene incluido, y volver a hacerlo es decisión tuya.</p></div>
-      <p class="porque"><span>Por qué</span>El peligro de irse es el silencio. Aquí todo final tiene aviso.</p>
+      <header><span class="n">4</span><h3>El aviso llega: hecho o falló</h3></header>
+      <div class="quem"><span class="tag vigia">El vigía</span><p>Lee el resultado y manda el aviso al celular: verde si salió bien, rojo con el motivo si falló.</p></div>
+      <div class="quem"><span class="tag">Tú</span><p>Lees el aviso. Si falló, el motivo viene incluido, y rehacerlo es decisión tuya.</p></div>
+      <p class="porque"><span>Por qué</span>El peligro de irte es el silencio. Aquí todo final tiene aviso.</p>
     </article>
   </div>
-  <div class="fluxo-baixo">
-    <p class="kicker-s">El flujo del Vigia, animado</p>
-<div class="diag" data-diag>
-<div class="ctl"><span data-rot>Vigia</span><button type="button" data-btn>Pausar</button></div>
-<svg viewBox="0 0 360 450" role="img" aria-label="Diagrama del Vigia: fase 1 contigo, el trabajo tarda mientras el Vigia revisa, la fase 2 se abre sola y el aviso llega al celular">
-<line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
-<text class="lb" x="46" y="104">cierras la conversación y te vas</text>
-<text class="lb" x="46" y="210">quedó listo (hasta 8 h)</text>
-<text class="falha" x="46" y="228">¿no quedó? aviso rojo</text>
-<text class="lb" x="46" y="322">hasta 3 h para terminar</text>
-<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Tú y la IA</text><text class="s" x="16" y="43">guion aprobado, va al generador</text></g>
-<g class="nd wait" data-dwell="3600" data-checks="todavía no|todavía no|todavía no|listo ✓" data-pref="el Vigia revisa:" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · El trabajo tarda</text><text class="s" x="16" y="43">el Vigia revisa cada 5 min</text></g>
-<g class="nd" data-dwell="1300" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Una IA nueva asume</text><text class="s" x="16" y="43">lee la nota y termina el trabajo</text></g>
-<g class="nd" data-dwell="1400" transform="translate(30,346)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Aviso en el celular</text><text class="s" x="16" y="43">hecho, o falló con el motivo</text></g>
-<text class="ping" x="180" y="436" text-anchor="middle" data-ping></text>
-<circle class="ring" r="20"/><circle class="tok" r="9"/>
-</svg>
-</div>
-    <p class="legenda">La bolita es el trabajo; el marco punteado es donde espera.</p>
-  </div>
-  <p class="analogia"><b>Como en el día a día:</b> dejas el auto en el taller con una nota ("cambiar el aceite, no tocar la radio") y te vas. El portero mira de vez en cuando si llegó el repuesto; cuando llega, llama al mecánico, que lee la nota y hace el trabajo. Tú solo recibes el mensaje "auto listo".</p>
 </div></section>
 
 <!-- ========== OS 3 JEITOS DE ESPERAR ========== -->
 <section id="jeitos"><div class="wrap">
   <p class="kicker">Las 3 formas</p>
-  <h2>Tres formas de esperar. El Vigia es una de ellas.</h2>
-  <p class="sub">INEMA espera trabajos largos de tres formas, cada una buena para un caso. El kit explica las tres, con los plazos medidos, y entrega el Vigia listo.</p>
-  <div class="jeitos">
-    <article class="jeito">
-      <p class="num">Forma 1</p>
-      <h3>El Vigia</h3>
-      <p class="bom">Para un trabajo que empezaste conversando con la IA.</p>
-      <p>Un pequeño programa aparte, sin IA, revisa si ya está listo y llama a una IA nueva que lee la nota y termina. Tus órdenes van en la nota, antes de irte.</p>
-      <ul class="chips"><li>revisa cada 5 min</li><li>espera hasta 8 h</li><li>murió en silencio: aviso en 20 min</li><li>IA nueva: hasta 3 h</li></ul>
-      <p class="origem">Viene del vigilante interno de INEMA. La copia reducida está en la carpeta <a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" target="_blank" rel="noopener">vigia</a> de este kit.</p>
-    </article>
-    <article class="jeito">
-
-      <p class="num">Forma 2</p>
-      <h3>El flujo con compuerta</h3>
-      <p class="bom">Para producción que se repite (video, reel) con aprobación a mitad de camino.</p>
-      <p>Envías un comando por Telegram y el trabajo avanza por fases: guion, avatar, descargar, montar. En los puntos caros hay una compuerta: el flujo se detiene hasta tu "puedes seguir". Si la máquina se reinicia, vuelve a la fase en la que estaba.</p>
-      <ul class="chips"><li>video corto: cada 1 min, hasta 10 h</li><li>avatar: cada 5 min, hasta 40 h</li><li>compuerta: te espera</li></ul>
-      <p class="origem">Viene de <a href="https://github.com/inematds/inemaccbot" target="_blank" rel="noopener">inemaccbot</a>, el bot de producción de INEMA (código abierto).</p>
-    </article>
-    <article class="jeito">
-
-      <p class="num">Forma 3</p>
-      <h3>La cola que retoma</h3>
-      <p class="bom">Para pedidos del día a día, que necesitan sobrevivir a un reinicio.</p>
-      <p>Cada pedido se convierte en una tarea guardada en una cola: reiniciar no la borra. Si la máquina se cae a mitad, llega un aviso, y retomas enviando en el chat el número del pedido con "continúa donde lo dejaste" (el comando /job): sigue con la conversación guardada.</p>
-      <ul class="chips"><li>"sigo vivo" cada 30 s</li><li>espera a los otros agentes: revisa cada 15–20 s</li><li>"sigo trabajando": 25 min</li></ul>
-      <p class="origem">Viene de <a href="https://github.com/inematds/openpcbotv3" target="_blank" rel="noopener">openpcbotv3</a>, el asistente de INEMA en Telegram (código abierto). Allí llegan los avisos de los otros dos.</p>
-    </article>
-  </div>
-
-  <div class="tabela-wrap">
-  <table class="tabela">
-    <thead><tr><th></th><th>Vigia</th><th>Flujo con compuerta</th><th>Cola que retoma</th></tr></thead>
-    <tbody>
-      <tr><th>Quién espera</th><td>un pequeño programa aparte, sin IA</td><td>el propio bot, fase por fase</td><td>el propio asistente, tarea por tarea</td></tr>
-      <tr><th>¿Apruebas a mitad?</th><td>no: las órdenes van en la nota</td><td>sí, en la compuerta</td><td>no; puedes retomar después</td></tr>
-      <tr><th>Cuándo desiste</th><td>8 h sin quedar listo</td><td>cada fase tiene su límite (1 h a 40 h)</td><td>si se cae a mitad: avisa y te espera</td></tr>
-      <tr><th>Cómo te avisa</th><td>en el celular, hecho o falló</td><td>en el chat del bot</td><td>en el chat del asistente</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p class="kicker-s" style="margin-top:34px">Los tres flujos, animados</p>
-  <div class="diags3">
+  <h2>Tres formas de esperar. El vigía es una de ellas.</h2>
+  <p class="sub">INEMA espera los trabajos largos de tres formas, cada una buena para un caso. El kit explica las tres, con los plazos medidos, y entrega el vigía listo.</p>
+  <div class="jeitos-l">
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
-<div class="ctl"><span data-rot>Vigia</span><button type="button" data-btn>Pausar</button></div>
-<svg viewBox="0 0 360 450" role="img" aria-label="Diagrama del Vigia: fase 1 contigo, el trabajo tarda mientras el Vigia revisa, la fase 2 se abre sola y el aviso llega al celular">
+<div class="ctl"><span data-rot>Vigía</span><button type="button" data-btn>Pausar</button></div>
+<svg viewBox="0 0 360 450" role="img" aria-label="Diagrama del vigía: fase 1 contigo, el trabajo tarda mientras el vigía revisa, la fase 2 se abre sola y el aviso llega al celular">
 <line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
 <text class="lb" x="46" y="104">cierras la conversación y te vas</text>
 <text class="lb" x="46" y="210">quedó listo (hasta 8 h)</text>
 <text class="falha" x="46" y="228">¿no quedó? aviso rojo</text>
 <text class="lb" x="46" y="322">hasta 3 h para terminar</text>
-<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Tú y la IA</text><text class="s" x="16" y="43">guion aprobado, va al generador</text></g>
-<g class="nd wait" data-dwell="3600" data-checks="todavía no|todavía no|todavía no|listo ✓" data-pref="el Vigia revisa:" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · El trabajo tarda</text><text class="s" x="16" y="43">el Vigia revisa cada 5 min</text></g>
-<g class="nd" data-dwell="1300" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Una IA nueva asume</text><text class="s" x="16" y="43">lee la nota y termina el trabajo</text></g>
+<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Tú y la IA</text><text class="s" x="16" y="43">guion aprobado, se envía al generador</text></g>
+<g class="nd wait" data-dwell="3600" data-checks="todavía no|todavía no|todavía no|listo ✓" data-pref="el vigía revisa:" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · El trabajo tarda</text><text class="s" x="16" y="43">el vigía revisa cada 5 min</text></g>
+<g class="nd" data-dwell="1300" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Una IA nueva se encarga</text><text class="s" x="16" y="43">lee la nota y termina el trabajo</text></g>
 <g class="nd" data-dwell="1400" transform="translate(30,346)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Aviso en el celular</text><text class="s" x="16" y="43">hecho, o falló con el motivo</text></g>
 <text class="ping" x="180" y="436" text-anchor="middle" data-ping></text>
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
-
+      </div>
+      <div class="jl-txt">
+      <p class="num">Forma 1</p>
+      <h3>El vigía</h3>
+      <p class="bom">Para un trabajo que empezaste conversando con la IA.</p>
+      <p>Un pequeño programa aparte, sin IA, revisa si quedó listo y llama a una IA nueva que lee la nota y termina. Tus órdenes van en la nota, antes de irte.</p>
+      <p class="analogia"><b>Como en la vida diaria:</b> dejas el auto en el taller con una nota ("cambiar el aceite, no tocar la radio") y te vas. El portero mira de vez en cuando si llegó la pieza; cuando llega, llama al mecánico, que lee la nota y hace el servicio. Tú solo recibes el mensaje "auto listo".</p>
+      <ul class="chips"><li>revisa cada 5 min</li><li>espera hasta 8 h</li><li>murió en silencio: aviso en 20 min</li><li>IA nueva: hasta 3 h</li></ul>
+      <p class="origem">Viene del vigía interno de INEMA. La copia reducida está en la carpeta <a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" target="_blank" rel="noopener">vigia</a> de este kit.</p>
+      </div>
+    </article>
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Flujo con compuerta</span><button type="button" data-btn>Pausar</button></div>
 <svg viewBox="0 0 360 640" role="img" aria-label="Diagrama del flujo con compuerta: comando en Telegram, guion, compuerta esperando tu aprobación, avatar, fase que revisa hasta que esté listo y video entregado en el chat">
 <line class="lnk" x1="30" y1="76" x2="30" y2="568"/>
-<text class="lb" x="46" y="306">¿se cayó la máquina? vuelve a la misma fase</text>
+<text class="lb" x="46" y="306">¿se cayó el equipo? vuelve a su fase</text>
 <g class="nd" data-dwell="800" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Pedido en Telegram</text><text class="s" x="16" y="43">un comando con el tema del video</text></g>
 <g class="nd" data-dwell="900" transform="translate(30,118)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · Fase: guion</text><text class="s" x="16" y="43">la IA escribe el texto</text></g>
-<g class="nd wait" data-dwell="2600" data-checks="esperándote|esperándote|aprobado ✓" data-pref="compuerta:" transform="translate(30,216)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Compuerta: apruebas</text><text class="s" x="16" y="43">el flujo para hasta tu "puedes seguir"</text></g>
+<g class="nd wait" data-dwell="2600" data-checks="esperándote|esperándote|aprobado ✓" data-pref="compuerta:" transform="translate(30,216)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Compuerta: tú apruebas</text><text class="s" x="16" y="43">se detiene hasta tu "puedes seguir"</text></g>
 <g class="nd" data-dwell="900" transform="translate(30,330)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Fase: avatar</text><text class="s" x="16" y="43">el pedido va al generador de video</text></g>
 <g class="nd wait" data-dwell="3200" data-checks="todavía no|todavía no|todavía no|descargado ✓" data-pref="revisa:" transform="translate(30,428)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">5 · Fase que espera</text><text class="s" x="16" y="43">revisa cada 1 a 5 min, hasta 10 a 40 h</text></g>
 <g class="nd" data-dwell="1400" transform="translate(30,526)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">6 · Video en tu chat</text><text class="s" x="16" y="43">montado y entregado</text></g>
@@ -536,71 +516,110 @@
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
+      </div>
+      <div class="jl-txt">
+
+      <p class="num">Forma 2</p>
+      <h3>El flujo con compuerta</h3>
+      <p class="bom">Para producción que se repite (video, reel) con aprobación a la mitad.</p>
+      <p>Mandas un comando por Telegram y el trabajo avanza por fases: guion, avatar, descargar, montar. En los puntos costosos hay una compuerta: el flujo se detiene hasta tu "puedes seguir". Si el equipo se reinicia, vuelve a la fase en la que estaba.</p>
+      <p class="analogia"><b>Como en la vida diaria:</b> una imprenta que solo imprime después de que apruebas la prueba de color. La pieza pasa de mesa en mesa; en la mesa de aprobación, espera tu firma. Si se va la luz, cada mesa sabe lo que ya hizo.</p>
+      <ul class="chips"><li>video corto: cada 1 min, hasta 10 h</li><li>avatar: cada 5 min, hasta 40 h</li><li>compuerta: te espera</li></ul>
+      <p class="origem">Viene de <a href="https://github.com/inematds/inemaccbot" target="_blank" rel="noopener">inemaccbot</a>, el bot de producción de INEMA (código abierto).</p>
+      </div>
+    </article>
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Cola que retoma</span><button type="button" data-btn>Pausar</button></div>
-<svg viewBox="0 0 360 540" role="img" aria-label="Diagrama de la cola que retoma: pedido en el chat, espera su turno guardado en la cola, agente trabajando y esperando a los especialistas, si se cae a mitad llega el aviso y retomas donde lo dejaste, respuesta en el chat">
+<svg viewBox="0 0 360 540" role="img" aria-label="Diagrama de la cola que retoma: pedido en el chat, espera su turno guardado en la cola, agente trabajando y esperando a los especialistas, si se cae a la mitad llega el aviso y retomas desde donde quedó, respuesta en el chat">
 <line class="lnk" x1="30" y1="76" x2="30" y2="474"/>
 <text class="lb" x="46" y="298">¿tardó 25 min? te avisa</text>
-<text class="lb" x="46" y="318">¿se cayó a mitad? aviso de falla</text>
+<text class="lb" x="46" y="318">¿se cayó a la mitad? aviso de falla</text>
 <text class="lb" x="46" y="420">retomado con la conversación guardada</text>
-<g class="nd" data-dwell="800" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Pedido en el chat</text><text class="s" x="16" y="43">le pides al asistente</text></g>
+<g class="nd" data-dwell="800" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Pedido en el chat</text><text class="s" x="16" y="43">se lo pides al asistente</text></g>
 <g class="nd wait" data-dwell="1700" data-checks="en la cola|en la cola|tu turno ✓" data-pref="cola:" transform="translate(30,118)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · Espera su turno</text><text class="s" x="16" y="43">guardado: reiniciar no lo borra</text></g>
 <g class="nd wait" data-dwell="2400" data-checks="especialistas trabajando|especialistas trabajando|todos listos ✓" data-pref="revisa cada 15 a 20 s:" transform="translate(30,216)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Agente trabajando</text><text class="s" x="16" y="43">espera a los especialistas que llamó</text></g>
-<g class="nd wait" data-dwell="2600" data-checks="falló: aviso en el chat|tú: continúa donde lo dejaste|retomado ✓" data-pref="" transform="translate(30,340)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · ¿Se cayó? Tú retomas</text><text class="s" x="16" y="43">un pedido y sigue desde ahí</text></g>
+<g class="nd wait" data-dwell="2600" data-checks="falló: aviso en el chat|tú: continúa donde quedaste|retomado ✓" data-pref="" transform="translate(30,340)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · ¿Se cayó? Tú retomas</text><text class="s" x="16" y="43">un pedido y sigue desde ahí</text></g>
 <g class="nd" data-dwell="1400" transform="translate(30,446)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">5 · Respuesta en el chat</text><text class="s" x="16" y="43">y los avisos de los otros sistemas</text></g>
 <text class="ping" x="180" y="530" text-anchor="middle" data-ping></text>
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
+      </div>
+      <div class="jl-txt">
+
+      <p class="num">Forma 3</p>
+      <h3>La cola que retoma</h3>
+      <p class="bom">Para pedidos del día a día, que necesitan sobrevivir a un reinicio.</p>
+      <p>Cada pedido se convierte en una tarea guardada en una cola: reiniciar no la borra. Si el equipo se cae a la mitad, llega un aviso, y retomas enviando en el chat el número del pedido con "continúa donde quedaste" (el comando /job): sigue con la conversación guardada.</p>
+      <p class="analogia"><b>Como en la vida diaria:</b> el turno del banco. Sacas tu número y te sientas; aunque el sistema se reinicie, tu número sigue en la fila. Si la atención se corta a la mitad, el banco te llama para avisarte, y vuelves con el mismo número de trámite, sin contar todo de nuevo.</p>
+      <ul class="chips"><li>"sigo vivo" cada 30 s</li><li>espera a los otros agentes: revisa cada 15–20 s</li><li>"sigo trabajando": 25 min</li></ul>
+      <p class="origem">Viene de <a href="https://github.com/inematds/openpcbotv3" target="_blank" rel="noopener">openpcbotv3</a>, el asistente de INEMA en Telegram (código abierto). Allí llegan los avisos de los otros dos.</p>
+      </div>
+    </article>
   </div>
+
+  <div class="tabela-wrap">
+  <table class="tabela">
+    <thead><tr><th></th><th>Vigía</th><th>Flujo con compuerta</th><th>Cola que retoma</th></tr></thead>
+    <tbody>
+      <tr><th>Quién espera</th><td>un pequeño programa aparte, sin IA</td><td>el propio bot, fase por fase</td><td>el propio asistente, tarea por tarea</td></tr>
+      <tr><th>¿Apruebas a la mitad?</th><td>no: las órdenes van en la nota</td><td>sí, en la compuerta</td><td>no; puedes retomar después</td></tr>
+      <tr><th>Cuándo se rinde</th><td>8 h sin quedar listo</td><td>cada fase tiene su límite (1 h a 40 h)</td><td>si se cae a la mitad: avisa y te espera</td></tr>
+      <tr><th>Cómo te avisa</th><td>en el celular, hecho o falló</td><td>en el chat del bot</td><td>en el chat del asistente</td></tr>
+    </tbody>
+  </table>
+  </div>
+
 </div></section>
 
 <!-- ========== QUESTÕES IMPORTANTES ========== -->
 <section id="importantes"><div class="wrap">
   <p class="kicker">Cuestiones importantes</p>
-  <h2>Dos preguntas antes de dejar la pantalla</h2>
+  <h2>Dos preguntas antes de alejarte de la pantalla</h2>
   <div class="questao" id="silencio">
-  <h3 class="q-tit"><span>1</span>¿Y si el trabajo nunca vuelve, o el Vigia se detiene?</h3>
+  <h3 class="q-tit"><span>1</span>¿Y si el trabajo nunca vuelve, o el vigía se detiene?</h3>
   <p class="sub">La mitad de los trabajos tarda más de 92 minutos, y tú no estás mirando. El peligro es el silencio: no llega nada y crees que todavía está esperando. Son dos casos, cada uno con su respuesta.</p>
   <figure class="largo m"><img src="../assets/vigia-vistoria.jpg" alt="De noche, un robot portero vigila el estante de paquetes; un paquete tiene el reloj de arena vacío" loading="lazy" width="1200" height="800"></figure>
   <div class="duas">
     <div class="bloco">
       <h3>El trabajo que nunca vuelve</h3>
-      <p>Cada trabajo tiene un límite (8 h, tú lo ajustas). Si lo supera, el Vigia desiste y envía el aviso rojo con el motivo. Si el trabajo graba un registro y este deja de avanzar por 20 minutos, sin nada más ejecutándose en la carpeta, el aviso llega antes del límite.</p>
+      <p>Cada trabajo tiene un límite (8 h, tú lo ajustas). Si lo pasa, el vigía se rinde y manda el aviso rojo con el motivo. Si el trabajo lleva un registro y este deja de avanzar durante 20 minutos, sin nada más funcionando en la carpeta, el aviso llega antes del límite.</p>
       <p class="medido">De los 179 trabajos medidos, 5 se detuvieron en el límite, y el aviso llegó en cada uno.</p>
     </div>
     <div class="bloco">
-      <h3>El Vigia que dejó de vigilar</h3>
-      <p>Aquí el Vigia no puede avisar, porque quien avisa es él. Por eso existe la inspección: otro pequeño programa sin IA, con reloj propio. Cada hora revisa si el Vigia corrió en los últimos 15 minutos, si algún trabajo pasó el límite sin aviso y si alguna IA nueva murió sin cerrar. Solo habla si encuentra un problema.</p>
-      <p class="medido">Todos los días a las 08:00 llega un informe corto. Si no llega, la máquina se cayó: la falta del informe también es un aviso.</p>
+      <h3>El vigía que dejó de vigilar</h3>
+      <p>Aquí el vigía no puede avisar, porque quien avisa es él. Por eso existe la inspección: otro pequeño programa sin IA, con reloj propio. Cada hora comprueba si el vigía funcionó en los últimos 15 minutos, si algún trabajo pasó el límite sin aviso y si alguna IA nueva murió sin cerrar. Solo habla si encuentra un problema.</p>
+      <p class="medido">Todos los días a las 08:00 llega un informe corto. Si no llega, el equipo se cayó: la falta del informe también es un aviso.</p>
     </div>
   </div>
-  <p class="analogia"><b>Como en el día a día:</b> el portero llama cuando vence el plazo del paquete. Pero si el portero se duerme, nadie llama. Entonces el administrador pasa cada hora con la linterna, y por la mañana deja una nota con el resumen de la noche.</p>
+  <p class="analogia"><b>Como en la vida diaria:</b> el portero llama cuando se vence el plazo del paquete. Pero si el portero se duerme, nadie llama. Entonces el administrador pasa cada hora con la linterna, y por la mañana deja una nota con el resumen de la noche.</p>
   </div>
 
 
   <div class="questao" id="bilhete">
   <h3 class="q-tit"><span>2</span>¿Cómo sabe la IA nueva lo que ya se hizo? La nota</h3>
-  <p class="sub">Cierras la conversación y la IA olvida todo. Sin un archivo de relevo, puede rehacer lo que ya estaba listo u olvidar lo que pediste. Por eso, antes de que te vayas, escribe la nota.</p>
-  <figure class="largo m"><img src="../assets/bilhete-handoff.jpg" alt="De madrugada, el portero de la noche entrega una tarjeta doblada a quien llega por la mañana" loading="lazy" width="1200" height="800"></figure>
+  <p class="sub">Cierras la conversación y la IA olvida todo. Sin un archivo de traspaso, puede rehacer lo que ya estaba listo u olvidar lo que pediste. Por eso, antes de que te vayas, escribe la nota.</p>
+  <figure class="largo m"><img src="../assets/bilhete-handoff.jpg" alt="De madrugada, el portero nocturno le entrega una tarjeta doblada a quien llega por la mañana" loading="lazy" width="1200" height="800"></figure>
   <div class="duas">
     <div class="bloco">
       <h3>La nota (CONTINUAR.md)</h3>
-      <p class="mut">Queda en la carpeta del trabajo. La lee una IA nueva, que no sabe nada más que eso. Tiene cuatro partes:</p>
+      <p class="mut">Se queda en la carpeta del trabajo. Quien la lee es una IA nueva, que no sabe nada más que lo que dice. Tiene cuatro partes:</p>
       <ol class="partes">
-        <li><b>Lo que ya se hizo</b>, y dónde está. Es lo que impide rehacerlo.</li>
+        <li><b>Lo que ya se hizo</b>, y dónde está. Es lo que evita rehacerlo.</li>
         <li><b>Lo que falta</b>, en orden, cada paso con lo que debe salir.</li>
         <li><b>Tus órdenes, citadas</b> entre comillas, tal como las dijiste.</li>
-        <li><b>Los frenos</b>: lo que no se puede ("no gastar créditos nuevos") y la obligación de escribir FEITO (hecho) o FALHOU (falló).</li>
+        <li><b>Los candados</b>: lo que no se puede ("no gastar créditos nuevos") y la obligación de escribir HECHO o FALLÓ.</li>
       </ol>
     </div>
     <div class="bloco">
-      <h3>El relevo de sesión</h3>
-      <p class="mut">Para cuando tú mismo vuelves a la conversación otro día, o cambias de IA (Claude ↔ Codex).</p>
+      <h3>El traspaso de sesión</h3>
+      <p class="mut">Para cuando tú vuelves a la conversación otro día, o cambias de IA (Claude ↔ Codex).</p>
       <ul class="lista sim">
-        <li><div><strong>Lo que está listo, con prueba</strong><span>y dónde verificar cada punto.</span></div></li>
-        <li><div><strong>Lo que se intentó y no se confirmó</strong><span>para que no se trate como listo.</span></div></li>
-        <li><div><strong>Decisiones, qué no hacer y la próxima acción</strong><span>indicando si necesita tu sí.</span></div></li>
+        <li><div><strong>Lo que está listo, con prueba</strong><span>y dónde comprobar cada punto.</span></div></li>
+        <li><div><strong>Lo que se intentó y no se confirmó</strong><span>para que no se tome como listo.</span></div></li>
+        <li><div><strong>Decisiones, lo que no hay que hacer y la próxima acción</strong><span>indicando si necesita tu sí.</span></div></li>
       </ul>
       <p class="mut">Cómo pedirlo: antes de limpiar, dile a la IA "handoff" (traspaso de sesión). Al volver, en una conversación nueva, di "retoma".</p>
     </div>
@@ -616,19 +635,19 @@
     <div class="bloco">
       <h3>Necesitas</h3>
       <ul class="lista sim">
-        <li><div><strong>Una computadora encendida, con Linux o macOS.</strong><span>Una portátil con la tapa cerrada suele suspenderse, y entonces el Vigia se detiene. Configúrala para que no se suspenda, o usa una mini PC.</span></div></li>
+        <li><div><strong>Una computadora encendida, con Linux o macOS.</strong><span>Una portátil con la tapa cerrada suele suspenderse, y entonces el vigía se detiene. Configúrala para que no se suspenda, o usa una mini PC.</span></div></li>
         <li><div><strong>La suscripción de Claude o de Codex.</strong><span>Con ella trabaja la IA nueva en la parte final. La espera no gasta nada.</span></div></li>
         <li><div><strong>Una señal de que el trabajo terminó.</strong><span>Por ejemplo, que el archivo del video aparezca en la carpeta. La IA arma esa comprobación contigo.</span></div></li>
-        <li><div><strong>Para el aviso en el celular, un bot tuyo en Telegram.</strong><span>Tu IA te guía para crear uno en pocos minutos y lo conecta cuando dices que sí.</span></div></li>
+        <li><div><strong>Para el aviso en el celular, un bot tuyo en Telegram.</strong><span>Tu IA te guía para crear uno en pocos minutos y lo conecta con tu sí.</span></div></li>
       </ul>
     </div>
     <div class="bloco">
       <h3>El kit no promete</h3>
       <ul class="lista">
         <li><div><strong>Instalar el bot o el asistente de INEMA.</strong><span>Cada uno tiene su página en GitHub.</span></div></li>
-        <li><div><strong>Revisar por sí solo un servicio que no dice si ya está listo.</strong><span>Alguien tiene que decirle al Vigia cómo preguntar.</span></div></li>
+        <li><div><strong>Comprobar por sí solo un servicio que no dice si terminó.</strong><span>Alguien tiene que decirle al vigía cómo preguntar.</span></div></li>
         <li><div><strong>Gastar cero en la parte final.</strong><span>La IA nueva trabaja con tu suscripción.</span></div></li>
-        <li><div><strong>Volver a intentar por su cuenta.</strong><span>Si falló, el Vigia avisa y se detiene. Volver a hacerlo es decisión tuya.</span></div></li>
+        <li><div><strong>Volver a intentarlo solo.</strong><span>Si falló, el vigía avisa y se detiene. Rehacerlo es decisión tuya.</span></div></li>
       </ul>
     </div>
   </div>
@@ -649,11 +668,13 @@
       <button class="btn" id="copiar" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="copiarTxt">Copiar el pedido</span></button>
     </div>
-<pre id="pedidoTxt">Lee el repositorio https://github.com/inematds/espera-sem-voce (el README y la carpeta vigia). Después mira mi proyecto y pregúntame qué trabajos tardan (video, render, transcripción, generador externo) y cómo espero hoy. Dime, en lenguaje sencillo, cuál de las tres formas sirve para cada uno (Vigia, flujo con compuerta o cola que retoma), cuánto tiempo dejaría de estar con la conversación abierta y qué haría falta para que el Vigia sepa preguntar "¿ya está listo?". No instales ni cambies nada antes de mi sí. Con mi sí: copia el Vigia de ejemplo, ejecuta su prueba, arma la primera nota y la primera comprobación para un trabajo mío, activa el aviso en mi celular por Telegram y dime si esta computadora puede suspenderse o apagarse mientras espera.</pre>
+<pre id="pedidoTxt">Lee el repositorio https://github.com/inematds/espera-sem-voce (el README y la carpeta vigia). Después mira mi proyecto y pregúntame qué trabajos tardan (video, render, transcripción, generador externo) y cómo los espero hoy. Dime, en lenguaje sencillo, cuál de las tres formas sirve para cada uno (vigía, flujo con compuerta o cola que retoma), cuánto tiempo dejaría de pasar con la conversación abierta y qué haría falta para que el vigía sepa preguntar "¿ya está listo?". No instales ni cambies nada antes de mi sí. Con mi sí: copia el vigía de ejemplo, ejecuta su prueba, arma la primera nota y la primera comprobación para un trabajo mío, conecta el aviso a mi celular por Telegram y dime si esta computadora puede suspenderse o apagarse mientras espera.</pre>
   </div>
   <span class="vh" id="aviso" role="status" aria-live="polite"></span>
-  <div class="depois">
-    <p>¿Prefieres descargarlo? No hay instalador: es una carpeta con un programa pequeño en Python. <a href="https://github.com/inematds/espera-sem-voce/archive/refs/heads/main.zip">Descarga el ZIP</a> o mira el <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">repositorio</a>. Los comandos para instalarlo a mano están en el README.</p>
+  <div class="cartoes3">
+    <div class="bloco"><h3>¿Solo quieres entender, sin instalar?</h3><p class="mut">Los flujos animados de arriba son la explicación completa: mira cada uno hasta el final. No hay versión en línea para usar, porque el vigía funciona en tu computadora.</p></div>
+    <div class="bloco"><h3>¿Dónde descargarlo?</h3><p class="mut">No hay instalador: es una carpeta con un programa pequeño (en Python, que tu IA instala si falta). <a href="https://github.com/inematds/espera-sem-voce/archive/refs/heads/main.zip">Descarga el ZIP del kit</a> o mira el <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">repositorio</a>.</p></div>
+    <div class="bloco"><h3>¿Eres técnico?</h3><p class="mut">Cómo funciona el vigía, la prueba, los plazos exactos y dónde está cada pieza en los proyectos de origen se encuentra en el <a href="https://github.com/inematds/espera-sem-voce#readme" target="_blank" rel="noopener">README</a>.</p></div>
   </div>
 </div></div></section>
 
@@ -670,14 +691,14 @@
 <!-- ========== PROVA ========== -->
 <section id="prova"><div class="wrap">
   <p class="kicker">Medido</p>
-  <h2>Medido en sistemas reales</h2>
+  <h2>Medido en los sistemas reales</h2>
   <div class="numeros">
-    <div class="numero"><b>179</b><span>trabajos esperados por el Vigia, del 09/11 al 25/11/2026: 124 hechos, 50 fallaron con aviso y motivo, 5 se detuvieron en el límite.</span></div>
+    <div class="numero"><b>179</b><span>trabajos esperados por el vigía, del 09/11 al 25/11/2026: 124 hechos, 50 fallaron con aviso y motivo, 5 se detuvieron en el límite.</span></div>
     <div class="numero"><b>92 min</b><span>fue la espera mediana hasta quedar listo: la mitad de los trabajos tarda más que eso.</span></div>
     <div class="numero"><b>193</b><span>flujos con compuerta del 31/07 al 20/11/2026: 151 terminaron, 15 fallaron, 27 cancelados por quien los pidió.</span></div>
-    <div class="numero"><b>5 de 5</b><span>casos de la prueba del Vigia de ejemplo pasan en pocos segundos, sin IA.</span></div>
+    <div class="numero"><b>5 de 5</b><span>casos de la prueba del vigía de ejemplo pasan en pocos segundos, sin IA.</span></div>
   </div>
-  <p class="sub">La inspección, activada el 25/11/2026, contó en el primer informe 286 rondas del Vigia en 24 horas, con un intervalo máximo de 6 minutos y ningún trabajo perdido. La cola del asistente completó cerca de 150 mil tareas; 13 fallaron, y cada falla generó un aviso. Conteos tomados de las bases de datos de cada sistema el 25/11/2026.</p>
+  <p class="sub">La inspección, activada el 25/11/2026, contó en el primer informe 286 rondas del vigía en 24 horas, con un intervalo máximo de 6 minutos y ningún trabajo perdido. La cola del asistente completó cerca de 150 mil tareas; 13 fallaron, y cada falla generó un aviso. Conteos tomados de las bases de datos de cada sistema el 25/11/2026.</p>
 </div></section>
 
 <!-- ========== PERGUNTAS ========== -->
@@ -685,17 +706,17 @@
   <p class="kicker">Preguntas</p>
   <h2>Preguntas antes de empezar</h2>
   <div class="faq">
-    <details><summary>¿Necesito programar?</summary><p>No. Pegas el pedido y tu IA arma el Vigia para tus trabajos. Tú solo dices que sí.</p></details>
+    <details><summary>¿Necesito saber programar?</summary><p>No. Pegas el pedido y tu IA arma el vigía para tus trabajos. Tú solo dices que sí.</p></details>
     <details><summary>¿Cuesta algo?</summary><p>El kit es gratis y abierto. La espera no gasta nada. La parte final usa tu IA (la suscripción de Claude o de Codex), como cualquier otro trabajo suyo.</p></details>
-    <details><summary>¿Necesito dejar la computadora encendida?</summary><p>Sí. La máquina donde corre el Vigia queda encendida y sin suspenderse; lo que cierras es la conversación.</p></details>
-    <details><summary>¿Cuál de las tres uso?</summary><p>Trabajo que empiezas conversando con la IA: el Vigia. Producción que se repite con aprobación: el flujo con compuerta. Pedido del día a día: la cola. El pedido de arriba hace que la IA elija contigo.</p></details>
-    <details><summary>¿Funciona con otra IA?</summary><p>Sí. El Vigia llama al comando que elijas para la parte final; el ejemplo usa Claude Code, y se puede cambiar por Codex.</p></details>
+    <details><summary>¿Tengo que dejar la computadora encendida?</summary><p>Sí. El equipo donde funciona el vigía se queda encendido y sin suspenderse; lo que cierras es la conversación.</p></details>
+    <details><summary>¿Cuál de las tres uso?</summary><p>Trabajo que empiezas conversando con la IA: el vigía. Producción que se repite con aprobación: el flujo con compuerta. Pedido del día a día: la cola. El pedido de arriba hace que la IA elija contigo.</p></details>
+    <details><summary>¿Funciona con otra IA?</summary><p>Sí. El vigía llama al comando que elijas para la parte final; el ejemplo usa Claude Code, y se puede cambiar por Codex.</p></details>
   </div>
 </div></div></section>
 
 <!-- ========== FECHO ========== -->
 <section class="fecho"><div class="wrap">
-  <h2>Y tú: ¿qué trabajo todavía te ata frente a la pantalla?</h2>
+  <h2>Y tú: ¿qué trabajo todavía te tiene atado frente a la pantalla?</h2>
   <p>Ven a contarlo y a ver otros kits gratis en <a href="https://inema.club" target="_blank" rel="noopener">inema.club</a>, directo en internet.</p>
   <div class="cta"><a class="btn" href="#comecar">Ir al pedido</a></div>
 </div></section>

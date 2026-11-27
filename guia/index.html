@@ -332,6 +332,22 @@
     .tabela-wrap{position:relative;background:linear-gradient(to left,rgba(250,204,21,.18),transparent 28px) right/28px 100% no-repeat}
     .tabela-wrap::before{content:"\2194";position:sticky;left:0;display:block;text-align:right;padding:6px 10px 0;color:var(--amb-t);font:700 1rem Sora,sans-serif}
   }
+  /* v2.5 */
+  .kicker{font:800 clamp(1.35rem,2.6vw,1.75rem)/1.1 Sora,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--amb-t);margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid var(--fill);display:inline-block}
+  .frase{font-size:clamp(1.1rem,1.6vw,1.25rem);line-height:1.6}
+  .tres-j{margin:16px 0;padding-left:1.2em;display:grid;gap:8px;font-size:1.05rem}
+  .tres-j b{color:var(--amb-t)}
+  .jeitos-l{display:grid;gap:40px;margin-top:32px}
+  .jeito-l{display:grid;grid-template-columns:340px minmax(0,1fr);gap:32px;align-items:start;padding-bottom:40px;border-bottom:1px solid var(--line)}
+  .jl-txt{display:flex;flex-direction:column;gap:12px}
+  .jl-txt .num{font:600 .8rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .jl-txt h3{font-size:1.5rem;font-weight:800}
+  .jl-txt .bom{font-weight:600}
+  .jl-txt .origem{color:var(--mut);font-size:.9rem}
+  .jl-txt .analogia{margin-top:4px}
+  .cartoes3{display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px}
+  .cartoes3 h3{font-size:1.05rem;margin-bottom:6px}
+  @media (max-width:900px){.jeito-l{grid-template-columns:1fr}.jl-diag{max-width:380px;width:100%;margin:0 auto}}
 </style>
 </head>
 <body>
@@ -380,6 +396,18 @@
 </div></header>
 
 <main>
+
+<!-- ========== EM UMA FRASE ========== -->
+<section id="resumo"><div class="wrap"><div class="col">
+  <p class="kicker">Em uma frase</p>
+  <p class="frase"><strong>Você quer pedir um trabalho longo à IA, ir cuidar da vida e receber só o aviso de que terminou.</strong> Este kit gratuito mostra os três jeitos que a INEMA usa todo dia para esperar sem ninguém olhando a tela, e traz um deles pronto para você usar:</p>
+  <ul class="tres-j">
+    <li><b>o vigia</b>: confere de tempos em tempos e chama uma conversa nova da IA quando fica pronto;</li>
+    <li><b>o fluxo com portão</b>: para nos pontos caros e espera o seu "pode seguir";</li>
+    <li><b>a fila que retoma</b>: guarda cada pedido e avisa se algo cair no meio.</li>
+  </ul>
+  <p class="mut">O computador onde ele roda fica ligado; quem sai é você.</p>
+</div></div></section>
 
 <!-- ========== PARA QUEM É ========== -->
 <section id="quem"><div class="wrap">
@@ -434,27 +462,6 @@
       <p class="porque"><span>Por quê</span>O perigo de sair é o silêncio. Aqui todo final tem aviso.</p>
     </article>
   </div>
-  <div class="fluxo-baixo">
-    <p class="kicker-s">O fluxo do vigia, animado</p>
-<div class="diag" data-diag>
-<div class="ctl"><span data-rot>Vigia</span><button type="button" data-btn>Pausar</button></div>
-<svg viewBox="0 0 360 450" role="img" aria-label="Diagrama do vigia: fase 1 com você, o trabalho demora enquanto o vigia confere, a fase 2 abre sozinha e o aviso chega no celular">
-<line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
-<text class="lb" x="46" y="104">você fecha a conversa e sai</text>
-<text class="lb" x="46" y="210">ficou pronto (até 8 h)</text>
-<text class="falha" x="46" y="228">não ficou? aviso vermelho</text>
-<text class="lb" x="46" y="322">até 3 h para terminar</text>
-<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Você e a IA</text><text class="s" x="16" y="43">roteiro aprovado, manda ao gerador</text></g>
-<g class="nd wait" data-dwell="3600" data-checks="ainda não|ainda não|ainda não|pronto ✓" data-pref="vigia confere:" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · O trabalho demora</text><text class="s" x="16" y="43">vigia confere a cada 5 min</text></g>
-<g class="nd" data-dwell="1300" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Uma IA nova assume</text><text class="s" x="16" y="43">lê o bilhete e termina o trabalho</text></g>
-<g class="nd" data-dwell="1400" transform="translate(30,346)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Aviso no celular</text><text class="s" x="16" y="43">feito, ou falhou com o motivo</text></g>
-<text class="ping" x="180" y="436" text-anchor="middle" data-ping></text>
-<circle class="ring" r="20"/><circle class="tok" r="9"/>
-</svg>
-</div>
-    <p class="legenda">A bolinha é o trabalho; a moldura tracejada é onde ele espera.</p>
-  </div>
-  <p class="analogia"><b>Como no dia a dia:</b> você deixa o carro na oficina com um bilhete ("trocar o óleo, não mexer no rádio") e vai embora. O porteiro olha de tempos em tempos se a peça chegou; quando chega, chama o mecânico, que lê o bilhete e faz o serviço. Você só recebe a mensagem "carro pronto".</p>
 </div></section>
 
 <!-- ========== OS 3 JEITOS DE ESPERAR ========== -->
@@ -462,48 +469,9 @@
   <p class="kicker">Os 3 jeitos</p>
   <h2>Três jeitos de esperar. O vigia é um deles.</h2>
   <p class="sub">A INEMA espera trabalhos longos de três jeitos, cada um bom para um caso. O kit explica os três, com os prazos medidos, e entrega o vigia pronto.</p>
-  <div class="jeitos">
-    <article class="jeito">
-      <p class="num">Jeito 1</p>
-      <h3>O vigia</h3>
-      <p class="bom">Para um trabalho que você começou conversando com a IA.</p>
-      <p>Um programinha à parte, sem IA, confere se ficou pronto e chama uma IA nova que lê o bilhete e termina. As suas ordens vão no bilhete, antes de sair.</p>
-      <ul class="chips"><li>confere a cada 5 min</li><li>espera até 8 h</li><li>morreu calado: aviso em 20 min</li><li>IA nova: até 3 h</li></ul>
-      <p class="origem">Vem do vigia interno da INEMA. A cópia enxuta está na pasta <a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" target="_blank" rel="noopener">vigia</a> deste kit.</p>
-    </article>
-    <article class="jeito">
-
-      <p class="num">Jeito 2</p>
-      <h3>O fluxo com portão</h3>
-      <p class="bom">Para produção que se repete (vídeo, reel) com aprovação no meio.</p>
-      <p>Você manda um comando pelo Telegram e o trabalho anda por fases: roteiro, avatar, baixar, montar. Nos pontos caros há um portão: o fluxo para até o seu "pode seguir". Se a máquina reinicia, ele volta da fase em que estava.</p>
-      <ul class="chips"><li>vídeo curto: a cada 1 min, até 10 h</li><li>avatar: a cada 5 min, até 40 h</li><li>portão: espera você</li></ul>
-      <p class="origem">Vem do <a href="https://github.com/inematds/inemaccbot" target="_blank" rel="noopener">inemaccbot</a>, o bot de produção da INEMA (código aberto).</p>
-    </article>
-    <article class="jeito">
-
-      <p class="num">Jeito 3</p>
-      <h3>A fila que retoma</h3>
-      <p class="bom">Para pedidos do dia a dia, que precisam sobreviver a um reinício.</p>
-      <p>Cada pedido vira uma tarefa guardada numa fila: reiniciar não apaga. Se a máquina cai no meio, chega um aviso, e você retoma mandando no chat o número do pedido com "continue de onde parou" (o comando /job): ele segue com a conversa salva.</p>
-      <ul class="chips"><li>"estou vivo" a cada 30 s</li><li>espera os outros agentes: confere a cada 15–20 s</li><li>"ainda trabalhando": 25 min</li></ul>
-      <p class="origem">Vem do <a href="https://github.com/inematds/openpcbotv3" target="_blank" rel="noopener">openpcbotv3</a>, o assistente da INEMA no Telegram (código aberto). É lá que chegam os avisos dos outros dois.</p>
-    </article>
-  </div>
-
-  <div class="tabela-wrap">
-  <table class="tabela">
-    <thead><tr><th></th><th>Vigia</th><th>Fluxo com portão</th><th>Fila que retoma</th></tr></thead>
-    <tbody>
-      <tr><th>Quem espera</th><td>um programinha à parte, sem IA</td><td>o próprio bot, fase por fase</td><td>o próprio assistente, tarefa por tarefa</td></tr>
-      <tr><th>Você aprova no meio?</th><td>não: as ordens vão no bilhete</td><td>sim, no portão</td><td>não; você pode retomar depois</td></tr>
-      <tr><th>Quando desiste</th><td>8 h sem ficar pronto</td><td>cada fase tem o seu limite (1 h a 40 h)</td><td>se cair no meio: avisa e espera você</td></tr>
-      <tr><th>Como te avisa</th><td>no celular, feito ou falhou</td><td>no chat do bot</td><td>no chat do assistente</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p class="kicker-s" style="margin-top:34px">Os três fluxos, animados</p>
-  <div class="diags3">
+  <div class="jeitos-l">
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Vigia</span><button type="button" data-btn>Pausar</button></div>
 <svg viewBox="0 0 360 450" role="img" aria-label="Diagrama do vigia: fase 1 com você, o trabalho demora enquanto o vigia confere, a fase 2 abre sozinha e o aviso chega no celular">
@@ -520,7 +488,19 @@
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
-
+      </div>
+      <div class="jl-txt">
+      <p class="num">Jeito 1</p>
+      <h3>O vigia</h3>
+      <p class="bom">Para um trabalho que você começou conversando com a IA.</p>
+      <p>Um programinha à parte, sem IA, confere se ficou pronto e chama uma IA nova que lê o bilhete e termina. As suas ordens vão no bilhete, antes de sair.</p>
+      <p class="analogia"><b>Como no dia a dia:</b> você deixa o carro na oficina com um bilhete ("trocar o óleo, não mexer no rádio") e vai embora. O porteiro olha de tempos em tempos se a peça chegou; quando chega, chama o mecânico, que lê o bilhete e faz o serviço. Você só recebe a mensagem "carro pronto".</p>
+      <ul class="chips"><li>confere a cada 5 min</li><li>espera até 8 h</li><li>morreu calado: aviso em 20 min</li><li>IA nova: até 3 h</li></ul>
+      <p class="origem">Vem do vigia interno da INEMA. A cópia enxuta está na pasta <a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" target="_blank" rel="noopener">vigia</a> deste kit.</p>
+      </div>
+    </article>
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Fluxo com portão</span><button type="button" data-btn>Pausar</button></div>
 <svg viewBox="0 0 360 640" role="img" aria-label="Diagrama do fluxo com portão: comando no Telegram, roteiro, portão esperando você aprovar, avatar, fase que confere até ficar pronto e vídeo entregue no chat">
@@ -536,6 +516,20 @@
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
+      </div>
+      <div class="jl-txt">
+
+      <p class="num">Jeito 2</p>
+      <h3>O fluxo com portão</h3>
+      <p class="bom">Para produção que se repete (vídeo, reel) com aprovação no meio.</p>
+      <p>Você manda um comando pelo Telegram e o trabalho anda por fases: roteiro, avatar, baixar, montar. Nos pontos caros há um portão: o fluxo para até o seu "pode seguir". Se a máquina reinicia, ele volta da fase em que estava.</p>
+      <p class="analogia"><b>Como no dia a dia:</b> uma gráfica que só imprime depois que você aprova a prova de cor. A peça passa de mesa em mesa; na mesa da aprovação, ela espera a sua assinatura. Se faltar luz, cada mesa sabe o que já fez.</p>
+      <ul class="chips"><li>vídeo curto: a cada 1 min, até 10 h</li><li>avatar: a cada 5 min, até 40 h</li><li>portão: espera você</li></ul>
+      <p class="origem">Vem do <a href="https://github.com/inematds/inemaccbot" target="_blank" rel="noopener">inemaccbot</a>, o bot de produção da INEMA (código aberto).</p>
+      </div>
+    </article>
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Fila que retoma</span><button type="button" data-btn>Pausar</button></div>
 <svg viewBox="0 0 360 540" role="img" aria-label="Diagrama da fila que retoma: pedido no chat, espera a vez guardado na fila, agente trabalhando e esperando os especialistas, se cair no meio chega o aviso e você retoma de onde parou, resposta no chat">
@@ -552,7 +546,32 @@
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
+      </div>
+      <div class="jl-txt">
+
+      <p class="num">Jeito 3</p>
+      <h3>A fila que retoma</h3>
+      <p class="bom">Para pedidos do dia a dia, que precisam sobreviver a um reinício.</p>
+      <p>Cada pedido vira uma tarefa guardada numa fila: reiniciar não apaga. Se a máquina cai no meio, chega um aviso, e você retoma mandando no chat o número do pedido com "continue de onde parou" (o comando /job): ele segue com a conversa salva.</p>
+      <p class="analogia"><b>Como no dia a dia:</b> a senha do banco. Você pega a senha e senta; mesmo que o sistema reinicie, a sua senha continua na fila. Se o atendimento cair no meio, o banco te liga avisando, e você volta com o mesmo número de protocolo, sem contar tudo de novo.</p>
+      <ul class="chips"><li>"estou vivo" a cada 30 s</li><li>espera os outros agentes: confere a cada 15–20 s</li><li>"ainda trabalhando": 25 min</li></ul>
+      <p class="origem">Vem do <a href="https://github.com/inematds/openpcbotv3" target="_blank" rel="noopener">openpcbotv3</a>, o assistente da INEMA no Telegram (código aberto). É lá que chegam os avisos dos outros dois.</p>
+      </div>
+    </article>
   </div>
+
+  <div class="tabela-wrap">
+  <table class="tabela">
+    <thead><tr><th></th><th>Vigia</th><th>Fluxo com portão</th><th>Fila que retoma</th></tr></thead>
+    <tbody>
+      <tr><th>Quem espera</th><td>um programinha à parte, sem IA</td><td>o próprio bot, fase por fase</td><td>o próprio assistente, tarefa por tarefa</td></tr>
+      <tr><th>Você aprova no meio?</th><td>não: as ordens vão no bilhete</td><td>sim, no portão</td><td>não; você pode retomar depois</td></tr>
+      <tr><th>Quando desiste</th><td>8 h sem ficar pronto</td><td>cada fase tem o seu limite (1 h a 40 h)</td><td>se cair no meio: avisa e espera você</td></tr>
+      <tr><th>Como te avisa</th><td>no celular, feito ou falhou</td><td>no chat do bot</td><td>no chat do assistente</td></tr>
+    </tbody>
+  </table>
+  </div>
+
 </div></section>
 
 <!-- ========== QUESTÕES IMPORTANTES ========== -->
@@ -652,8 +671,10 @@
 <pre id="pedidoTxt">Leia o repositório https://github.com/inematds/espera-sem-voce (o README e a pasta vigia). Depois olhe o meu projeto e me pergunte quais trabalhos demoram (vídeo, render, transcrição, gerador externo) e como eu espero hoje. Me diga, em linguagem simples, qual dos três jeitos serve para cada um (vigia, fluxo com portão ou fila que retoma), quanto tempo eu deixaria de ficar com a conversa aberta e o que precisaria para o vigia saber perguntar "ficou pronto?". Não instale nem mude nada antes do meu sim. Com o meu sim: copie o vigia de exemplo, rode o teste dele, monte o primeiro bilhete e a primeira conferência para um trabalho meu, ligue o aviso no meu celular pelo Telegram e me diga se este computador pode dormir ou desligar enquanto espera.</pre>
   </div>
   <span class="vh" id="aviso" role="status" aria-live="polite"></span>
-  <div class="depois">
-    <p>Prefere baixar? Não há instalador: é uma pasta com um programa pequeno em Python. <a href="https://github.com/inematds/espera-sem-voce/archive/refs/heads/main.zip">Baixe o ZIP</a> ou veja o <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">repositório</a>. Os comandos para instalar à mão estão no README.</p>
+  <div class="cartoes3">
+    <div class="bloco"><h3>Quer só entender, sem instalar?</h3><p class="mut">Os fluxos animados acima são a explicação inteira: assista cada um até o fim. Não há versão online para usar, porque o vigia roda no seu computador.</p></div>
+    <div class="bloco"><h3>Onde baixar?</h3><p class="mut">Não há instalador: é uma pasta com um programa pequeno (em Python, que a sua IA instala se faltar). <a href="https://github.com/inematds/espera-sem-voce/archive/refs/heads/main.zip">Baixe o ZIP do kit</a> ou veja o <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">repositório</a>.</p></div>
+    <div class="bloco"><h3>É técnico?</h3><p class="mut">Como o vigia roda, o teste, os prazos exatos e onde está cada peça nos projetos de origem estão no <a href="https://github.com/inematds/espera-sem-voce#readme" target="_blank" rel="noopener">README</a>.</p></div>
   </div>
 </div></div></section>
 

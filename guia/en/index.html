@@ -6,9 +6,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VIGIA — Waiting Without You: you leave the screen, the AI finishes, the alert arrives</title>
-<meta name="description" content="Free kit from INEMA. You ask the AI for the long job and close the conversation. A watcher checks every 5 minutes, a new AI conversation finishes the job and the alert arrives: done or failed.">
-<meta property="og:title" content="VIGIA — Waiting Without You">
+<title>Vigia — Waiting without you: you leave the screen, the AI finishes, the alert arrives</title>
+<meta name="description" content="Free kit from INEMA. You ask the AI for the long job and close the conversation. A watcher checks every 5 minutes, a new AI conversation finishes it, and the alert arrives: done or failed.">
+<meta property="og:title" content="Vigia — Waiting without you">
 <meta property="og:description" content="You leave the screen. The AI finishes. The alert arrives. Free kit at inema.club, right on the web.">
 <meta property="og:image" content="https://inematds.github.io/espera-sem-voce/guia/assets/banner-en.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -332,6 +332,22 @@
     .tabela-wrap{position:relative;background:linear-gradient(to left,rgba(250,204,21,.18),transparent 28px) right/28px 100% no-repeat}
     .tabela-wrap::before{content:"\2194";position:sticky;left:0;display:block;text-align:right;padding:6px 10px 0;color:var(--amb-t);font:700 1rem Sora,sans-serif}
   }
+  /* v2.5 */
+  .kicker{font:800 clamp(1.35rem,2.6vw,1.75rem)/1.1 Sora,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--amb-t);margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid var(--fill);display:inline-block}
+  .frase{font-size:clamp(1.1rem,1.6vw,1.25rem);line-height:1.6}
+  .tres-j{margin:16px 0;padding-left:1.2em;display:grid;gap:8px;font-size:1.05rem}
+  .tres-j b{color:var(--amb-t)}
+  .jeitos-l{display:grid;gap:40px;margin-top:32px}
+  .jeito-l{display:grid;grid-template-columns:340px minmax(0,1fr);gap:32px;align-items:start;padding-bottom:40px;border-bottom:1px solid var(--line)}
+  .jl-txt{display:flex;flex-direction:column;gap:12px}
+  .jl-txt .num{font:600 .8rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .jl-txt h3{font-size:1.5rem;font-weight:800}
+  .jl-txt .bom{font-weight:600}
+  .jl-txt .origem{color:var(--mut);font-size:.9rem}
+  .jl-txt .analogia{margin-top:4px}
+  .cartoes3{display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px}
+  .cartoes3 h3{font-size:1.05rem;margin-bottom:6px}
+  @media (max-width:900px){.jeito-l{grid-template-columns:1fr}.jl-diag{max-width:380px;width:100%;margin:0 auto}}
 </style>
 </head>
 <body>
@@ -343,7 +359,7 @@
     <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
   </span>
   <nav class="menu" aria-label="Sections">
-    <a href="#jeitos">3 ways</a><a href="#importantes">Key questions</a><a href="#comecar">In practice</a><a href="#video">Videos</a><a href="#prova">Measured</a>
+    <a href="#jeitos">3 ways</a><a href="#importantes">Questions</a><a href="#comecar">Try it</a><a href="#video">Videos</a><a href="#prova">Measured</a>
   </nav>
   <span class="lang" aria-label="Language">
     <a href="../">PT</a>
@@ -356,13 +372,13 @@
 <header class="hero" id="top"><div class="wrap">
   <div class="h-top">
     <h1>
-      <span class="marcao"><span class="vigia">Vigia</span> <span class="esp">Waiting Without You</span></span><span class="vh">: </span>
+      <span class="marcao"><span class="vigia">Vigia</span> <span class="esp">Waiting without you</span></span><span class="vh">: </span>
       <span class="manchete"><span class="l">You leave the screen.</span> <span class="l">The AI finishes.</span> <span class="l"><em>The alert arrives.</em></span></span>
     </h1>
   
-    <p class="lead">Stop staring at the screen while your video gets ready. You ask the AI for the long job and close the conversation. The watcher, a program with no AI in it, checks every 5 minutes and opens a new AI conversation to finish. At the end the alert reaches your phone: done or failed.</p>
+    <p class="lead">Stop staring at the screen while your video gets ready. You ask the AI for the long job and close the conversation. Vigia, the watcher, is a program with no AI in it: it checks every 5 minutes and opens a new AI conversation to finish the work. At the end an alert reaches your phone: done or failed.</p>
   </div>
-  <figure class="f2"><img src="../assets/banner-en.jpg" alt="VIGIA — Waiting Without You: the long job carries on by itself and tells you when it ends" width="1400" height="788"></figure>
+  <figure class="f2"><img src="../assets/banner-en.jpg" alt="Vigia — Waiting without you: the long job carries on by itself and tells you when it ends" width="1400" height="788"></figure>
   <div class="h-bot">
     <div class="cta">
       <a class="btn" href="#comecar">Copy the request and start
@@ -371,144 +387,96 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>Watch the videos</a>
     </div>
     <ul class="fatos">
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Free and open kit. No coding needed: you paste one request.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Free and open kit. No coding needed: you paste a request.</span></li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>You need a computer that stays on and a Claude or Codex subscription.</span></li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Measured: 179 jobs waited on in 17 days, and every ending came with an alert.</span></li>
     </ul>
   </div>
-  <figure class="f1"><img src="../assets/hero.jpg" alt="Robots working on their own in a lit-up control center, with no one watching the screen" width="1100" height="734"></figure>
+  <figure class="f1"><img src="../assets/hero.jpg" alt="Robots working on their own in a lit control room, with no one watching the screen" width="1100" height="734"></figure>
 </div></header>
 
 <main>
 
+<!-- ========== EM UMA FRASE ========== -->
+<section id="resumo"><div class="wrap"><div class="col">
+  <p class="kicker">In one sentence</p>
+  <p class="frase"><strong>You want to ask the AI for a long job, go live your life, and get only the alert saying it's over.</strong> This free kit shows the three ways INEMA uses every day to wait with no one watching the screen, and includes one of them ready for you to use:</p>
+  <ul class="tres-j">
+    <li><b>the watcher</b>: checks from time to time and calls a new AI conversation when the job is ready;</li>
+    <li><b>the flow with a gate</b>: stops at the expensive points and waits for your "go ahead";</li>
+    <li><b>the queue that resumes</b>: saves every request and warns you if something drops midway.</li>
+  </ul>
+  <p class="mut">The computer it runs on stays on; the one who leaves is you.</p>
+</div></div></section>
+
 <!-- ========== PARA QUEM É ========== -->
 <section id="quem"><div class="wrap">
   <p class="kicker">Who it's for</p>
-  <h2>This is for you if…</h2>
+  <h2>It's for you if…</h2>
   <div class="publicos">
-    <article class="pub"><img src="../assets/quem-criador.jpg" alt="A content creator leaves home while the video gets ready" loading="lazy" width="760" height="506">
+    <article class="pub"><img src="../assets/quem-criador.jpg" alt="Content creator leaves home while the video gets ready" loading="lazy" width="760" height="506">
       <h3>You make videos with AI</h3>
-      <p>You send off the avatar or the edit and walk away. The video is assembled and published when it's ready, even in the middle of the night. If the generator gets stuck, you find out right away, not the next day.</p>
+      <p>Send off the avatar or the edit and walk away. The video is assembled and published when it's ready, even in the middle of the night. If the generator gets stuck, you know right away, not the next day.</p>
       <p class="usa">Uses: <b>the watcher</b></p></article>
-    <article class="pub"><img src="../assets/quem-gestor.jpg" alt="A person approves the next step of a job on their phone" loading="lazy" width="760" height="506">
-      <h3>You need to approve along the way</h3>
-      <p>The job stops at the costly points, before spending credits and before publishing, and waits for your "go ahead" from your phone. Nothing goes out without you seeing the text.</p>
-      <p class="usa">Uses: <b>the gated flow</b></p></article>
-    <article class="pub"><img src="../assets/quem-tecnico.jpg" alt="A technician watches a small server working on its own" loading="lazy" width="760" height="506">
+    <article class="pub"><img src="../assets/quem-gestor.jpg" alt="Person approves the next step of a job on their phone" loading="lazy" width="760" height="506">
+      <h3>You need to approve midway</h3>
+      <p>The work stops at the expensive points, before spending credits and before publishing, and waits for your "go ahead" on your phone. Nothing goes out without you seeing the text.</p>
+      <p class="usa">Uses: <b>the flow with a gate</b></p></article>
+    <article class="pub"><img src="../assets/quem-tecnico.jpg" alt="Technician watches a small server working on its own" loading="lazy" width="760" height="506">
       <h3>You build automation</h3>
-      <p>Three designs tested in production so you can pick the right one, the time limits of each one measured, and a ready-made watcher with no dependencies to adapt.</p>
+      <p>Three designs tested in production so you can pick the right one, the time limits of each one measured, and a ready-made watcher, with no dependencies, for you to adapt.</p>
       <p class="usa">Uses: <b>all three</b>, and the queue day to day</p></article>
   </div>
 </div></section>
 
 <!-- ========== COMO FUNCIONA O VIGIA: 4 passos ========== -->
 <section id="passos"><div class="wrap">
-  <figure class="largo topo-sec"><img src="../assets/banner-grade-en.jpg" alt="The three ways to wait: watcher, gated flow and resumable queue" loading="lazy" width="1400" height="788"></figure>
+  <figure class="largo topo-sec"><img src="../assets/banner-grade-en.jpg" alt="The three ways of waiting: watcher, flow with a gate and queue that resumes" loading="lazy" width="1400" height="788"></figure>
   <hr class="risco">
   <p class="kicker">How it works</p>
   <h2>How the watcher works, in 4 steps</h2>
   <p class="sub">You only work in step 1. Then you close the conversation and wait for the alert.</p>
   <div class="passos">
     <article class="passo">
-      <header><span class="n">1</span><h3>Ask for the job and check the handoff note</h3></header>
+      <header><span class="n">1</span><h3>Ask for the job and check the note</h3></header>
       <div class="quem"><span class="tag">You</span><p>Agree on the job with the AI and approve whatever is needed, such as the video script.</p></div>
-      <div class="quem"><span class="tag ia">The AI</span><p>Kicks off the slow part and writes the note: what has been done, what's left, your orders in quotes and what must not happen.</p></div>
-      <p class="porque"><span>Why</span>A new conversation will finish the job, and it only knows what's in the note.</p>
+      <div class="quem"><span class="tag ia">The AI</span><p>Starts the slow part and writes the note: what has been done, what's left, your orders in quotes and what must not happen.</p></div>
+      <p class="porque"><span>Why</span>A new conversation will finish the job, and it only knows what is in the note.</p>
     </article>
     <article class="passo">
-      <header><span class="n">2</span><h3>Close the conversation and go</h3></header>
-      <div class="quem"><span class="tag">You</span><p>Close the conversation and get on with your life. The computer stays on, without going to sleep.</p></div>
-      <div class="quem"><span class="tag vigia">The watcher</span><p>Every 5 minutes it asks "is it ready?". It waits up to 8 hours.</p></div>
+      <header><span class="n">2</span><h3>Close the conversation and leave</h3></header>
+      <div class="quem"><span class="tag">You</span><p>Close the conversation and go live your life. The computer stays on, without sleeping.</p></div>
+      <div class="quem"><span class="tag vigia">Watcher</span><p>Every 5 minutes it asks "is it ready?". It waits up to 8 hours.</p></div>
       <p class="porque"><span>Why</span>The watcher is an ordinary program, not an AI. While it waits, nothing is spent.</p>
     </article>
     <article class="passo">
       <header><span class="n">3</span><h3>The new AI finishes</h3></header>
       <div class="quem"><span class="tag">You</span><p>Do nothing. This is the part without you.</p></div>
-      <div class="quem"><span class="tag ia">The AI</span><p>When it's ready, the watcher opens a new conversation. It reads only the note and goes all the way (assembles, reviews, publishes), with up to 3 hours to do it.</p></div>
-      <p class="porque"><span>Why</span>With no one at the screen, it doesn't stop to ask permission. What's written in the note is what counts.</p>
+      <div class="quem"><span class="tag ia">The AI</span><p>When the job is ready, the watcher opens a new conversation. It reads only the note and goes all the way to the end (assembles, reviews, publishes), with up to 3 hours to do it.</p></div>
+      <p class="porque"><span>Why</span>With no one at the screen, it doesn't stop to ask permission. What is written in the note is what counts.</p>
     </article>
     <article class="passo">
       <header><span class="n">4</span><h3>The alert arrives: done or failed</h3></header>
-      <div class="quem"><span class="tag vigia">The watcher</span><p>Reads the result and sends the alert to your phone: green if it worked, red with the reason if it failed.</p></div>
+      <div class="quem"><span class="tag vigia">Watcher</span><p>Reads the result and sends the alert to your phone: green if it worked, red with the reason if it failed.</p></div>
       <div class="quem"><span class="tag">You</span><p>Read the alert. If it failed, the reason comes with it, and redoing it is your call.</p></div>
-      <p class="porque"><span>Why</span>The danger of walking away is silence. Here every ending comes with an alert.</p>
+      <p class="porque"><span>Why</span>The danger of leaving is silence. Here every ending comes with an alert.</p>
     </article>
   </div>
-  <div class="fluxo-baixo">
-    <p class="kicker-s">The watcher's flow, animated</p>
-<div class="diag" data-diag>
-<div class="ctl"><span data-rot>Watcher</span><button type="button" data-btn>Pause</button></div>
-<svg viewBox="0 0 360 450" role="img" aria-label="Watcher diagram: phase 1 with you, the job takes a while as the watcher checks, phase 2 opens by itself and the alert reaches your phone">
-<line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
-<text class="lb" x="46" y="104">you close the chat and leave</text>
-<text class="lb" x="46" y="210">it's ready (up to 8 h)</text>
-<text class="falha" x="46" y="228">not ready? red alert</text>
-<text class="lb" x="46" y="322">up to 3 h to finish</text>
-<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · You and the AI</text><text class="s" x="16" y="43">script approved, sent to generator</text></g>
-<g class="nd wait" data-dwell="3600" data-checks="not yet|not yet|not yet|ready ✓" data-pref="watcher checks:" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · The job takes a while</text><text class="s" x="16" y="43">watcher checks every 5 min</text></g>
-<g class="nd" data-dwell="1300" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · A new AI takes over</text><text class="s" x="16" y="43">reads the note and finishes the job</text></g>
-<g class="nd" data-dwell="1400" transform="translate(30,346)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Alert on your phone</text><text class="s" x="16" y="43">done, or failed with the reason</text></g>
-<text class="ping" x="180" y="436" text-anchor="middle" data-ping></text>
-<circle class="ring" r="20"/><circle class="tok" r="9"/>
-</svg>
-</div>
-    <p class="legenda">The dot is the job; the dashed frame is where it waits.</p>
-  </div>
-  <p class="analogia"><b>Like in everyday life:</b> you drop your car at the repair shop with a note ("change the oil, don't touch the radio") and leave. The doorman checks now and then whether the part has arrived; when it does, he calls the mechanic, who reads the note and does the work. All you get is the message "car's ready".</p>
 </div></section>
 
 <!-- ========== OS 3 JEITOS DE ESPERAR ========== -->
 <section id="jeitos"><div class="wrap">
   <p class="kicker">The 3 ways</p>
-  <h2>Three ways to wait. The watcher is one of them.</h2>
-  <p class="sub">INEMA waits on long jobs in three ways, each one good for a different case. The kit explains all three, with measured time limits, and gives you the watcher ready to use.</p>
-  <div class="jeitos">
-    <article class="jeito">
-      <p class="num">Way 1</p>
-      <h3>The watcher</h3>
-      <p class="bom">For a job you started by chatting with the AI.</p>
-      <p>A small separate program, with no AI, checks whether it's ready and calls a new AI that reads the note and finishes. Your orders go in the note, before you leave.</p>
-      <ul class="chips"><li>checks every 5 min</li><li>waits up to 8 h</li><li>died silently: alert in 20 min</li><li>new AI: up to 3 h</li></ul>
-      <p class="origem">Comes from INEMA's internal watcher. The lean copy is in this kit's <a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" target="_blank" rel="noopener">vigia</a> folder.</p>
-    </article>
-    <article class="jeito">
-
-      <p class="num">Way 2</p>
-      <h3>The gated flow</h3>
-      <p class="bom">For repeat production (video, reel) with approval along the way.</p>
-      <p>You send a command on Telegram and the job moves through phases: script, avatar, download, assembly. At the costly points there's a gate: the flow stops until your "go ahead". If the machine restarts, it picks up from the phase it was in.</p>
-      <ul class="chips"><li>short video: every 1 min, up to 10 h</li><li>avatar: every 5 min, up to 40 h</li><li>gate: waits for you</li></ul>
-      <p class="origem">Comes from <a href="https://github.com/inematds/inemaccbot" target="_blank" rel="noopener">inemaccbot</a>, INEMA's production bot (open source).</p>
-    </article>
-    <article class="jeito">
-
-      <p class="num">Way 3</p>
-      <h3>The resumable queue</h3>
-      <p class="bom">For everyday requests that need to survive a restart.</p>
-      <p>Each request becomes a task saved in a queue: restarting doesn't erase it. If the machine goes down midway, you get an alert, and you resume by sending the request number in the chat with "continue where you left off" (the /job command): it picks up with the conversation saved.</p>
-      <ul class="chips"><li>"I'm alive" every 30 s</li><li>waits for the other agents: checks every 15–20 s</li><li>"still working": 25 min</li></ul>
-      <p class="origem">Comes from <a href="https://github.com/inematds/openpcbotv3" target="_blank" rel="noopener">openpcbotv3</a>, INEMA's assistant on Telegram (open source). That's where the alerts from the other two arrive.</p>
-    </article>
-  </div>
-
-  <div class="tabela-wrap">
-  <table class="tabela">
-    <thead><tr><th></th><th>Watcher</th><th>Gated flow</th><th>Resumable queue</th></tr></thead>
-    <tbody>
-      <tr><th>Who waits</th><td>a small separate program, no AI</td><td>the bot itself, phase by phase</td><td>the assistant itself, task by task</td></tr>
-      <tr><th>Do you approve midway?</th><td>no: orders go in the note</td><td>yes, at the gate</td><td>no; you can resume later</td></tr>
-      <tr><th>When it gives up</th><td>8 h without being ready</td><td>each phase has its own limit (1 h to 40 h)</td><td>if it drops midway: alerts and waits for you</td></tr>
-      <tr><th>How it tells you</th><td>on your phone, done or failed</td><td>in the bot's chat</td><td>in the assistant's chat</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p class="kicker-s" style="margin-top:34px">The three flows, animated</p>
-  <div class="diags3">
+  <h2>Three ways of waiting. The watcher is one of them.</h2>
+  <p class="sub">INEMA waits on long jobs in three ways, each good for a different case. The kit explains all three, with measured time limits, and delivers the watcher ready to use.</p>
+  <div class="jeitos-l">
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Watcher</span><button type="button" data-btn>Pause</button></div>
 <svg viewBox="0 0 360 450" role="img" aria-label="Watcher diagram: phase 1 with you, the job takes a while as the watcher checks, phase 2 opens by itself and the alert reaches your phone">
 <line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
-<text class="lb" x="46" y="104">you close the chat and leave</text>
+<text class="lb" x="46" y="104">you close the conversation and leave</text>
 <text class="lb" x="46" y="210">it's ready (up to 8 h)</text>
 <text class="falha" x="46" y="228">not ready? red alert</text>
 <text class="lb" x="46" y="322">up to 3 h to finish</text>
@@ -520,39 +488,90 @@
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
-
+      </div>
+      <div class="jl-txt">
+      <p class="num">Way 1</p>
+      <h3>The watcher</h3>
+      <p class="bom">For a job you started by talking with the AI.</p>
+      <p>A small separate program, with no AI, checks whether the job is ready and calls a new AI that reads the note and finishes. Your orders go in the note, before you leave.</p>
+      <p class="analogia"><b>Like in everyday life:</b> you leave your car at the repair shop with a note ("change the oil, don't touch the radio") and go. The doorman looks from time to time to see if the part has arrived; when it does, he calls the mechanic, who reads the note and does the work. All you get is the message "car ready".</p>
+      <ul class="chips"><li>checks every 5 min</li><li>waits up to 8 h</li><li>died silently: alert in 20 min</li><li>new AI: up to 3 h</li></ul>
+      <p class="origem">Comes from INEMA's internal watcher. The lean copy is in the <a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" target="_blank" rel="noopener">vigia</a> folder of this kit.</p>
+      </div>
+    </article>
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
-<div class="ctl"><span data-rot>Gated flow</span><button type="button" data-btn>Pause</button></div>
-<svg viewBox="0 0 360 640" role="img" aria-label="Gated flow diagram: command on Telegram, script, gate waiting for your approval, avatar, a phase that checks until ready and the video delivered in the chat">
+<div class="ctl"><span data-rot>Flow with a gate</span><button type="button" data-btn>Pause</button></div>
+<svg viewBox="0 0 360 640" role="img" aria-label="Diagram of the flow with a gate: command on Telegram, script, gate waiting for your approval, avatar, phase that checks until it's ready and video delivered in the chat">
 <line class="lnk" x1="30" y1="76" x2="30" y2="568"/>
-<text class="lb" x="46" y="306">machine went down? resumes its phase</text>
+<text class="lb" x="46" y="306">machine went down? resumes that phase</text>
 <g class="nd" data-dwell="800" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Request on Telegram</text><text class="s" x="16" y="43">one command with the video topic</text></g>
 <g class="nd" data-dwell="900" transform="translate(30,118)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · Phase: script</text><text class="s" x="16" y="43">the AI writes the text</text></g>
 <g class="nd wait" data-dwell="2600" data-checks="waiting for you|waiting for you|approved ✓" data-pref="gate:" transform="translate(30,216)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Gate: you approve</text><text class="s" x="16" y="43">flow stops until your "go ahead"</text></g>
 <g class="nd" data-dwell="900" transform="translate(30,330)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Phase: avatar</text><text class="s" x="16" y="43">request goes to the video generator</text></g>
-<g class="nd wait" data-dwell="3200" data-checks="not yet|not yet|not yet|downloaded ✓" data-pref="checks:" transform="translate(30,428)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">5 · Waiting phase</text><text class="s" x="16" y="43">checks every 1–5 min, up to 10–40 h</text></g>
+<g class="nd wait" data-dwell="3200" data-checks="not yet|not yet|not yet|downloaded ✓" data-pref="check:" transform="translate(30,428)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">5 · Waiting phase</text><text class="s" x="16" y="43">checks every 1–5 min, up to 10–40 h</text></g>
 <g class="nd" data-dwell="1400" transform="translate(30,526)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">6 · Video in your chat</text><text class="s" x="16" y="43">assembled and delivered</text></g>
 <text class="ping" x="180" y="624" text-anchor="middle" data-ping></text>
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
+      </div>
+      <div class="jl-txt">
+
+      <p class="num">Way 2</p>
+      <h3>The flow with a gate</h3>
+      <p class="bom">For repeating production (video, reel) with approval midway.</p>
+      <p>You send a command on Telegram and the work moves through phases: script, avatar, download, assembly. At the expensive points there is a gate: the flow stops until your "go ahead". If the machine restarts, it picks up from the phase it was in.</p>
+      <p class="analogia"><b>Like in everyday life:</b> a print shop that only prints after you approve the color proof. The piece moves from desk to desk; at the approval desk, it waits for your signature. If the power goes out, each desk knows what it has already done.</p>
+      <ul class="chips"><li>short video: every 1 min, up to 10 h</li><li>avatar: every 5 min, up to 40 h</li><li>gate: waits for you</li></ul>
+      <p class="origem">Comes from <a href="https://github.com/inematds/inemaccbot" target="_blank" rel="noopener">inemaccbot</a>, INEMA's production bot (open source).</p>
+      </div>
+    </article>
+    <article class="jeito-l">
+      <div class="jl-diag">
 <div class="diag" data-diag>
-<div class="ctl"><span data-rot>Resumable queue</span><button type="button" data-btn>Pause</button></div>
-<svg viewBox="0 0 360 540" role="img" aria-label="Resumable queue diagram: request in the chat, waits its turn saved in the queue, agent working and waiting for the specialists, if it drops midway the alert arrives and you resume where it left off, answer in the chat">
+<div class="ctl"><span data-rot>Queue that resumes</span><button type="button" data-btn>Pause</button></div>
+<svg viewBox="0 0 360 540" role="img" aria-label="Diagram of the queue that resumes: request in the chat, waits its turn saved in the queue, agent working and waiting for the specialists, if it drops midway an alert arrives and you resume where it stopped, reply in the chat">
 <line class="lnk" x1="30" y1="76" x2="30" y2="474"/>
-<text class="lb" x="46" y="298">took 25 min? it lets you know</text>
+<text class="lb" x="46" y="298">taking 25 min? it lets you know</text>
 <text class="lb" x="46" y="318">dropped midway? failure alert</text>
-<text class="lb" x="46" y="420">resumed with the chat saved</text>
+<text class="lb" x="46" y="420">resumed with the saved conversation</text>
 <g class="nd" data-dwell="800" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Request in the chat</text><text class="s" x="16" y="43">you ask the assistant</text></g>
-<g class="nd wait" data-dwell="1700" data-checks="queued|queued|your turn ✓" data-pref="queue:" transform="translate(30,118)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · Waits its turn</text><text class="s" x="16" y="43">saved: restarting won't erase it</text></g>
+<g class="nd wait" data-dwell="1700" data-checks="in line|in line|your turn ✓" data-pref="queue:" transform="translate(30,118)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · Waits its turn</text><text class="s" x="16" y="43">saved: a restart doesn't erase it</text></g>
 <g class="nd wait" data-dwell="2400" data-checks="specialists working|specialists working|all done ✓" data-pref="checks every 15–20 s:" transform="translate(30,216)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Agent working</text><text class="s" x="16" y="43">waits for the specialists it called</text></g>
-<g class="nd wait" data-dwell="2600" data-checks="failed: alert in chat|you: continue where you left off|resumed ✓" data-pref="" transform="translate(30,340)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Dropped? You resume</text><text class="s" x="16" y="43">one request and it carries on</text></g>
-<g class="nd" data-dwell="1400" transform="translate(30,446)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">5 · Answer in the chat</text><text class="s" x="16" y="43">plus alerts from the other systems</text></g>
+<g class="nd wait" data-dwell="2600" data-checks="failed: alert in chat|you: continue where you stopped|resumed ✓" data-pref="" transform="translate(30,340)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Dropped? You resume</text><text class="s" x="16" y="43">one request and it goes on from there</text></g>
+<g class="nd" data-dwell="1400" transform="translate(30,446)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">5 · Reply in the chat</text><text class="s" x="16" y="43">plus alerts from the other systems</text></g>
 <text class="ping" x="180" y="530" text-anchor="middle" data-ping></text>
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
+      </div>
+      <div class="jl-txt">
+
+      <p class="num">Way 3</p>
+      <h3>The queue that resumes</h3>
+      <p class="bom">For everyday requests that need to survive a restart.</p>
+      <p>Each request becomes a task saved in a queue: a restart doesn't erase it. If the machine goes down midway, an alert arrives, and you resume by sending in the chat the request number with "continue where you stopped" (the /job command): it carries on with the saved conversation.</p>
+      <p class="analogia"><b>Like in everyday life:</b> the ticket number at the bank. You take a number and sit down; even if the system restarts, your number is still in line. If the service drops midway, the bank calls to tell you, and you come back with the same case number, without explaining everything again.</p>
+      <ul class="chips"><li>"I'm alive" every 30 s</li><li>waits for other agents: checks every 15–20 s</li><li>"still working": 25 min</li></ul>
+      <p class="origem">Comes from <a href="https://github.com/inematds/openpcbotv3" target="_blank" rel="noopener">openpcbotv3</a>, INEMA's Telegram assistant (open source). That's where the alerts from the other two arrive.</p>
+      </div>
+    </article>
   </div>
+
+  <div class="tabela-wrap">
+  <table class="tabela">
+    <thead><tr><th></th><th>Watcher</th><th>Flow with a gate</th><th>Queue that resumes</th></tr></thead>
+    <tbody>
+      <tr><th>Who waits</th><td>a small separate program, with no AI</td><td>the bot itself, phase by phase</td><td>the assistant itself, task by task</td></tr>
+      <tr><th>Do you approve midway?</th><td>no: your orders go in the note</td><td>yes, at the gate</td><td>no; you can resume later</td></tr>
+      <tr><th>When it gives up</th><td>8 h without being ready</td><td>each phase has its own limit (1 h to 40 h)</td><td>if it drops midway: warns and waits for you</td></tr>
+      <tr><th>How it tells you</th><td>on your phone, done or failed</td><td>in the bot chat</td><td>in the assistant chat</td></tr>
+    </tbody>
+  </table>
+  </div>
+
 </div></section>
 
 <!-- ========== QUESTÕES IMPORTANTES ========== -->
@@ -561,8 +580,8 @@
   <h2>Two questions before you leave the screen</h2>
   <div class="questao" id="silencio">
   <h3 class="q-tit"><span>1</span>What if the job never comes back, or the watcher stops?</h3>
-  <p class="sub">Half the jobs take more than 92 minutes, and you're not looking. The danger is silence: nothing arrives and you think it's still waiting. There are two cases, each with its own answer.</p>
-  <figure class="largo m"><img src="../assets/vigia-vistoria.jpg" alt="At night, a doorman robot watches over the package shelf; one package has an empty hourglass" loading="lazy" width="1200" height="800"></figure>
+  <p class="sub">Half of the jobs take more than 92 minutes, and you're not looking. The danger is silence: nothing arrives and you think it's still waiting. There are two cases, each with its own answer.</p>
+  <figure class="largo m"><img src="../assets/vigia-vistoria.jpg" alt="At night, a doorman robot watches over a shelf of packages; one package has an empty hourglass" loading="lazy" width="1200" height="800"></figure>
   <div class="duas">
     <div class="bloco">
       <h3>The job that never comes back</h3>
@@ -571,34 +590,34 @@
     </div>
     <div class="bloco">
       <h3>The watcher that stopped watching</h3>
-      <p>Here the watcher can't warn you, because it's the one that does the warning. That's why there's an inspection: another small program with no AI, running on its own clock. Every hour it checks whether the watcher ran in the last 15 minutes, whether any job went past its limit without an alert and whether any new AI died without wrapping up. It only speaks if it finds a problem.</p>
-      <p class="medido">Every day at 08:00 a short report arrives. If it doesn't, the machine is down: a missing report is a warning too.</p>
+      <p>Here the watcher can't warn you, because it is the one that does the warning. That's why there is an inspection: another small program with no AI, with its own clock. Every hour it checks whether the watcher ran in the last 15 minutes, whether any job passed its limit without an alert and whether any new AI died without closing out. It only speaks up if it finds a problem.</p>
+      <p class="medido">Every day at 08:00 a short report arrives. If it doesn't, the machine went down: a missing report is also a warning.</p>
     </div>
   </div>
-  <p class="analogia"><b>Like in everyday life:</b> the doorman calls when a package's deadline runs out. But if the doorman falls asleep, nobody calls. So the building manager walks by every hour with a flashlight, and in the morning leaves a note summing up the night.</p>
+  <p class="analogia"><b>Like in everyday life:</b> the doorman calls when a package's deadline runs out. But if the doorman falls asleep, no one calls. So the building manager walks by every hour with a flashlight, and in the morning leaves a note summing up the night.</p>
   </div>
 
 
   <div class="questao" id="bilhete">
-  <h3 class="q-tit"><span>2</span>How does the new AI know what's already done? The handoff note</h3>
-  <p class="sub">You close the conversation and the AI forgets everything. Without a handoff file, it might redo what was already finished or forget what you asked for. So, before you leave, it writes the note.</p>
+  <h3 class="q-tit"><span>2</span>How does the new AI know what has been done? The note</h3>
+  <p class="sub">You close the conversation and the AI forgets everything. Without a handover file, it might redo what was already finished or forget what you asked for. That's why, before you leave, it writes the note.</p>
   <figure class="largo m"><img src="../assets/bilhete-handoff.jpg" alt="In the early hours, the night doorman hands a folded card to the person arriving in the morning" loading="lazy" width="1200" height="800"></figure>
   <div class="duas">
     <div class="bloco">
       <h3>The note (CONTINUAR.md)</h3>
-      <p class="mut">It lives in the job's folder. The reader is a new AI that knows nothing beyond it. It has four parts:</p>
+      <p class="mut">It stays in the job's folder. The reader is a new AI that knows nothing beyond it. It has four parts:</p>
       <ol class="partes">
         <li><b>What has been done</b>, and where it is. This is what prevents redoing it.</li>
-        <li><b>What's left</b>, in order, each step with what it should produce.</li>
-        <li><b>Your orders, quoted</b>, exactly as you said them.</li>
-        <li><b>The guardrails</b>: what's not allowed ("don't spend new credits") and the duty to write FEITO (done) or FALHOU (failed).</li>
+        <li><b>What's left</b>, in order, each step with what should come out of it.</li>
+        <li><b>Your orders, quoted</b>, just the way you said them.</li>
+        <li><b>The guardrails</b>: what isn't allowed ("don't spend new credits") and the duty to write FEITO (done) or FALHOU (failed).</li>
       </ol>
     </div>
     <div class="bloco">
       <h3>The session handoff</h3>
-      <p class="mut">For when you come back to the conversation another day yourself, or switch AIs (Claude ↔ Codex).</p>
+      <p class="mut">For when you come back to the conversation yourself another day, or switch AIs (Claude ↔ Codex).</p>
       <ul class="lista sim">
-        <li><div><strong>What's finished, with proof</strong><span>and where to check each item.</span></div></li>
+        <li><div><strong>What is ready, with proof</strong><span>and where to check each item.</span></div></li>
         <li><div><strong>What was tried and not confirmed</strong><span>so it isn't treated as done.</span></div></li>
         <li><div><strong>Decisions, what not to do and the next action</strong><span>saying whether it needs your yes.</span></div></li>
       </ul>
@@ -618,8 +637,8 @@
       <ul class="lista sim">
         <li><div><strong>A computer that stays on, with Linux or macOS.</strong><span>A laptop with the lid closed usually goes to sleep, and then the watcher stops. Set it not to sleep, or use a mini PC.</span></div></li>
         <li><div><strong>A Claude or Codex subscription.</strong><span>That's what the new AI uses to work on the final part. Waiting spends nothing.</span></div></li>
-        <li><div><strong>A sign that the job is finished.</strong><span>For example, the video file showing up in the folder. The AI sets up this check with you.</span></div></li>
-        <li><div><strong>For the phone alert, your own bot on Telegram.</strong><span>Your AI guides you through creating one in a few minutes and connects it once you say yes.</span></div></li>
+        <li><div><strong>A signal that the job is over.</strong><span>For example, the video file showing up in the folder. The AI sets up this check with you.</span></div></li>
+        <li><div><strong>For the phone alert, a Telegram bot of your own.</strong><span>Your AI guides you to create one in a few minutes and connects it once you say yes.</span></div></li>
       </ul>
     </div>
     <div class="bloco">
@@ -628,7 +647,7 @@
         <li><div><strong>To install INEMA's bot or assistant.</strong><span>Each one has its own page on GitHub.</span></div></li>
         <li><div><strong>To check on its own a service that doesn't say whether it's ready.</strong><span>Someone has to tell the watcher how to ask.</span></div></li>
         <li><div><strong>To spend zero on the final part.</strong><span>The new AI works through your subscription.</span></div></li>
-        <li><div><strong>To retry on its own.</strong><span>If it failed, the watcher alerts you and stops. Redoing it is your call.</span></div></li>
+        <li><div><strong>To retry on its own.</strong><span>If it failed, the watcher warns you and stops. Redoing it is your call.</span></div></li>
       </ul>
     </div>
   </div>
@@ -636,11 +655,11 @@
 
 <!-- ========== COMEÇAR ========== -->
 <section id="comecar"><div class="wrap"><div class="col">
-  <p class="kicker">In practice</p>
+  <p class="kicker">Try it</p>
   <h2>To get started, paste this request into your AI</h2>
   <ol class="tres">
     <li><p>Open <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> or <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> in your project folder. They are AIs that work with files and run programs on your computer, always asking permission.</p></li>
-    <li><p>Paste the request. The AI reads the kit, asks which of your jobs take a long time and tells you which of the three ways fits each one.</p></li>
+    <li><p>Paste the request. The AI reads the kit, asks which of your jobs take long and says which of the three ways suits each one.</p></li>
     <li><p>Say yes only to what makes sense. Then start a real job, close the conversation and wait for the alert.</p></li>
   </ol>
   <div class="pedido">
@@ -649,21 +668,23 @@
       <button class="btn" id="copiar" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="copiarTxt">Copy the request</span></button>
     </div>
-<pre id="pedidoTxt">Read the repository https://github.com/inematds/espera-sem-voce (the README and the vigia folder). Then look at my project and ask me which jobs take a long time (video, render, transcription, external generator) and how I wait for them today. Tell me, in plain language, which of the three ways fits each one (watcher, gated flow or resumable queue), how much time I would no longer spend keeping the conversation open and what the watcher would need in order to ask "is it ready?". Don't install or change anything before I say yes. Once I say yes: copy the example watcher, run its test, put together the first handoff note and the first check for one of my jobs, connect the alert to my phone through Telegram and tell me whether this computer can sleep or shut down while it waits.</pre>
+<pre id="pedidoTxt">Read the repository https://github.com/inematds/espera-sem-voce (the README and the vigia folder). Then look at my project and ask me which jobs take long (video, render, transcription, external generator) and how I wait for them today. Tell me, in plain language, which of the three ways suits each one (watcher, flow with a gate or queue that resumes), how much time I would stop keeping the conversation open and what the watcher would need to know how to ask "is it ready?". Don't install or change anything before I say yes. Once I say yes: copy the example watcher, run its test, set up the first note and the first check for one of my jobs, connect the alert to my phone through Telegram and tell me whether this computer can sleep or shut down while it waits.</pre>
   </div>
   <span class="vh" id="aviso" role="status" aria-live="polite"></span>
-  <div class="depois">
-    <p>Prefer to download? There's no installer: it's a folder with a small Python program. <a href="https://github.com/inematds/espera-sem-voce/archive/refs/heads/main.zip">Download the ZIP</a> or see the <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">repository</a>. The commands for installing by hand are in the README.</p>
+  <div class="cartoes3">
+    <div class="bloco"><h3>Just want to understand, without installing?</h3><p class="mut">The animated flows above are the whole explanation: watch each one to the end. There is no online version to use, because the watcher runs on your computer.</p></div>
+    <div class="bloco"><h3>Where to download?</h3><p class="mut">There is no installer: it's a folder with a small program (in Python, which your AI installs if it's missing). <a href="https://github.com/inematds/espera-sem-voce/archive/refs/heads/main.zip">Download the kit ZIP</a> or see the <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">repository</a>.</p></div>
+    <div class="bloco"><h3>Are you technical?</h3><p class="mut">How the watcher runs, the test, the exact time limits and where each piece lives in the source projects are in the <a href="https://github.com/inematds/espera-sem-voce#readme" target="_blank" rel="noopener">README</a>.</p></div>
   </div>
 </div></div></section>
 
 <!-- ========== VÍDEOS ========== -->
 <section id="video"><div class="wrap">
   <p class="kicker">Videos</p>
-  <h2>Prefer watching? Two short videos</h2>
+  <h2>Rather watch? Two short videos</h2>
   <div class="videos">
-    <figure class="short"><a href="https://www.youtube.com/shorts/sRoQb5OZWBw" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/sRoQb5OZWBw/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true">▶</span></a><figcaption>For beginners</figcaption></figure>
-    <figure class="short"><a href="https://www.youtube.com/shorts/fAbHaCgTj74" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/fAbHaCgTj74/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true">▶</span></a><figcaption>For people who run agents</figcaption></figure>
+    <figure class="short"><a href="https://www.youtube.com/shorts/sRoQb5OZWBw" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/sRoQb5OZWBw/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true">▶</span></a><figcaption>For those just starting out</figcaption></figure>
+    <figure class="short"><a href="https://www.youtube.com/shorts/fAbHaCgTj74" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/fAbHaCgTj74/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true">▶</span></a><figcaption>For those who run agents</figcaption></figure>
   </div>
 </div></section>
 
@@ -673,29 +694,29 @@
   <h2>Measured on real systems</h2>
   <div class="numeros">
     <div class="numero"><b>179</b><span>jobs waited on by the watcher, from Nov 9 to Nov 25, 2026: 124 done, 50 failed with an alert and a reason, 5 stopped at the limit.</span></div>
-    <div class="numero"><b>92 min</b><span>was the median wait until ready: half the jobs take longer than that.</span></div>
-    <div class="numero"><b>193</b><span>gated flows from Jul 31 to Nov 20, 2026: 151 finished, 15 failed, 27 canceled by the person who asked.</span></div>
+    <div class="numero"><b>92 min</b><span>was the median wait until ready: half of the jobs take longer than that.</span></div>
+    <div class="numero"><b>193</b><span>flows with a gate from Jul 31 to Nov 20, 2026: 151 finished, 15 failed, 27 canceled by whoever requested them.</span></div>
     <div class="numero"><b>5 of 5</b><span>cases in the example watcher's test pass in a few seconds, with no AI.</span></div>
   </div>
-  <p class="sub">The inspection, turned on on Nov 25, 2026, counted in its first report 286 watcher runs in 24 hours, with a longest gap of 6 minutes and no jobs lost. The assistant's queue completed close to 150 thousand tasks; 13 failed, and each failure triggered an alert. Counts taken from each system's database on Nov 25, 2026.</p>
+  <p class="sub">The inspection, switched on on Nov 25, 2026, counted in its first report 286 watcher runs in 24 hours, with a longest gap of 6 minutes and no job lost. The assistant's queue completed close to 150 thousand tasks; 13 failed, and each failure produced an alert. Counts taken from each system's database on Nov 25, 2026.</p>
 </div></section>
 
 <!-- ========== PERGUNTAS ========== -->
 <section id="perguntas"><div class="wrap"><div class="col">
-  <p class="kicker">Questions</p>
+  <p class="kicker">FAQ</p>
   <h2>Questions before you start</h2>
   <div class="faq">
     <details><summary>Do I need to code?</summary><p>No. You paste the request and your AI sets up the watcher for your jobs. You just say yes.</p></details>
-    <details><summary>Does it cost anything?</summary><p>The kit is free and open. Waiting spends nothing. The final part uses your AI (your Claude or Codex subscription), like any other work it does.</p></details>
-    <details><summary>Do I need to leave the computer on?</summary><p>Yes. The machine where the watcher runs stays on and awake; what you close is the conversation.</p></details>
-    <details><summary>Which of the three should I use?</summary><p>A job you start by chatting with the AI: the watcher. Repeat production with approval: the gated flow. An everyday request: the queue. The request above has the AI choose with you.</p></details>
+    <details><summary>Does it cost anything?</summary><p>The kit is free and open. Waiting spends nothing. The final part uses your AI (the Claude or Codex subscription), like any other work it does.</p></details>
+    <details><summary>Do I need to leave the computer on?</summary><p>Yes. The machine the watcher runs on stays on and doesn't sleep; what you close is the conversation.</p></details>
+    <details><summary>Which of the three do I use?</summary><p>A job you start by talking with the AI: the watcher. Repeating production with approval: the flow with a gate. Everyday request: the queue. The request above has the AI choose with you.</p></details>
     <details><summary>Does it work with another AI?</summary><p>Yes. The watcher calls whatever command you choose for the final part; the example uses Claude Code, and you can swap it for Codex.</p></details>
   </div>
 </div></div></section>
 
 <!-- ========== FECHO ========== -->
 <section class="fecho"><div class="wrap">
-  <h2>And you: which job still keeps you stuck in front of the screen?</h2>
+  <h2>How about you: which job still keeps you stuck in front of the screen?</h2>
   <p>Come tell us and see other free kits at <a href="https://inema.club" target="_blank" rel="noopener">inema.club</a>, right on the web.</p>
   <div class="cta"><a class="btn" href="#comecar">Go to the request</a></div>
 </div></section>
@@ -704,7 +725,7 @@
 
 <footer><div class="wrap">
   <nav aria-label="Footer">
-    <span>VIGIA — Waiting Without You · an INEMA kit</span>
+    <span>Vigia — Waiting without you · an INEMA kit</span>
     <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
     <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">GitHub</a>
   </nav>
