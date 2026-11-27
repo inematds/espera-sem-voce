@@ -1,134 +1,269 @@
 <!DOCTYPE html>
+<!--
+  Guia (PT) do kit "Espera sem você" (vigia). Versões: en/ e es/. Números: seção #prova (contagens de 25/11/2026) e README "Prazos".
+-->
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Vigia — Espera sem você: o trabalho longo da IA segue sozinho e te avisa no fim</title>
-<meta content="Três jeitos de o trabalho demorado de um agente de IA esperar entre as fases sem você na frente da tela: o vigia, o fluxo com portão e a fila que retoma. Diagramas animados e um vigia pronto." name="description"/>
-<meta content="Vigia — Espera sem você: saia da frente da tela, o trabalho segue" property="og:title"/>
-<meta content="Vigia, fluxo com portão e fila que retoma: os três jeitos que a INEMA usa para a IA esperar sem gastar." property="og:description"/>
-<meta content="https://inematds.github.io/espera-sem-voce/guia/assets/banner.jpg" property="og:image"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://inematds.github.io/espera-sem-voce/guia/" hreflang="pt-BR" rel="alternate"/>
-<link href="https://inematds.github.io/espera-sem-voce/guia/en/" hreflang="en" rel="alternate"/>
-<link href="https://inematds.github.io/espera-sem-voce/guia/es/" hreflang="es" rel="alternate"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vigia — Espera sem você: você sai da tela, a IA termina, o aviso chega</title>
+<meta name="description" content="Kit grátis do INEMA. Você pede o trabalho demorado à IA e fecha a conversa. Um vigia confere a cada 5 minutos, uma conversa nova da IA termina e o aviso chega: feito ou falhou.">
+<meta property="og:title" content="Vigia — Espera sem você">
+<meta property="og:description" content="Você sai da tela. A IA termina. O aviso chega. Kit grátis no inema.club, direto na internet.">
+<meta property="og:image" content="https://inematds.github.io/espera-sem-voce/guia/assets/banner.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
-    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#FACC15; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
-    --fill:#FACC15; --tint:rgba(250,204,21,.12); --ok:#7CE0C6; --bad:#F0918A;
-    --nd:#1b1b24; --ndon:#2a2410;
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730; --dash:#4b4b5a;
+    --txt:#e9e9ee; --mut:#9a9aa6;
+    --fill:#FACC15; --tinta:#1a1206;      /* amarelo como preenchimento + letra sobre ele */
+    --amb-t:#FACC15;                      /* amarelo como letra: só no escuro */
+    --link:#FACC15; --foco:#FACC15;
+    --dica:#16161e; --dica-b:#FACC15;
+    --sky:#38bdf8; --pro:#cbd5e1;
     color-scheme:dark;
   }
   body.light{
-    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
-    --txt:#1a1a22; --mut:#5b5b68; --amb:#a16207; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
-    --fill:#FACC15; --tint:#FEF9C3; --ok:#0E6B55; --bad:#A83426;
-    --nd:#ffffff; --ndon:#FEF9C3;
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea; --dash:#b4b7c4;
+    --txt:#1a1a22; --mut:#5b5b68;
+    --amb-t:#1a1a22; --link:#854d0e; --foco:#1a1a22;
+    --dica:#FEF9C3; --dica-b:#EAB308;
+    --sky:#0369a1; --pro:#b45309;
     color-scheme:light;
   }
-  body.light .hero .glow{opacity:.5}
-  body.light nav{background:rgba(246,247,249,.85)}
-  body.light .amb{color:var(--txt);background:linear-gradient(transparent 55%,#FACC15 55%)}
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
-  a{color:var(--amb);text-decoration:none}
-  body.light main a:not(.btn),body.light footer a{color:#854d0e;text-decoration:underline;text-decoration-color:#FACC15;text-decoration-thickness:3px}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
-  .mut{color:var(--mut)} .amb{color:var(--amb)}
-  .chip{display:inline-block;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
-  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
-  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
-  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb);white-space:nowrap}
-  nav .brand .emoji{font-size:1.25rem}
-  nav .sep{color:var(--mut);opacity:.45}
-  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .inema:hover,nav .pro:hover{filter:brightness(1.15)}
-  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
-  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
-  nav .links a.sec{color:var(--mut);white-space:nowrap} nav .links a.sec:hover{color:var(--txt)}
-  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
-  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:var(--tint)}
-  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
-  .tgl:hover{border-color:var(--amb)}
-  .btn{display:inline-block;background:var(--fill);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
-  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
-  @media(max-width:1500px){nav .links a.opt{display:none}}
-  @media(max-width:860px){nav .links a.sec{display:none}}
-  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
-  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(250,204,21,.18),transparent 70%);pointer-events:none}
-  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;grid-template-areas:"top f2" "bot f1";column-gap:40px;row-gap:28px;align-items:center;padding:74px 22px}
-  .h-top{grid-area:top}.h-bot{grid-area:bot}.f1{grid-area:f1}.f2{grid-area:f2}
-  .hero h1{font-size:clamp(2.1rem,4.6vw,3.3rem);font-weight:800;letter-spacing:-.025em}
-  .hero p.lead{font-size:1.15rem;color:var(--mut);margin:0 0 1.6em;max-width:46ch}
-  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
-  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
-  .hero figure img{width:100%;height:auto;display:block}
-  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;grid-template-areas:"top" "f2" "bot" "f1";padding:48px 22px}}
-  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
-  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
-  section{padding:62px 0;border-bottom:1px solid var(--line)}
-  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
-  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:66ch}
-  .grid{display:grid;gap:16px}
-  .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
-  @media(max-width:820px){.g3{grid-template-columns:1fr 1fr}}
-  @media(max-width:540px){.g2,.g3{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
-  .card h3{font-size:1.05rem;margin-bottom:.4em}
-  .card p{color:var(--mut);font-size:.95rem;margin:0}
-  .card p+p{margin-top:.6em}
-  .card ul{margin:8px 0 0;padding-left:20px;color:var(--mut);font-size:.95rem}.card li{margin:5px 0}
-  .quem-img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;margin:0 0 14px;display:block;border:1px solid var(--line)}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
-  @media(max-width:720px){.stats{grid-template-columns:1fr}}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
-  .stat b{display:block;font:800 clamp(1.9rem,4vw,2.6rem)/1.05 Sora,sans-serif;letter-spacing:-.02em;color:var(--amb)}
-  body.light .stat b{color:var(--txt)}
-  .stat span{display:block;color:var(--mut);font-size:.93rem;margin-top:.5em}
-  .fonte{font-size:.86rem;color:var(--mut);margin-top:14px;max-width:80ch}
-  .tl{list-style:none;margin:0;padding:0;counter-reset:t}
-  .tl li{position:relative;padding:0 0 18px 48px;counter-increment:t}
-  .tl li::before{content:counter(t);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:10px;background:var(--fill);color:#1a1206;font:800 .95rem/32px Sora,sans-serif;text-align:center}
-  .tl li::after{content:"";position:absolute;left:15px;top:36px;bottom:4px;width:2px;background:var(--line)}
-  .tl li:last-child::after{display:none}
-  .tl b{font-family:Sora}
-  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:28px}
-  .step>div{min-width:0}
-  .step .b{width:46px;height:46px;border-radius:12px;background:var(--fill);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
-  .step h3{font-size:1.12rem;margin-bottom:.3em}
-  .step p{color:var(--mut);margin:.2em 0 .5em}
-  .pedido{position:relative;background:var(--card);border:1px solid var(--amb);border-radius:12px;padding:16px 18px;margin-top:10px}
-  .pedido p{margin:0;color:var(--txt);font-size:.95rem;padding-right:84px;overflow-wrap:anywhere}
-  .copiar{position:absolute;top:10px;right:10px;background:var(--fill);color:#1a1206;border:0;border-radius:8px;padding:.35em .8em;font:600 .82rem Sora;cursor:pointer}
-  @media(max-width:520px){.pedido p{padding-right:0;padding-top:30px}}
-  .prova{background:var(--card);border:1px solid var(--amb);border-radius:16px;padding:26px 26px 22px;margin-top:6px}
-  body.light .prova{border-color:#EAB308}
-  blockquote{margin:6px 0 0;padding:14px 18px;border-left:3px solid var(--fill);background:var(--bg2);border-radius:0 10px 10px 0;font-size:1.02rem}
-  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
-  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:4px}
-  /* os três jeitos */
-  .jeito{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:34px;align-items:start;padding:34px 0;border-top:1px solid var(--line)}
-  .jeito:first-of-type{border-top:none;padding-top:8px}
-  @media(max-width:820px){.jeito{grid-template-columns:1fr}}
-  .jeito h3{font-size:1.4rem;margin:.2em 0 .45em}
-  .jeito p{margin:.4em 0;max-width:62ch}
-  .jeito .num{font:800 .8rem Sora;letter-spacing:.14em;text-transform:uppercase;color:var(--amb)}
-  .jeito .analog{margin-top:.9em;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;font-size:.95rem;color:var(--mut)}
-  .jeito .analog b{color:var(--txt)}
-  .jeito .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
-  .prazos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  #silencio .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
-  #bilhete .origem{margin-top:.9em;font-size:.92rem;color:var(--mut)}
-  @media(max-width:640px){#bilhete .cmp td[data-l]::before{content:attr(data-l) ": ";font:600 .8rem Sora;color:var(--amb)} body.light #bilhete .cmp td[data-l]::before{color:var(--txt)}}
-  .prazos span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.35em .85em;font:600 .82rem Sora}
-  .prazos span b{color:var(--amb)} body.light .prazos span b{color:var(--txt)}
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+  body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:Sora,system-ui,sans-serif;margin:0;line-height:1.12;letter-spacing:-.02em}
+  p{margin:0}
+  a{color:var(--link);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+  body.light a{text-decoration-color:#FACC15;text-decoration-thickness:3px}
+  :focus-visible{outline:2px solid var(--foco);outline-offset:3px;border-radius:4px}
+  svg{flex:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .col{max-width:760px}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* barra do topo: só a marca e o idioma */
+  .topo{border-bottom:1px solid var(--line)}
+  .topo .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
+  .topo a{text-decoration:none;font:600 .875rem Sora,sans-serif}
+  .marca{display:inline-flex;align-items:center;gap:7px}
+  .marca .inema{color:var(--sky)} .marca .pro{color:var(--pro)} .marca .sep{color:var(--mut);opacity:.6}
+  .lang{display:inline-flex;gap:2px}
+  .lang a{color:var(--mut);padding:.35em .55em;border-radius:6px}
+  .lang a.on{color:var(--txt);background:var(--bg2)}
+
+  /* TOPO: o teste dos 5 segundos acontece aqui */
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;padding-top:40px;padding-bottom:56px}
+  .hero h1{letter-spacing:-.03em}
+  .nome{display:inline-block;font:800 .9375rem/1.2 Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--amb-t);margin-bottom:14px}
+  body.light .nome{background:linear-gradient(transparent 55%,#FACC15 55%);padding:0 .25em}
+  .manchete{display:block;font-size:clamp(2.3rem,5.2vw,3.6rem);font-weight:800;line-height:1.04}
+  .manchete .l{display:block;text-wrap:balance}
+  .manchete em{font-style:normal;color:var(--amb-t)}
+  body.light .manchete em{background:linear-gradient(transparent 62%,#FACC15 62%)}
+  .lead{font-size:clamp(1.09rem,1.5vw,1.22rem);line-height:1.55;margin-top:18px;max-width:33em}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:50px;padding:.7em 1.3em;border-radius:10px;border:1px solid var(--fill);background:var(--fill);color:var(--tinta);font:800 1rem Sora,sans-serif;text-decoration:none;cursor:pointer}
+  body.light a.btn{text-decoration:none}
+  .btn svg{width:18px;height:18px}
+  .btn.ghost{background:transparent;color:var(--txt);border-color:var(--line);font-weight:600}
+  .btn:hover{filter:brightness(1.07)} .btn.ghost:hover{border-color:var(--mut);filter:none}
+  .fatos{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:8px;font-size:.97rem;color:var(--txt)}
+  .fatos li{display:flex;gap:10px;align-items:flex-start}
+  .fatos svg{width:18px;height:18px;margin-top:.22em;color:var(--txt)}
+
+  /* caixa de imagem que ainda não existe */
+  .ph{margin:0;border:1.5px dashed var(--dash);border-radius:16px;background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(127,127,150,.07) 14px 28px),var(--bg2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:18px;color:var(--mut)}
+  .ph svg{width:26px;height:26px}
+  .ph b{font:600 .8125rem/1.35 Sora,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--txt)}
+  .ph span{font-size:.9rem;line-height:1.4;max-width:26em}
+  .antesdepois{padding:0;aspect-ratio:4/3;position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:0;overflow:hidden}
+  .antesdepois .lado{display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:16px;text-align:left}
+  .antesdepois .lado + .lado{border-left:1.5px dashed var(--dash);background:rgba(250,204,21,.06)}
+  .antesdepois .rot{font:800 .8125rem Sora,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--txt)}
+  .antesdepois .lado span{font-size:.9rem;max-width:none}
+  .antesdepois .selo{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:max-content;max-width:86%;display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--dash);border-radius:12px;padding:12px 16px}
+
+  /* seções */
+  section{padding:68px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800;text-wrap:balance}
+  .sub{color:var(--mut);margin-top:12px;max-width:38em}
+
+  /* passos: todos com a mesma forma */
+  .passos{margin-top:34px;display:grid;gap:16px}
+  .passo{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
+  .passo > *{min-width:0}
+  .passo header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .n{flex:none;width:46px;height:46px;border-radius:12px;background:var(--fill);color:var(--tinta);font:800 1.4rem/46px Sora,sans-serif;text-align:center}
+  .passo h3{font-size:clamp(1.2rem,2.2vw,1.45rem);font-weight:800}
+  .quem{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:start;padding:11px 0;border-top:1px solid var(--line)}
+  .tag{display:inline-block;justify-self:start;margin-top:.15em;font:600 .75rem/1 Sora,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:.5em .65em;border-radius:6px;border:1px solid var(--dash);color:var(--txt);white-space:nowrap}
+  .tag.vigia{background:var(--fill);border-color:var(--fill);color:var(--tinta)}   /* o programa do kit */
+  .tag.ia{background:var(--txt);border-color:var(--txt);color:var(--bg)}            /* a IA: outra peça, outra cor */
+  .porque{border-top:1px solid var(--line);padding-top:12px;color:var(--mut);font-size:.97rem}
+  .porque span{font:600 .75rem Sora,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--txt);margin-right:.6em}
+  .ph-passo{aspect-ratio:4/3}
+  .dica{grid-column:1/-1;background:var(--dica);border:1px solid var(--line);border-left:4px solid var(--dica-b);border-radius:10px;padding:14px 18px}
+  .dica b{font-family:Sora,sans-serif;font-weight:600}
+
+  /* vídeos: dois curtos, em pé */
+  .videos{display:grid;grid-template-columns:repeat(2,minmax(0,230px));gap:16px;margin-top:26px}
+  .ph-short{aspect-ratio:9/16;padding:14px}
+
+  /* precisa / não faz */
+  .duas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+  .bloco{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;min-width:0}
+  .bloco h3{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+  .lista{list-style:none;margin:0;padding:0}
+  .lista li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+  .lista li:first-child{border-top:none}
+  .lista svg{width:18px;height:18px;margin-top:.28em;color:var(--mut)}
+  .lista.sim svg{color:var(--txt)}
+  .lista strong{font-weight:600;display:block}
+  .lista span{color:var(--mut);font-size:.97rem}
+
+  /* começar */
+  .tres{list-style:none;counter-reset:c;margin:28px 0 0;padding:0;display:grid;gap:12px}
+  .tres li{counter-increment:c;display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;align-items:start}
+  .tres li::before{content:counter(c);width:34px;height:34px;border-radius:10px;border:1px solid var(--dash);font:800 1rem/32px Sora,sans-serif;text-align:center}
+  .tres p{padding-top:.2em}
+  .pedido{margin-top:26px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
+  .pedido-barra{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:12px 14px 12px 18px;border-bottom:1px solid var(--line)}
+  .pedido-barra p{font-size:.95rem;color:var(--mut)}
+  .pedido-barra .btn{min-height:44px;padding:.5em 1.05em}
+  .pedido pre{margin:0;padding:18px;font:400 .9rem/1.65 ui-monospace,"SF Mono",Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--txt)}
+  .depois{margin-top:18px;color:var(--mut);font-size:.97rem;display:grid;gap:6px}
+
+  /* perguntas */
+  .faq{margin-top:26px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:17px 2px;font:600 1.05rem/1.35 Sora,sans-serif}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";flex:none;font:400 1.5rem/1 Inter,sans-serif;color:var(--mut)}
+  .faq details[open] summary::after{content:"\2212"}
+  .faq details p{padding:0 2px 18px;color:var(--mut);max-width:42em}
+
+  /* fecho */
+  .fecho{text-align:center}
+  .fecho h2{max-width:20em;margin:0 auto}
+  .fecho p{margin:16px auto 0;max-width:30em;font-size:1.1rem}
+  .fecho .cta{justify-content:center}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);font-size:.9rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between}
+  footer nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+  footer a{color:var(--mut)}
+  footer a.inema{color:var(--sky)}
+  .tema{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:10px;min-height:40px;padding:.4em .9em;font:600 .875rem Sora,sans-serif;cursor:pointer}
+
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;gap:34px;padding-top:34px;padding-bottom:48px}
+    .antesdepois{aspect-ratio:16/10}
+    .passo{grid-template-columns:1fr;gap:18px}
+    .ph-passo{aspect-ratio:16/9}
+    .duas{grid-template-columns:1fr}
+    section{padding:52px 0}
+  }
+  @media (max-width:480px){
+    .wrap{padding:0 16px}
+    .nome{margin-bottom:12px;font-size:.875rem}
+    .antesdepois{aspect-ratio:4/3} .antesdepois .selo{top:30%}
+    .lead{margin-top:16px}
+    .cta{margin-top:20px} .cta .btn{flex:1 1 auto}
+    .fatos{margin-top:20px}
+    .passo,.bloco{padding:18px}
+    .quem{grid-template-columns:1fr;gap:7px}
+    .tag{margin-top:0}
+    .n{width:40px;height:40px;line-height:40px;font-size:1.2rem}
+    .videos{grid-template-columns:1fr 1fr;gap:12px}
+    .ph-short{padding:10px}
+    .pedido-barra .btn{width:100%}
+  }
+  /* ===== v2 completo: o que voltou ===== */
+  :root{--azul:#3B9EFF}
+  body.light{--azul:#0b63c4}
+  .topo .wrap{flex-wrap:wrap}
+  .menu{display:flex;gap:4px 18px;flex-wrap:wrap}
+  .menu a{color:var(--mut);font-weight:600}
+  .menu a:hover{color:var(--txt)}
+  /* nome forte: VIGIA grande em azul (regra V11 do banner) + o nome do kit */
+  .marcao{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin-bottom:16px}
+  .marcao .vigia{font:800 clamp(2rem,4.4vw,2.9rem)/1 Sora,sans-serif;letter-spacing:-.01em;text-transform:uppercase;color:var(--azul)}
+  .marcao .esp{font:800 clamp(1.1rem,2vw,1.35rem)/1.1 Sora,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--amb-t)}
+  body.light .marcao .esp{background:linear-gradient(transparent 55%,#FACC15 55%);padding:0 .2em}
+  .manchete{font-size:clamp(2.1rem,4.6vw,3.2rem)}
+  .banner{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  .banner img,.largo img,.pub img{display:block;width:100%;height:auto}
+  .largo{margin:28px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+  /* públicos */
+  .publicos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+  .pub{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .pub h3{font-size:1.15rem;font-weight:800;margin:16px 18px 8px}
+  .pub p{margin:0 18px;color:var(--mut);font-size:.97rem}
+  .pub .usa{margin:auto 18px 18px;padding-top:12px;color:var(--txt);font-size:.9rem}
+  .pub .usa b{color:var(--amb-t)}
+  /* passos sem imagem: uma coluna */
+  .passos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .passo{grid-template-columns:1fr;display:block}
+  .analogia{margin-top:22px;background:var(--dica);border:1px solid var(--line);border-left:4px solid var(--dica-b);border-radius:10px;padding:14px 18px;max-width:52em}
+  .analogia b{font-family:Sora,sans-serif;font-weight:600}
+  /* três jeitos */
+  .jeitos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+  .jeito{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+  .jeito:first-child{border-color:var(--fill)}
+  .jeito .num{font:600 .75rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .jeito h3{font-size:1.35rem;font-weight:800}
+  .jeito .bom{font-weight:600}
+  .jeito p{font-size:.97rem}
+  .jeito .origem{margin-top:auto;color:var(--mut);font-size:.88rem}
+  .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+  .chips li{font:600 .78rem Inter,sans-serif;padding:.35em .6em;border-radius:6px;border:1px solid var(--dash);color:var(--txt)}
+  .tabela-wrap{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:14px}
+  .tabela{border-collapse:collapse;width:100%;min-width:620px;font-size:.95rem}
+  .tabela th,.tabela td{padding:12px 14px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+  .tabela thead th{border-top:none;font:800 .95rem Sora,sans-serif;background:var(--bg2)}
+  .tabela tbody th{font-weight:600;color:var(--mut);white-space:nowrap}
+  /* silêncio / bilhete */
+  .bloco p + p{margin-top:12px}
+  .medido{border-left:3px solid var(--fill);padding-left:12px;font-weight:500}
+  .mut{color:var(--mut);font-size:.97rem}
+  .partes{margin:12px 0 0;padding-left:1.3em;display:grid;gap:8px}
+  .bloco .lista{margin:8px 0 12px}
+  /* vídeos */
+  .videos{grid-template-columns:repeat(2,minmax(0,260px))}
+  .short{margin:0}
+  .short a{position:relative;display:block;aspect-ratio:9/16;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--bg2)}
+  .short img{width:100%;height:100%;object-fit:cover;display:block}
+  .short .play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--fill);color:var(--tinta);display:grid;place-items:center;font-size:1.4rem}
+  .short figcaption{margin-top:10px;font:600 .95rem Sora,sans-serif}
+  /* prova */
+  .numeros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}
+  .numero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
+  .numero b{font:800 2.2rem/1 Sora,sans-serif;color:var(--amb-t)}
+  .numero span{color:var(--mut);font-size:.93rem}
+  #prova .sub{margin-top:20px;max-width:52em;font-size:.93rem}
+  @media (max-width:900px){
+    .publicos,.jeitos{grid-template-columns:1fr}
+    .passos{grid-template-columns:1fr}
+    .numeros{grid-template-columns:1fr 1fr}
+    .menu{display:none}
+  }
+  @media (max-width:480px){
+    .numeros{grid-template-columns:1fr}
+    .videos{grid-template-columns:1fr 1fr}
+  }
+  .largo.m{max-width:760px}
+  /* topo: a imagem da direita ocupa a altura do texto, sem flutuar */
+  .hero .wrap{align-items:stretch}
+  .hero-img{display:flex}
+  .hero-img img{width:100%;height:100%;object-fit:cover}
+  .largo.topo-sec{margin:0 0 40px}
+  @media (max-width:900px){ .hero-img img{height:auto;aspect-ratio:3/2} }
   .diag{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px 10px 6px;position:relative}
   .diag svg{width:100%;height:auto;display:block}
   .diag .ctl{display:flex;justify-content:space-between;align-items:center;padding:4px 8px 8px;font:600 .78rem Sora;color:var(--mut)}
@@ -145,120 +280,162 @@
   body.light .ping{fill:#854d0e}
   .tok{fill:var(--amb)} body.light .tok{fill:#EAB308}
   .ring{fill:none;stroke:var(--amb);stroke-width:2;opacity:0}
-  .falha{font:600 11.5px Sora,sans-serif;fill:var(--bad)}
-  .cmp{width:100%;border-collapse:collapse;font-size:.95rem}
-  .cmp th,.cmp td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-  .cmp th{font-family:Sora;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
-  .cmp td:first-child{font-family:Sora;font-weight:600;color:var(--txt)}
-  .cmpwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card);margin-top:28px}
-  @media(max-width:640px){.cmp thead{display:none}.cmp tr{display:block;border-bottom:1px solid var(--line);padding:8px 0}.cmp td{display:block;border:none;padding:3px 14px}.cmp td:first-child{padding-top:8px}}
+  .falha{font:600 11.5px Sora,sans-serif;fill:var(--bad)}  /* v2.2: duas imagens à direita no topo (banner ao lado do título, hero ao lado do botão) */
+  :root{--amb:#FACC15;--bad:#F0918A;--nd:#1b1b24;--ndon:#2a2410}
+  body.light{--amb:#a16207;--bad:#A83426;--nd:#ffffff;--ndon:#FEF9C3}
+  .hero .wrap{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-areas:"top f2" "bot f1";column-gap:44px;row-gap:26px;align-items:center}
+  .h-top{grid-area:top}.h-bot{grid-area:bot}
+  .hero .f1,.hero .f2{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  .hero .f2{grid-area:f2}.hero .f1{grid-area:f1}
+  .hero .f1 img,.hero .f2 img{display:block;width:100%;height:auto}
+  .hero .f1 img{aspect-ratio:16/9;object-fit:cover}
+  .h-bot .lead{margin-top:0}
+  /* fluxo do vigia ao lado dos 4 passos */
+  .fluxo{display:grid;grid-template-columns:340px minmax(0,1fr);gap:24px;margin-top:30px;align-items:start}
+  .fluxo-diag{position:sticky;top:16px}
+  .fluxo .passos{margin-top:0;grid-template-columns:1fr}
+  .legenda{color:var(--mut);font-size:.85rem;margin-top:8px;text-align:center}
+  .jeito .diag{margin-bottom:6px}
+  .ver-fluxo{font:600 .85rem Sora,sans-serif;text-decoration:none}
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;grid-template-areas:"top" "bot" "f2" "f1"}
+    .fluxo{grid-template-columns:1fr}
+    .fluxo-diag{position:static;max-width:380px;margin:0 auto;width:100%}
+  }
+  /* v2.3 */
+  .hero .wrap{align-items:start}
+  .h-top .lead{margin-top:18px}
+  .h-bot{align-self:start}
+  .hero .f1{align-self:start}
+  .hero .f2{align-self:center}
+  .fluxo-baixo{max-width:420px;margin:26px auto 0}
+  .passos{grid-template-columns:1fr !important;max-width:860px}
+  .kicker{font:800 .8rem Sora,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--amb-t);margin-bottom:10px}
+  .kicker-s{font:700 .78rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:10px;text-align:center}
+  .diags3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+  .questao{margin-top:36px;padding-top:28px;border-top:1px dashed var(--line)}
+  .questao:first-of-type{border-top:none;padding-top:0}
+  .q-tit{display:flex;align-items:center;gap:14px;font-size:clamp(1.3rem,2.6vw,1.7rem);font-weight:800}
+  .q-tit span{flex:none;width:42px;height:42px;border-radius:12px;background:var(--fill);color:var(--tinta);display:grid;place-items:center;font-size:1.2rem}
+  .questao .sub{margin-top:12px}
+  @media (max-width:900px){
+    .diags3{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  }
+  /* v2.4: respiro */
+  .risco{border:0;border-top:1px solid var(--line);margin:44px 0 40px}
+  .largo.topo-sec{margin:0}
+  #jeitos .jeitos{gap:24px;margin-top:32px}
+  #jeitos .tabela-wrap{margin-top:48px}
+  #jeitos .kicker-s{margin-top:56px !important;margin-bottom:16px}
+  #jeitos .diags3{gap:24px}
+  @media (max-width:640px){
+    .tabela-wrap{position:relative;background:linear-gradient(to left,rgba(250,204,21,.18),transparent 28px) right/28px 100% no-repeat}
+    .tabela-wrap::before{content:"\2194";position:sticky;left:0;display:block;text-align:right;padding:6px 10px 0;color:var(--amb-t);font:700 1rem Sora,sans-serif}
+  }
 </style>
 </head>
 <body>
-<nav><div class="wrap">
-<a class="brand" href="#top"><span class="emoji">⏳</span> Vigia — Espera sem você</a>
-<span class="sep">|</span>
-<span class="clubpro">
-<a class="inema" href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a>
-<span class="sep">-</span>
-<a class="pro" href="https://inema.pro" rel="noopener" target="_blank">PRO</a>
-</span>
-<div class="links">
-<a class="sec" href="#explicado">O ganho</a>
-<a class="sec" href="#como">Os três jeitos</a>
-<a class="sec opt" href="#silencio">E se travar?</a>
-<a class="sec" href="#bilhete">O bilhete</a>
-<a class="sec" href="#comecar">Como começar</a>
-<a class="sec opt" href="#prova">A prova</a>
-<span class="lang"><a class="on" href="./">PT</a><a href="en/">EN</a><a href="es/">ES</a></span>
-<button aria-label="Alternar tema" class="tgl" id="themeToggle" title="Alternar tema">🌙</button>
-<a class="btn" href="https://github.com/inematds/espera-sem-voce" rel="noopener" target="_blank">GitHub</a>
-</div>
-</div></nav>
-<header class="hero" id="top">
-<div class="glow"></div>
-<div class="wrap">
-<div class="h-top"><span class="chip">Kit grátis · 3 jeitos de esperar · com diagramas animados</span>
-<h1>Você dispara o trabalho demorado e sai da frente da tela. <span class="amb">Espera sem você</span>: o trabalho segue sozinho e te avisa no fim</h1></div>
-<figure class="f2"><img alt="Espera sem você: o trabalho longo segue sozinho e te avisa no fim" src="assets/banner.jpg"/></figure>
-<div class="h-bot"><p class="lead">O vídeo com avatar leva uma hora para ficar pronto, a montagem final leva a tarde. Hoje você fica com a conversa da IA aberta, olhando a tela, e cada "já ficou pronto?" gasta a cota da sua assinatura. Aqui estão os três jeitos que a INEMA usa todo dia para a IA esperar sem você e sem gastar: o vigia, o fluxo com portão e a fila que retoma.</p>
-<div class="cta">
-<a class="btn" href="#como">Ver os três jeitos</a>
-<a class="btn ghost" href="#comecar">Como começar</a>
-</div></div>
-<figure class="f1"><img alt="Robôs trabalhando sozinhos numa central iluminada, sem ninguém olhando a tela" src="assets/hero.jpg"/></figure>
-</div>
-</header>
-<main>
-<section class="resumo" id="resumo"><div class="wrap">
-<span class="chip">Em uma frase</span>
-<p><strong>Você quer pedir um trabalho longo à IA, ir cuidar da vida e receber só o aviso de que terminou.</strong> Este kit gratuito explica, com diagramas animados, os três jeitos que os sistemas da INEMA usam para esperar entre uma fase e outra: um <strong>vigia</strong> que confere de tempos em tempos e chama uma conversa nova da IA quando fica pronto, um <strong>fluxo com portão</strong> que para e espera o seu "pode seguir", e uma <strong>fila que guarda</strong> cada pedido e te avisa se algo cair no meio, para você retomar de onde parou. Traz também um vigia pronto para você usar. O computador onde ele roda fica ligado; quem sai é você. Para começar, basta colar um pedido no Claude Code ou no Codex.</p>
-</div></section>
-<section id="explicado"><div class="wrap">
-<span class="chip">O ganho</span>
-<h2>Da tela aberta esperando <span class="amb">ao aviso no celular</span></h2>
-<div class="grid g2">
-<div class="card"><h3>😟 Hoje</h3><p>Você pede o vídeo, a IA manda para o gerador de avatar e fica perguntando "já ficou pronto?" a cada poucos minutos. Cada pergunta relê a conversa inteira e gasta a sua cota. Se você fecha a conversa, o trabalho para no meio.</p><p>E quando a máquina reinicia, ninguém sabe em que passo estava.</p></div>
-<div class="card"><h3>😌 Com a espera sem você</h3><p>A IA faz a parte que pensa e entrega a espera para quem não gasta nada: um programinha que confere, uma fila, um portão. Você fecha a conversa e vai cuidar da vida; o computador fica ligado fazendo o resto. Quando fica pronto, o trabalho segue sozinho e o aviso chega no seu celular (pelo seu bot do Telegram), com o resultado ou com o motivo da falha.</p><p>Se a máquina cair, você sabe em que passo estava e retoma dali.</p></div>
-</div>
-<div class="stats">
-<div class="stat"><b>0 de cota</b><span>enquanto espera: quem confere se ficou pronto é um programinha, não a IA. A IA só volta quando há trabalho para ela.</span></div>
-<div class="stat"><b>92 min</b><span>foi a espera do meio (mediana) dos 174 trabalhos que o vigia da INEMA soltou desde 09/11. É o tempo que a conversa ficaria aberta à toa.</span></div>
-<div class="stat"><b>1 aviso</b><span>no fim, e um vermelho se algo travar. Você não precisa olhar a tela no caminho.</span></div>
-</div>
-<p class="fonte">Números do estado do vigia em 25/11/2026: 179 trabalhos registrados de 09/11 a 25/11, dos quais 174 chegaram a ficar prontos ou a ser liberados.</p>
-</div></section>
-<section id="quem"><div class="wrap">
-<span class="chip">Para quem</span>
-<h2>O que cada um <span class="amb">ganha</span></h2>
-<div class="grid g3">
-<div class="card"><img alt="Criadora de conteúdo sai de casa enquanto o vídeo fica pronto" class="quem-img" loading="lazy" src="assets/quem-criador.jpg"/><h3>🎬 Quem faz vídeo com IA</h3><p><strong>Ganha:</strong> manda o avatar ou a montagem do vídeo e vai embora. O vídeo é montado e publicado quando fica pronto, mesmo de madrugada.</p><p><strong>E mais:</strong> se o gerador travar, você sabe na hora certa, não no dia seguinte.</p></div>
-<div class="card"><img alt="Pessoa aprova pelo celular o próximo passo de um trabalho" class="quem-img" loading="lazy" src="assets/quem-gestor.jpg"/><h3>✅ Quem precisa aprovar</h3><p><strong>Ganha:</strong> o trabalho para nos pontos caros (antes de gastar crédito, antes de publicar) e espera o seu "pode seguir" pelo celular.</p><p><strong>E mais:</strong> nada sai sem você ter visto o texto.</p></div>
-<div class="card"><img alt="Técnico observa um pequeno servidor com luz âmbar trabalhando sozinho" class="quem-img" loading="lazy" src="assets/quem-tecnico.jpg"/><h3>🛠️ Quem monta automação</h3><p><strong>Ganha:</strong> três desenhos testados em produção para escolher o certo, e um vigia pronto, sem dependências, para adaptar.</p><p><strong>E mais:</strong> os prazos de cada um, medidos, para não inventar número.</p></div>
-</div>
-</div></section>
-<section id="dia"><div class="wrap">
-<span class="chip">No seu dia</span>
-<h2>Como isso muda <span class="amb">a sua tarde</span></h2>
-<div class="grid g3">
-<div class="card"><h3>🎥 Vídeo com avatar</h3><p><strong>Hoje:</strong> você espera o avatar com a conversa aberta, ou esquece e só volta à noite.</p><p><strong>Com o vigia:</strong> você fecha; ele confere a cada 5 minutos, chama a IA quando fica pronto e o vídeo sai publicado.</p></div>
-<div class="card"><h3>🧾 Texto antes de gastar</h3><p><strong>Hoje:</strong> a IA gera tudo de uma vez e você descobre o erro no fim, com o crédito gasto.</p><p><strong>Com o portão:</strong> o fluxo para depois do roteiro; você lê no celular, aprova, e só então ele gasta.</p></div>
-<div class="card"><h3>🔌 A máquina reiniciou</h3><p><strong>Hoje:</strong> o trabalho some sem aviso e você recomeça do zero.</p><p><strong>Com a fila:</strong> o pedido fica guardado; se cair no meio, chega o aviso de falha e você manda /job, o número do pedido e "continue de onde parou", com a conversa salva.</p></div>
-</div>
-<div style="margin-top:28px">
-<ol class="tl">
-<li><b>14:00</b> — você aprova o roteiro com a IA e ela manda o avatar para o gerador de vídeo. Você fecha a conversa e sai; o computador fica ligado.</li>
-<li><b>14:05 a 15:30</b> — o vigia confere a cada 5 minutos: "ainda não". Nenhuma IA está ligada nesse tempo.</li>
-<li><b>15:35</b> — ficou pronto. O vigia abre uma conversa nova da IA, que lê o bilhete deixado às 14:00 e monta o vídeo.</li>
-<li><b>16:10</b> — o vídeo está publicado e o aviso chega no seu celular, com o link.</li>
-</ol>
-</div>
-</div></section>
-<section id="video"><div class="wrap">
-<span class="chip">Vídeo</span>
-<h2>Rode sem créditos de API na espera</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1.25rem;max-width:640px">
-<article>
-<h3>Para quem está começando</h3>
-<iframe src="https://www.youtube.com/embed/sRoQb5OZWBw" title="Para quem está começando"
-        loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture" allowfullscreen
-        style="display:block;width:100%;aspect-ratio:9 / 16;border:0;border-radius:14px"></iframe>
-</article>
-<article>
-<h3>Para quem roda agentes</h3>
-<iframe src="https://www.youtube.com/embed/fAbHaCgTj74" title="Para quem roda agentes"
-        loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture" allowfullscreen
-        style="display:block;width:100%;aspect-ratio:9 / 16;border:0;border-radius:14px"></iframe>
-</article>
-</div>
-</div></section>
-<section id="como"><div class="wrap">
-<span class="chip">Os três jeitos</span>
-<h2>Três jeitos de esperar, <span class="amb">sem jargão</span></h2>
-<p class="sub">Cada diagrama anda sozinho: a bolinha é o trabalho, a moldura tracejada é onde ele espera. Use o botão para pausar ou repetir.</p>
-<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="Os três jeitos de esperar: vigia, fluxo com portão e fila que retoma" src="assets/banner-grade.jpg" style="width:100%;display:block"/></figure>
 
-<div class="jeito">
+<div class="topo"><div class="wrap">
+  <span class="marca">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep" aria-hidden="true">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <nav class="menu" aria-label="Seções">
+    <a href="#jeitos">3 jeitos</a><a href="#importantes">Questões</a><a href="#comecar">Na prática</a><a href="#video">Vídeos</a><a href="#prova">Medido</a>
+  </nav>
+  <span class="lang" aria-label="Idioma">
+    <a class="on" href="./" aria-current="true">PT</a>
+    <a href="en/">EN</a>
+    <a href="es/">ES</a>
+  </span>
+</div></div>
+
+<!-- ========== TOPO: nome forte + manchete + resumo + ação + banner padrão ========== -->
+<header class="hero" id="top"><div class="wrap">
+  <div class="h-top">
+    <h1>
+      <span class="marcao"><span class="vigia">Vigia</span> <span class="esp">Espera sem você</span></span><span class="vh">: </span>
+      <span class="manchete"><span class="l">Você sai da tela.</span> <span class="l">A IA termina.</span> <span class="l"><em>O aviso chega.</em></span></span>
+    </h1>
+  
+    <p class="lead">Pare de ficar olhando a tela enquanto o vídeo fica pronto. Você pede o trabalho demorado à IA e fecha a conversa. O vigia, um programa sem IA, confere a cada 5 minutos e abre uma conversa nova da IA para terminar. No fim chega o aviso no celular: feito ou falhou.</p>
+  </div>
+  <figure class="f2"><img src="assets/banner.jpg" alt="Vigia — Espera sem você: o trabalho longo segue sozinho e te avisa no fim" width="1400" height="788"></figure>
+  <div class="h-bot">
+    <div class="cta">
+      <a class="btn" href="#comecar">Copiar o pedido e começar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+      <a class="btn ghost" href="#video">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>Ver os vídeos</a>
+    </div>
+    <ul class="fatos">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Kit grátis e aberto. Sem saber programar: você cola um pedido.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Precisa de um computador ligado e da assinatura do Claude ou do Codex.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Medido: 179 trabalhos esperados em 17 dias, e todo final chegou com aviso.</span></li>
+    </ul>
+  </div>
+  <figure class="f1"><img src="assets/hero.jpg" alt="Robôs trabalhando sozinhos numa central iluminada, sem ninguém olhando a tela" width="1100" height="734"></figure>
+</div></header>
+
+<main>
+
+<!-- ========== PARA QUEM É ========== -->
+<section id="quem"><div class="wrap">
+  <p class="kicker">Para quem</p>
+  <h2>É para você se…</h2>
+  <div class="publicos">
+    <article class="pub"><img src="assets/quem-criador.jpg" alt="Criadora de conteúdo sai de casa enquanto o vídeo fica pronto" loading="lazy" width="760" height="506">
+      <h3>Você faz vídeo com IA</h3>
+      <p>Manda o avatar ou a montagem e vai embora. O vídeo é montado e publicado quando fica pronto, mesmo de madrugada. Se o gerador travar, você sabe na hora, não no dia seguinte.</p>
+      <p class="usa">Usa: <b>o vigia</b></p></article>
+    <article class="pub"><img src="assets/quem-gestor.jpg" alt="Pessoa aprova pelo celular o próximo passo de um trabalho" loading="lazy" width="760" height="506">
+      <h3>Você precisa aprovar no meio</h3>
+      <p>O trabalho para nos pontos caros, antes de gastar crédito e antes de publicar, e espera o seu "pode seguir" pelo celular. Nada sai sem você ver o texto.</p>
+      <p class="usa">Usa: <b>o fluxo com portão</b></p></article>
+    <article class="pub"><img src="assets/quem-tecnico.jpg" alt="Técnico observa um pequeno servidor trabalhando sozinho" loading="lazy" width="760" height="506">
+      <h3>Você monta automação</h3>
+      <p>Três desenhos testados em produção para escolher o certo, os prazos de cada um medidos, e um vigia pronto, sem dependências, para adaptar.</p>
+      <p class="usa">Usa: <b>os três</b>, e a fila no dia a dia</p></article>
+  </div>
+</div></section>
+
+<!-- ========== COMO FUNCIONA O VIGIA: 4 passos ========== -->
+<section id="passos"><div class="wrap">
+  <figure class="largo topo-sec"><img src="assets/banner-grade.jpg" alt="Os três jeitos de esperar: vigia, fluxo com portão e fila que retoma" loading="lazy" width="1400" height="788"></figure>
+  <hr class="risco">
+  <p class="kicker">Como funciona</p>
+  <h2>Como funciona o vigia, em 4 passos</h2>
+  <p class="sub">Você só trabalha no passo 1. Depois fecha a conversa e espera o aviso.</p>
+  <div class="passos">
+    <article class="passo">
+      <header><span class="n">1</span><h3>Peça o trabalho e confira o bilhete</h3></header>
+      <div class="quem"><span class="tag">Você</span><p>Combina o trabalho com a IA e aprova o que for preciso, como o roteiro do vídeo.</p></div>
+      <div class="quem"><span class="tag ia">A IA</span><p>Dispara a parte demorada e escreve o bilhete: o que já foi feito, o que falta, as suas ordens entre aspas e o que não pode acontecer.</p></div>
+      <p class="porque"><span>Por quê</span>Quem vai terminar é uma conversa nova, que só sabe o que está no bilhete.</p>
+    </article>
+    <article class="passo">
+      <header><span class="n">2</span><h3>Feche a conversa e saia</h3></header>
+      <div class="quem"><span class="tag">Você</span><p>Fecha a conversa e vai cuidar da vida. O computador fica ligado, sem dormir.</p></div>
+      <div class="quem"><span class="tag vigia">O vigia</span><p>A cada 5 minutos pergunta "ficou pronto?". Espera até 8 horas.</p></div>
+      <p class="porque"><span>Por quê</span>O vigia é um programa comum, não uma IA. Enquanto ele espera, nada é gasto.</p>
+    </article>
+    <article class="passo">
+      <header><span class="n">3</span><h3>A IA nova termina</h3></header>
+      <div class="quem"><span class="tag">Você</span><p>Não faz nada. Esta é a parte sem você.</p></div>
+      <div class="quem"><span class="tag ia">A IA</span><p>Quando fica pronto, o vigia abre uma conversa nova. Ela lê só o bilhete e vai até o fim (monta, revisa, publica), com até 3 horas para isso.</p></div>
+      <p class="porque"><span>Por quê</span>Sem ninguém na tela, ela não para para pedir licença. Vale o que está escrito no bilhete.</p>
+    </article>
+    <article class="passo">
+      <header><span class="n">4</span><h3>O aviso chega: feito ou falhou</h3></header>
+      <div class="quem"><span class="tag vigia">O vigia</span><p>Lê o resultado e manda o aviso no celular: verde se deu certo, vermelho com o motivo se falhou.</p></div>
+      <div class="quem"><span class="tag">Você</span><p>Lê o aviso. Se falhou, o motivo vem junto, e refazer é decisão sua.</p></div>
+      <p class="porque"><span>Por quê</span>O perigo de sair é o silêncio. Aqui todo final tem aviso.</p>
+    </article>
+  </div>
+  <div class="fluxo-baixo">
+    <p class="kicker-s">O fluxo do vigia, animado</p>
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Vigia</span><button type="button" data-btn>Pausar</button></div>
 <svg viewBox="0 0 360 450" role="img" aria-label="Diagrama do vigia: fase 1 com você, o trabalho demora enquanto o vigia confere, a fase 2 abre sozinha e o aviso chega no celular">
@@ -275,18 +452,75 @@
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
-<div>
-<span class="num">Jeito 1 · o vigia</span>
-<h3>Você sai, um vigia espera, uma IA nova termina</h3>
-<p>A conversa com você vai até mandar o trabalho demorado (o avatar, a montagem do vídeo). Antes de sair, a IA deixa um <a href="#bilhete"><strong>bilhete</strong></a> num arquivo: o que falta fazer, as suas ordens e o que não pode. Aí entra um <strong>vigia</strong>: um programinha que não é IA e não gasta nada. A cada 5 minutos ele pergunta "ficou pronto?".</p>
-<p>Quando fica, ele abre uma <strong>conversa nova</strong> da IA, que lê só o bilhete e vai até o fim: monta, revisa, publica. Você recebe um aviso com o resultado.</p>
-<div class="analog"><b>Como no dia a dia:</b> você deixa o carro na oficina com um bilhete ("trocar o óleo, não mexer no rádio") e vai embora. O porteiro olha de tempos em tempos se a peça chegou; quando chega, chama o mecânico, que lê o bilhete e faz o serviço. Você só recebe a mensagem "carro pronto".</div>
-<div class="prazos"><span>confere a cada <b>5 min</b></span><span>espera até <b>8 h</b></span><span>trabalho que morreu: aviso em <b>20 min</b></span><span>IA nova tem até <b>3 h</b></span></div>
-<p class="origem">De onde vem: o vigia <strong>continua</strong> do projeto interno da INEMA (que não é público). A versão de exemplo, do mesmo desenho, está <a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" rel="noopener" target="_blank">neste kit</a>.</p>
-</div>
+    <p class="legenda">A bolinha é o trabalho; a moldura tracejada é onde ele espera.</p>
+  </div>
+  <p class="analogia"><b>Como no dia a dia:</b> você deixa o carro na oficina com um bilhete ("trocar o óleo, não mexer no rádio") e vai embora. O porteiro olha de tempos em tempos se a peça chegou; quando chega, chama o mecânico, que lê o bilhete e faz o serviço. Você só recebe a mensagem "carro pronto".</p>
+</div></section>
+
+<!-- ========== OS 3 JEITOS DE ESPERAR ========== -->
+<section id="jeitos"><div class="wrap">
+  <p class="kicker">Os 3 jeitos</p>
+  <h2>Três jeitos de esperar. O vigia é um deles.</h2>
+  <p class="sub">A INEMA espera trabalhos longos de três jeitos, cada um bom para um caso. O kit explica os três, com os prazos medidos, e entrega o vigia pronto.</p>
+  <div class="jeitos">
+    <article class="jeito">
+      <p class="num">Jeito 1</p>
+      <h3>O vigia</h3>
+      <p class="bom">Para um trabalho que você começou conversando com a IA.</p>
+      <p>Um programinha à parte, sem IA, confere se ficou pronto e chama uma IA nova que lê o bilhete e termina. As suas ordens vão no bilhete, antes de sair.</p>
+      <ul class="chips"><li>confere a cada 5 min</li><li>espera até 8 h</li><li>morreu calado: aviso em 20 min</li><li>IA nova: até 3 h</li></ul>
+      <p class="origem">Vem do vigia interno da INEMA. A cópia enxuta está na pasta <a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" target="_blank" rel="noopener">vigia</a> deste kit.</p>
+    </article>
+    <article class="jeito">
+
+      <p class="num">Jeito 2</p>
+      <h3>O fluxo com portão</h3>
+      <p class="bom">Para produção que se repete (vídeo, reel) com aprovação no meio.</p>
+      <p>Você manda um comando pelo Telegram e o trabalho anda por fases: roteiro, avatar, baixar, montar. Nos pontos caros há um portão: o fluxo para até o seu "pode seguir". Se a máquina reinicia, ele volta da fase em que estava.</p>
+      <ul class="chips"><li>vídeo curto: a cada 1 min, até 10 h</li><li>avatar: a cada 5 min, até 40 h</li><li>portão: espera você</li></ul>
+      <p class="origem">Vem do <a href="https://github.com/inematds/inemaccbot" target="_blank" rel="noopener">inemaccbot</a>, o bot de produção da INEMA (código aberto).</p>
+    </article>
+    <article class="jeito">
+
+      <p class="num">Jeito 3</p>
+      <h3>A fila que retoma</h3>
+      <p class="bom">Para pedidos do dia a dia, que precisam sobreviver a um reinício.</p>
+      <p>Cada pedido vira uma tarefa guardada numa fila: reiniciar não apaga. Se a máquina cai no meio, chega um aviso, e você retoma mandando no chat o número do pedido com "continue de onde parou" (o comando /job): ele segue com a conversa salva.</p>
+      <ul class="chips"><li>"estou vivo" a cada 30 s</li><li>espera os outros agentes: confere a cada 15–20 s</li><li>"ainda trabalhando": 25 min</li></ul>
+      <p class="origem">Vem do <a href="https://github.com/inematds/openpcbotv3" target="_blank" rel="noopener">openpcbotv3</a>, o assistente da INEMA no Telegram (código aberto). É lá que chegam os avisos dos outros dois.</p>
+    </article>
+  </div>
+
+  <div class="tabela-wrap">
+  <table class="tabela">
+    <thead><tr><th></th><th>Vigia</th><th>Fluxo com portão</th><th>Fila que retoma</th></tr></thead>
+    <tbody>
+      <tr><th>Quem espera</th><td>um programinha à parte, sem IA</td><td>o próprio bot, fase por fase</td><td>o próprio assistente, tarefa por tarefa</td></tr>
+      <tr><th>Você aprova no meio?</th><td>não: as ordens vão no bilhete</td><td>sim, no portão</td><td>não; você pode retomar depois</td></tr>
+      <tr><th>Quando desiste</th><td>8 h sem ficar pronto</td><td>cada fase tem o seu limite (1 h a 40 h)</td><td>se cair no meio: avisa e espera você</td></tr>
+      <tr><th>Como te avisa</th><td>no celular, feito ou falhou</td><td>no chat do bot</td><td>no chat do assistente</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="kicker-s" style="margin-top:34px">Os três fluxos, animados</p>
+  <div class="diags3">
+<div class="diag" data-diag>
+<div class="ctl"><span data-rot>Vigia</span><button type="button" data-btn>Pausar</button></div>
+<svg viewBox="0 0 360 450" role="img" aria-label="Diagrama do vigia: fase 1 com você, o trabalho demora enquanto o vigia confere, a fase 2 abre sozinha e o aviso chega no celular">
+<line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
+<text class="lb" x="46" y="104">você fecha a conversa e sai</text>
+<text class="lb" x="46" y="210">ficou pronto (até 8 h)</text>
+<text class="falha" x="46" y="228">não ficou? aviso vermelho</text>
+<text class="lb" x="46" y="322">até 3 h para terminar</text>
+<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Você e a IA</text><text class="s" x="16" y="43">roteiro aprovado, manda ao gerador</text></g>
+<g class="nd wait" data-dwell="3600" data-checks="ainda não|ainda não|ainda não|pronto ✓" data-pref="vigia confere:" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · O trabalho demora</text><text class="s" x="16" y="43">vigia confere a cada 5 min</text></g>
+<g class="nd" data-dwell="1300" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Uma IA nova assume</text><text class="s" x="16" y="43">lê o bilhete e termina o trabalho</text></g>
+<g class="nd" data-dwell="1400" transform="translate(30,346)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Aviso no celular</text><text class="s" x="16" y="43">feito, ou falhou com o motivo</text></g>
+<text class="ping" x="180" y="436" text-anchor="middle" data-ping></text>
+<circle class="ring" r="20"/><circle class="tok" r="9"/>
+</svg>
 </div>
 
-<div class="jeito">
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Fluxo com portão</span><button type="button" data-btn>Pausar</button></div>
 <svg viewBox="0 0 360 640" role="img" aria-label="Diagrama do fluxo com portão: comando no Telegram, roteiro, portão esperando você aprovar, avatar, fase que confere até ficar pronto e vídeo entregue no chat">
@@ -302,19 +536,6 @@
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
-<div>
-<span class="num">Jeito 2 · o fluxo com portão</span>
-<h3>Uma linha de produção com fases e um portão onde você aprova</h3>
-<p>Aqui a espera mora <strong>dentro do próprio bot</strong>. Você manda um comando pelo Telegram e o trabalho anda por fases: roteiro, avatar, baixar, montar. Cada fase guarda onde parou. A fase que espera o gerador de vídeo <strong>se reagenda sozinha</strong>: volta para a fila, confere de novo, e só desiste no limite dela.</p>
-<p>Nos pontos caros existe um <strong>portão</strong>: o fluxo para e espera você aprovar pelo celular antes de gastar crédito. Se a máquina reinicia no meio, o bot acha o vídeo que já existe pelo nome e continua da fase certa, sem pedir outro.</p>
-<div class="analog"><b>Como no dia a dia:</b> uma gráfica que só imprime depois que você aprova a prova de cor. A peça passa de mesa em mesa; na mesa da aprovação, ela espera a sua assinatura. Se faltar luz, cada mesa sabe o que já fez.</div>
-<div class="prazos"><span>vídeo curto: a cada <b>1 min</b>, até <b>10 h</b></span><span>avatar: a cada <b>5 min</b>, até <b>40 h</b></span><span>portão: <b>espera você</b></span></div>
-<p class="origem">O diagrama é um fluxo de exemplo que junta as peças: cada produção tem as fases dela. O reel curto confere a cada minuto e não tem portão; o vídeo com avatar tem dois portões (o texto e o vídeo baixado) e confere a cada 5 minutos.</p>
-<p class="origem">De onde vem: o motor de fluxos do <a href="https://github.com/inematds/inemaccbot" rel="noopener" target="_blank">inemaccbot</a> (código aberto). O portão está descrito em <a href="https://github.com/inematds/inemaccbot/blob/master/docs/plugar-fluxo.md" rel="noopener" target="_blank">como plugar um fluxo</a> (em português), e a fase que espera, na <a href="https://github.com/inematds/inemaccbot/blob/master/src/dominio/flow.ts" rel="noopener" target="_blank">definição dos fluxos</a>.</p>
-</div>
-</div>
-
-<div class="jeito">
 <div class="diag" data-diag>
 <div class="ctl"><span data-rot>Fila que retoma</span><button type="button" data-btn>Pausar</button></div>
 <svg viewBox="0 0 360 540" role="img" aria-label="Diagrama da fila que retoma: pedido no chat, espera a vez guardado na fila, agente trabalhando e esperando os especialistas, se cair no meio chega o aviso e você retoma de onde parou, resposta no chat">
@@ -331,123 +552,202 @@
 <circle class="ring" r="20"/><circle class="tok" r="9"/>
 </svg>
 </div>
-<div>
-<span class="num">Jeito 3 · a fila que retoma</span>
-<h3>Uma fila que guarda cada pedido e nunca falha calada</h3>
-<p>É como o assistente pessoal da INEMA (o Jarvis no Telegram) espera. Cada pedido vira uma tarefa <strong>guardada</strong> numa fila: se a máquina reinicia enquanto ele espera a vez, ele continua lá. Quando o agente chama especialistas (outros agentes, cada um com uma parte do trabalho), ele <strong>espera todos terminarem</strong>, conferindo a cada 15 a 20 segundos, antes de responder.</p>
-<p>Enquanto trabalha, o agente manda um <strong>sinal de vida</strong> a cada 30 segundos. Se o sinal some no meio (a máquina caiu), o pedido não some junto: ele é marcado como falho e <strong>chega um aviso</strong>. Você manda no chat /job, o número do pedido e "continue de onde parou", e ele retoma com a conversa salva (ou, se ela se perdeu, a partir do pedido original). As tarefas automáticas, como as agendadas, ainda tentam de novo sozinhas, uma vez, depois de 30 segundos. É também o lugar onde chegam os avisos dos outros dois jeitos.</p>
-<div class="analog"><b>Como no dia a dia:</b> a senha do banco. Você pega a senha e senta; mesmo que o sistema reinicie, a sua senha continua na fila. Se o atendimento cair no meio, o banco te liga avisando, e você volta com o mesmo número de protocolo, sem contar tudo de novo.</div>
-<div class="prazos"><span>sinal de vida: <b>30 s</b></span><span>espera os especialistas: a cada <b>15 a 20 s</b></span><span>aviso "ainda trabalhando": <b>25 min</b></span></div>
-<p class="origem">De onde vem: a fila do <a href="https://github.com/inematds/openpcbotv3" rel="noopener" target="_blank">openpcbotv3</a> (código aberto), o assistente da INEMA no Telegram.</p>
-</div>
-</div>
+  </div>
+</div></section>
 
-<div class="cmpwrap"><table class="cmp">
-<thead><tr><th></th><th>Vigia</th><th>Fluxo com portão</th><th>Fila que retoma</th></tr></thead>
-<tbody>
-<tr><td>Quem espera</td><td>um programinha à parte, sem IA</td><td>o próprio bot, fase por fase</td><td>o próprio assistente, tarefa por tarefa</td></tr>
-<tr><td>Bom para</td><td>trabalho de uma vez que você começou conversando com a IA</td><td>produção que se repete (vídeo, reel) com aprovação no meio</td><td>pedidos do dia a dia, que precisam sobreviver a um reinício</td></tr>
-<tr><td>Você aprova no meio?</td><td>não: as ordens vão no bilhete</td><td>sim, no portão</td><td>não; você pode retomar depois</td></tr>
-<tr><td>Quando desiste</td><td>8 h sem ficar pronto</td><td>cada fase tem o seu limite (de 1 h a 40 h)</td><td>se cair no meio: avisa e espera você retomar</td></tr>
-<tr><td>Como te avisa</td><td>no celular, feito ou falhou</td><td>no chat do bot</td><td>no chat do assistente</td></tr>
-</tbody></table></div>
-<div class="grid g2" style="margin-top:16px">
-<div class="card"><h3>✅ O que o kit entrega</h3><ul><li>os três desenhos explicados, com os prazos medidos</li><li>um vigia de exemplo, sem dependências, com teste</li><li>o pedido para a sua IA escolher o jeito certo para você</li></ul></div>
-<div class="card"><h3>🚫 O que ele não promete</h3><ul><li>instalar o bot ou o assistente da INEMA (cada um tem a sua página no GitHub)</li><li>conferir sozinho um serviço que não diz se ficou pronto: alguém precisa dizer ao vigia como perguntar</li><li>gastar zero na fase final: a IA nova trabalha pela sua assinatura</li><li>avisar no celular sozinho: o aviso vai pelo seu bot do Telegram, que a sua IA liga com o seu sim</li></ul></div>
-</div>
+<!-- ========== QUESTÕES IMPORTANTES ========== -->
+<section id="importantes"><div class="wrap">
+  <p class="kicker">Questões importantes</p>
+  <h2>Duas perguntas antes de sair da tela</h2>
+  <div class="questao" id="silencio">
+  <h3 class="q-tit"><span>1</span>E se o trabalho nunca voltar, ou o vigia parar?</h3>
+  <p class="sub">Metade dos trabalhos leva mais de 92 minutos, e você não está olhando. O perigo é o silêncio: nada chega e você acha que ainda está esperando. São dois casos, cada um com a sua resposta.</p>
+  <figure class="largo m"><img src="assets/vigia-vistoria.jpg" alt="À noite, um robô porteiro vigia a prateleira de pacotes; um pacote tem a ampulheta vazia" loading="lazy" width="1200" height="800"></figure>
+  <div class="duas">
+    <div class="bloco">
+      <h3>O trabalho que nunca volta</h3>
+      <p>Cada trabalho tem um limite (8 h, você ajusta). Passou dele, o vigia desiste e manda o aviso vermelho com o motivo. Se o trabalho grava um registro e ele para de andar por 20 minutos, sem nada mais rodando na pasta, o aviso vem antes do limite.</p>
+      <p class="medido">Dos 179 trabalhos medidos, 5 pararam no limite, e o aviso chegou em cada um.</p>
+    </div>
+    <div class="bloco">
+      <h3>O vigia que parou de vigiar</h3>
+      <p>Aqui o vigia não pode avisar, porque quem avisa é ele. Por isso existe a vistoria: outro programinha sem IA, com relógio próprio. De hora em hora ela confere se o vigia rodou nos últimos 15 minutos, se algum trabalho passou do limite sem aviso e se alguma IA nova morreu sem fechar. Só fala se achar problema.</p>
+      <p class="medido">Todo dia às 08:00 chega um relatório curto. Se ele não chegar, a máquina caiu: a falta do relatório também é um aviso.</p>
+    </div>
+  </div>
+  <p class="analogia"><b>Como no dia a dia:</b> o porteiro liga quando o prazo do pacote estoura. Mas se o porteiro dormir, ninguém liga. Então o síndico passa de hora em hora com a lanterna, e de manhã deixa um bilhete com o resumo da noite.</p>
+  </div>
+
+
+  <div class="questao" id="bilhete">
+  <h3 class="q-tit"><span>2</span>Como a IA nova sabe o que já foi feito? O bilhete</h3>
+  <p class="sub">Você fecha a conversa e a IA esquece tudo. Sem um arquivo de passagem, ela pode refazer o que já estava pronto ou esquecer o que você pediu. Por isso, antes de sair, ela escreve o bilhete.</p>
+  <figure class="largo m"><img src="assets/bilhete-handoff.jpg" alt="De madrugada, o porteiro da noite entrega um cartão dobrado para quem chega de manhã" loading="lazy" width="1200" height="800"></figure>
+  <div class="duas">
+    <div class="bloco">
+      <h3>O bilhete (CONTINUAR.md)</h3>
+      <p class="mut">Fica na pasta do trabalho. Quem lê é uma IA nova, que não sabe nada além dele. Tem quatro partes:</p>
+      <ol class="partes">
+        <li><b>O que já foi feito</b>, e onde está. É o que impede de refazer.</li>
+        <li><b>O que falta</b>, em ordem, cada passo com o que deve sair.</li>
+        <li><b>As suas ordens, citadas</b> entre aspas, do jeito que você disse.</li>
+        <li><b>As travas</b>: o que não pode ("não gastar crédito novo") e a obrigação de escrever FEITO ou FALHOU.</li>
+      </ol>
+    </div>
+    <div class="bloco">
+      <h3>A passagem de sessão</h3>
+      <p class="mut">Para quando você mesmo volta à conversa outro dia, ou troca de IA (Claude ↔ Codex).</p>
+      <ul class="lista sim">
+        <li><div><strong>O que está pronto, com prova</strong><span>e onde conferir cada item.</span></div></li>
+        <li><div><strong>O que foi tentado e não confirmado</strong><span>para não ser tratado como pronto.</span></div></li>
+        <li><div><strong>Decisões, o que não fazer e a próxima ação</strong><span>dizendo se ela precisa do seu sim.</span></div></li>
+      </ul>
+      <p class="mut">Como pedir: antes de limpar, diga à IA "handoff" (passagem de sessão). Ao voltar, numa conversa nova, diga "retoma".</p>
+    </div>
+  </div>
+  </div>
 </div></section>
-<section id="silencio"><div class="wrap">
-<span class="chip">Quando nada chega</span>
-<h2>E se o trabalho nunca voltar, <span class="amb">ou o vigia parar?</span></h2>
-<p class="sub">Metade dos trabalhos leva mais de 92 minutos para ficar pronto, e você não está olhando, então o perigo é o silêncio: nada chega e você acha que ainda está tudo esperando. São dois casos, e cada um tem uma resposta diferente.</p>
-<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="À noite, um robô porteiro vigia a prateleira de pacotes; um pacote tem a ampulheta vazia e uma etiqueta vermelha, e um segundo robô entra com lanterna e prancheta para conferir se o porteiro está no posto" loading="lazy" src="assets/vigia-vistoria.jpg" style="width:100%;display:block"/></figure>
-<div class="grid g2">
-<div class="card"><h3>⏳ O trabalho que nunca volta</h3><p>O vigia não espera para sempre. Cada trabalho tem um <strong>limite</strong>; passou dele, o vigia desiste e te manda o <strong>aviso vermelho com o motivo</strong>. Ele também percebe o trabalho que morreu calado, quando o trabalho deixa um registro (um arquivo de log): se esse registro parou de andar há 20 minutos e nada mais roda naquela pasta, ele avisa sem esperar o limite. Sem registro, o aviso vem no limite.</p><div class="prazos"><span>limite: <b>8 h</b> (você ajusta)</span><span>morreu calado: <b>20 min</b></span><span>a IA que termina: até <b>3 h</b></span></div><p class="origem">No pacote da imagem, a ampulheta já esvaziou: é a hora do aviso vermelho. Dos 179 trabalhos medidos, 5 pararam no limite, e o aviso chegou em cada um.</p></div>
-<div class="card"><h3>🔦 O vigia que parou de vigiar</h3><p>Aqui o vigia não pode te avisar, porque quem avisa é ele mesmo. Por isso entra uma <strong>vistoria</strong>: outro programinha, também sem IA, com o seu próprio relógio. <strong>De hora em hora</strong> ela confere três coisas: se o vigia rodou nos últimos 15 minutos, se algum trabalho passou do limite sem aviso e se alguma IA nova morreu sem fechar o trabalho. Só fala se achar problema, repete o aviso a cada 6 h enquanto não resolver e avisa quando volta ao normal.</p><div class="prazos"><span>vistoria: <b>de hora em hora</b></span><span>vigia parado: <b>15 min</b> sem rodar</span><span>relatório: <b>1 por dia</b></span></div><p class="origem">Toda manhã, às 08:00, chega um <strong>relatório</strong> curto. Se ele não chegar, algo grave aconteceu (a máquina caiu ou os avisos pararam): a falta do relatório também é um aviso.</p></div>
-</div>
-<div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Como no dia a dia:</b> o porteiro do prédio sabe que o pacote tem prazo e liga para você quando ele estoura. Mas se o porteiro dormir, ninguém liga. Então o síndico passa de hora em hora com a lanterna para ver se ele está no posto, e de manhã deixa um bilhete com o resumo da noite.</div>
+
+<!-- ========== O QUE PRECISA / O QUE NÃO FAZ ========== -->
+<section id="precisa"><div class="wrap">
+  <p class="kicker">Antes de instalar</p>
+  <h2>O que você precisa ter, e o que o kit não promete</h2>
+  <div class="duas">
+    <div class="bloco">
+      <h3>Você precisa de</h3>
+      <ul class="lista sim">
+        <li><div><strong>Um computador ligado, com Linux ou macOS.</strong><span>Notebook de tampa fechada costuma dormir, e aí o vigia para. Ajuste para não dormir, ou use um mini PC.</span></div></li>
+        <li><div><strong>A assinatura do Claude ou do Codex.</strong><span>É por ela que a IA nova trabalha na parte final. A espera não gasta nada.</span></div></li>
+        <li><div><strong>Um sinal de que o trabalho acabou.</strong><span>Por exemplo, o arquivo do vídeo aparecer na pasta. A IA monta essa conferência com você.</span></div></li>
+        <li><div><strong>Para o aviso no celular, um bot seu no Telegram.</strong><span>A sua IA te guia para criar um em poucos minutos e liga com o seu sim.</span></div></li>
+      </ul>
+    </div>
+    <div class="bloco">
+      <h3>O kit não promete</h3>
+      <ul class="lista">
+        <li><div><strong>Instalar o bot ou o assistente da INEMA.</strong><span>Cada um tem a sua página no GitHub.</span></div></li>
+        <li><div><strong>Conferir sozinho um serviço que não diz se ficou pronto.</strong><span>Alguém precisa dizer ao vigia como perguntar.</span></div></li>
+        <li><div><strong>Gastar zero na parte final.</strong><span>A IA nova trabalha pela sua assinatura.</span></div></li>
+        <li><div><strong>Tentar de novo sozinho.</strong><span>Se falhou, o vigia avisa e para. Refazer é decisão sua.</span></div></li>
+      </ul>
+    </div>
+  </div>
 </div></section>
-<section id="bilhete"><div class="wrap">
-<span class="chip">O arquivo de passagem</span>
-<h2>Como a próxima conversa sabe o que já foi feito <span class="amb">e não começa de novo</span></h2>
-<p class="sub">Você fecha a conversa e a IA esquece tudo: sem um arquivo de passagem, ao voltar ela pode refazer o que já estava pronto ou esquecer o que você pediu. Por isso, antes de sair, ela escreve esse arquivo. Na INEMA são dois: o <strong>bilhete</strong>, para a IA nova que o vigia chama quando o trabalho fica pronto, e a <strong>passagem de sessão</strong>, para quando você mesmo volta à conversa outro dia.</p>
-<figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line)"><img alt="De madrugada, o robô porteiro da noite veste o casaco e entrega um cartão dobrado, que brilha em âmbar, ao robô que chega para o turno da manhã; na mesa, um pacote já conferido com um carimbo de visto e dois ainda esperando; à direita, um arquivo de madeira com uma gaveta aberta cheia de pastas datadas e lacradas" loading="lazy" src="assets/bilhete-handoff.jpg" style="width:100%;display:block"/></figure>
-<div class="grid g2">
-<div class="card"><h3>📝 O bilhete (CONTINUAR.md)</h3><p>Fica na pasta do trabalho. Quem lê é uma IA <strong>nova, que não sabe nada além dele</strong>, por isso o bilhete é curto e tem quatro partes:</p><ul><li><strong>O que já foi feito:</strong> cada coisa pronta e onde ela está (o roteiro aprovado, o vídeo já enviado ao gerador). É essa lista que impede a IA nova de refazer.</li><li><strong>O que falta:</strong> os passos em ordem, cada um com o que deve sair (um arquivo, um link ou uma conferência).</li><li><strong>As suas ordens, citadas:</strong> suas frases entre aspas, do jeito que você disse ("só não listado"), para ninguém reinterpretar.</li><li><strong>As travas:</strong> o que não pode acontecer ("não gastar crédito novo") e a obrigação de, no fim, escrever <strong>FEITO</strong> ou <strong>FALHOU</strong> com o motivo.</li></ul><p class="origem">Além do bilhete, o vigia anota em que ponto cada trabalho está: esperando, rodando, feito, falhou ou parado. Trabalho que já está esperando ou rodando não é aberto de novo, então ele roda uma vez só. Ele termina quando a IA nova escreve FEITO ou FALHOU, ou quando o vigia desiste sozinho (o trabalho passou do limite, morreu calado ou a IA nova acabou sem escrever nada). Em qualquer final você recebe um aviso no celular: verde se deu certo, vermelho com o motivo se falhou.</p></div>
-<div class="card"><h3>🗂️ A passagem de sessão (handoff)</h3><p>Serve para quando você limpa a conversa, ela fica cheia ou você troca de IA (Claude ↔ Codex). Cada passagem vira um arquivo novo com data e hora, <strong>nunca apagado nem sobrescrito</strong>, e um índice mostra o que ainda está aberto. Dentro, sempre na mesma ordem:</p><ul><li><strong>O que está pronto, com prova:</strong> só entra o que foi conferido, e cada item aponta onde conferir (a versão salva, o teste que passou, o arquivo).</li><li><strong>O que foi tentado e não confirmado</strong>, para não ser tratado como pronto.</li><li><strong>As decisões e o que não fazer:</strong> inclusive os caminhos que você recusou.</li><li><strong>O que ficou pela metade e a próxima ação exata</strong>, dizendo se ela precisa do seu sim.</li><li><strong>Cinco perguntas-teste</strong> (tarefa, última decisão, o que não pode mudar, o que está pela metade, próximo passo): a conversa nova responde, e a resposta é conferida.</li></ul><p class="origem">No fim do arquivo vai uma espécie de impressão digital de cada arquivo citado, tirada no momento da passagem. Se alguém mexeu depois, a IA que retoma pela passagem percebe: em vez de confiar no texto, ela checa o que está feito.</p><p class="origem"><strong>Como pedir:</strong> antes de limpar a conversa, peça à IA "handoff" (ou "encerrar sessão"). Ao voltar, numa conversa nova, peça "retoma": ela lê a passagem e te diz onde parou antes de mexer em qualquer coisa.</p></div>
-</div>
-<div class="cmpwrap"><table class="cmp">
-<thead><tr><th></th><th>Bilhete</th><th>Passagem de sessão</th></tr></thead>
-<tbody>
-<tr><td>Quem continua</td><td data-l="Bilhete">uma IA nova, sozinha, chamada pelo vigia</td><td data-l="Passagem de sessão">você, ou uma IA numa conversa nova</td></tr>
-<tr><td>Quando é escrito</td><td data-l="Bilhete">antes de fechar, com o trabalho lá fora em andamento</td><td data-l="Passagem de sessão">antes de limpar a conversa, ou quando ela enche</td></tr>
-<tr><td>Tamanho</td><td data-l="Bilhete">curto: feito, falta, ordens, travas</td><td data-l="Passagem de sessão">completo: provas, decisões e perguntas-teste</td></tr>
-<tr><td>Como termina</td><td data-l="Bilhete">com o aviso no celular: verde se deu certo, vermelho com o motivo se falhou ou se o vigia desistiu</td><td data-l="Passagem de sessão">com a próxima ação e se ela precisa do seu sim</td></tr>
-</tbody></table></div>
-<div class="analog" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;color:var(--mut)"><b style="color:var(--txt)">Como no dia a dia:</b> o porteiro da noite deixa um cartão para quem chega de manhã: "o pacote do 12 já foi entregue, faltam dois, o síndico disse para não aceitar nada sem nota". O de manhã não abre o pacote já entregue. E o livro da portaria guarda cada turno em uma página própria, que ninguém arranca.</div>
+
+<!-- ========== COMEÇAR ========== -->
+<section id="comecar"><div class="wrap"><div class="col">
+  <p class="kicker">Na prática</p>
+  <h2>Para começar, cole este pedido na sua IA</h2>
+  <ol class="tres">
+    <li><p>Abra o <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> ou o <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> na pasta do seu projeto. São IAs que mexem em arquivos e rodam programas no seu computador, sempre pedindo licença.</p></li>
+    <li><p>Cole o pedido. A IA lê o kit, pergunta quais trabalhos seus demoram e diz qual dos três jeitos serve para cada um.</p></li>
+    <li><p>Diga sim só ao que fizer sentido. Depois dispare um trabalho de verdade, feche a conversa e espere o aviso.</p></li>
+  </ol>
+  <div class="pedido">
+    <div class="pedido-barra">
+      <p>O texto é para a IA. Você não precisa entender, só copiar.</p>
+      <button class="btn" id="copiar" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="copiarTxt">Copiar o pedido</span></button>
+    </div>
+<pre id="pedidoTxt">Leia o repositório https://github.com/inematds/espera-sem-voce (o README e a pasta vigia). Depois olhe o meu projeto e me pergunte quais trabalhos demoram (vídeo, render, transcrição, gerador externo) e como eu espero hoje. Me diga, em linguagem simples, qual dos três jeitos serve para cada um (vigia, fluxo com portão ou fila que retoma), quanto tempo eu deixaria de ficar com a conversa aberta e o que precisaria para o vigia saber perguntar "ficou pronto?". Não instale nem mude nada antes do meu sim. Com o meu sim: copie o vigia de exemplo, rode o teste dele, monte o primeiro bilhete e a primeira conferência para um trabalho meu, ligue o aviso no meu celular pelo Telegram e me diga se este computador pode dormir ou desligar enquanto espera.</pre>
+  </div>
+  <span class="vh" id="aviso" role="status" aria-live="polite"></span>
+  <div class="depois">
+    <p>Prefere baixar? Não há instalador: é uma pasta com um programa pequeno em Python. <a href="https://github.com/inematds/espera-sem-voce/archive/refs/heads/main.zip">Baixe o ZIP</a> ou veja o <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">repositório</a>. Os comandos para instalar à mão estão no README.</p>
+  </div>
+</div></div></section>
+
+<!-- ========== VÍDEOS ========== -->
+<section id="video"><div class="wrap">
+  <p class="kicker">Vídeos</p>
+  <h2>Prefere assistir? Dois vídeos curtos</h2>
+  <div class="videos">
+    <figure class="short"><a href="https://www.youtube.com/shorts/sRoQb5OZWBw" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/sRoQb5OZWBw/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true">▶</span></a><figcaption>Para quem está começando</figcaption></figure>
+    <figure class="short"><a href="https://www.youtube.com/shorts/fAbHaCgTj74" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/fAbHaCgTj74/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true">▶</span></a><figcaption>Para quem roda agentes</figcaption></figure>
+  </div>
 </div></section>
-<section id="comecar"><div class="wrap">
-<span class="chip">Como começar</span>
-<h2>Você não instala nada <span class="amb">à mão</span></h2>
-<div class="step"><div class="b">1</div><div><h3>Abra um agente de IA no seu computador</h3><p>Agente é a IA que, além de conversar, mexe em arquivos e roda programas, sempre pedindo licença. Os mais usados são o <a href="https://claude.com/product/claude-code" rel="noopener" target="_blank">Claude Code</a> (da Anthropic) e o <a href="https://developers.openai.com/codex" rel="noopener" target="_blank">Codex</a> (da OpenAI). Abra o agente na pasta do seu projeto.</p></div></div>
-<div class="step"><div class="b">2</div><div><h3>Cole o pedido</h3><p>A IA lê o kit, olha os seus trabalhos demorados e diz, em linguagem simples, qual dos três jeitos serve.</p>
-<div class="pedido"><button class="copiar" type="button">Copiar</button><p>Leia o repositório https://github.com/inematds/espera-sem-voce (o README e a pasta vigia). Depois olhe o meu projeto e me pergunte quais trabalhos demoram (vídeo, render, transcrição, gerador externo) e como eu espero hoje. Me diga, em linguagem simples, qual dos três jeitos serve para cada um (vigia, fluxo com portão ou fila que retoma), quanto tempo eu deixaria de ficar com a conversa aberta e o que precisaria para o vigia saber perguntar "ficou pronto?". Não instale nem mude nada antes do meu sim. Com o meu sim: copie o vigia de exemplo, rode o teste dele, monte o primeiro bilhete e a primeira conferência para um trabalho meu, ligue o aviso no meu celular pelo Telegram e me diga se este computador pode dormir ou desligar enquanto espera.</p></div></div></div>
-<div class="step"><div class="b">3</div><div><h3>Diga sim ao que fizer sentido</h3><p>Dispare um trabalho de verdade, feche a conversa e saia da frente da tela, com o computador ligado e sem dormir. Espere o aviso no celular. Se você ainda não tem um bot no Telegram, a sua IA te guia para criar um em poucos minutos.</p></div></div>
-<div class="grid g2" style="margin-top:10px">
-<div class="card"><h3>🌐 Quer só entender, sem instalar?</h3><p>Os diagramas acima são a explicação inteira: assista cada um até o fim. Não há versão online para usar, porque o vigia roda no seu computador.</p></div>
-<div class="card"><h3>⬇️ Onde baixar?</h3><p>Não há instalador: é uma pasta com um programa pequeno (feito em Python, que a sua IA instala se faltar). Baixe o <a href="https://github.com/inematds/espera-sem-voce/archive/refs/heads/main.zip">ZIP do kit</a> ou veja o <a href="https://github.com/inematds/espera-sem-voce" rel="noopener" target="_blank">repositório</a>.</p></div>
-</div>
-<div class="card" style="margin-top:16px"><h3>🧑‍💻 É técnico?</h3><p>Como o vigia roda, o teste, os prazos exatos e onde está cada peça nos projetos de origem estão no README.</p><p><a class="btn" href="https://github.com/inematds/espera-sem-voce#instalação-técnica" rel="noopener" target="_blank">Ver a parte técnica</a></p></div>
-</div></section>
-<section id="base"><div class="wrap">
-<span class="chip">De onde vem</span>
-<h2>Três sistemas <span class="amb">que rodam todo dia</span></h2>
-<div class="grid g3">
-<div class="card"><h3>⏳ Vigia continua</h3><p>Parte do projeto interno da INEMA, que é privado. Espera vídeos com avatar e montagens desde outubro de 2026 e chama a conversa nova da IA. O desenho dele está copiado, enxuto, na pasta vigia deste kit.</p><p><a href="https://github.com/inematds/espera-sem-voce/tree/main/vigia" rel="noopener" target="_blank">Ver o vigia de exemplo</a></p></div>
-<div class="card"><h3>🏭 inemaccbot</h3><p>O bot de produção da INEMA no Telegram: comandos que viram fluxos de fases, com portão de aprovação e fases que esperam o gerador de vídeo. Código aberto.</p><p><a href="https://github.com/inematds/inemaccbot" rel="noopener" target="_blank">Ver o inemaccbot</a></p></div>
-<div class="card"><h3>🤖 openpcbotv3</h3><p>O assistente pessoal da INEMA (o Jarvis): fila guardada, sinal de vida, novas tentativas e o lugar onde chegam os avisos dos outros sistemas. Código aberto.</p><p><a href="https://github.com/inematds/openpcbotv3" rel="noopener" target="_blank">Ver o openpcbotv3</a></p></div>
-</div>
-</div></section>
+
+<!-- ========== PROVA ========== -->
 <section id="prova"><div class="wrap">
-<span class="chip">A prova</span>
-<h2>Medido nos sistemas <span class="amb">de verdade</span></h2>
-<div class="prova">
-<ol class="tl">
-<li><b>Vigia:</b> 179 trabalhos de 09/11 a 25/11/2026. 124 terminaram feitos, 50 falharam com aviso e motivo, 5 pararam no limite de espera. A espera do meio até ficar pronto foi de 92 minutos.</li>
-<li><b>Vistoria do vigia:</b> ligada em 25/11/2026. O primeiro relatório contou 286 rodadas do vigia nas 24 horas anteriores, com o maior intervalo de 6 minutos, e nenhum trabalho perdido.</li>
-<li><b>Fluxo com portão:</b> 193 fluxos de 31/07 a 20/11/2026. 151 terminaram, 15 falharam e 27 foram cancelados por quem pediu.</li>
-<li><b>Fila que retoma:</b> perto de 150 mil tarefas concluídas no assistente (quase todas automáticas, mais 170 pedidos longos de agente); 13 falharam, e cada falha gerou um aviso no chat.</li>
-<li><b>Vigia de exemplo deste kit:</b> o teste roda cinco casos em poucos segundos, sem IA: espera enquanto não está pronto, chama a fase 2 quando fica, para com aviso no limite de espera, encerra a fase 2 que passa de 3 horas, e a vistoria percebe o vigia parado (avisa uma vez e de novo quando ele volta). Cinco de cinco passaram.</li>
-</ol>
-<blockquote>As falhas também contam a favor: em todas elas o aviso chegou com o motivo, em vez de o trabalho ficar parado sem ninguém saber.</blockquote>
-<p class="fonte">Contagens tiradas dos bancos e do estado de cada sistema em 25/11/2026, Linux.</p>
-</div>
+  <p class="kicker">Medido</p>
+  <h2>Medido nos sistemas de verdade</h2>
+  <div class="numeros">
+    <div class="numero"><b>179</b><span>trabalhos esperados pelo vigia, de 09/11 a 25/11/2026: 124 feitos, 50 falharam com aviso e motivo, 5 pararam no limite.</span></div>
+    <div class="numero"><b>92 min</b><span>foi a espera do meio até ficar pronto: metade dos trabalhos demora mais que isso.</span></div>
+    <div class="numero"><b>193</b><span>fluxos com portão de 31/07 a 20/11/2026: 151 terminaram, 15 falharam, 27 cancelados por quem pediu.</span></div>
+    <div class="numero"><b>5 de 5</b><span>casos do teste do vigia de exemplo passam em poucos segundos, sem IA.</span></div>
+  </div>
+  <p class="sub">A vistoria, ligada em 25/11/2026, contou no primeiro relatório 286 rodadas do vigia em 24 horas, com o maior intervalo de 6 minutos e nenhum trabalho perdido. A fila do assistente concluiu perto de 150 mil tarefas; 13 falharam, e cada falha gerou um aviso. Contagens tiradas dos bancos de cada sistema em 25/11/2026.</p>
 </div></section>
-<section id="faq"><div class="wrap">
-<span class="chip">Perguntas</span>
-<h2>Antes de <span class="amb">você perguntar</span></h2>
-<div class="grid g2">
-<div class="card"><h3>Preciso programar?</h3><p>Não. Você cola o pedido do "Como começar" e a sua IA monta o vigia para os seus trabalhos. Você só diz sim.</p></div>
-<div class="card"><h3>Custa alguma coisa?</h3><p>O kit é grátis e aberto. A espera não gasta nada. A fase final usa a sua IA (a assinatura do Claude ou do Codex), como qualquer outro trabalho dela.</p></div>
-<div class="card"><h3>Preciso deixar o computador ligado?</h3><p>Sim. A máquina onde o vigia roda fica ligada e sem dormir; o que você fecha é a conversa. Num notebook, fechar a tampa costuma suspender tudo: ajuste para não dormir, ou use um mini PC ou um servidor alugado.</p></div>
-<div class="card"><h3>Qual dos três eu uso?</h3><p>Trabalho que você começa conversando com a IA: o vigia. Produção que se repete com aprovação: o fluxo com portão. Pedido do dia a dia: a fila. O pedido do "Como começar" faz a IA escolher com você.</p></div>
-<div class="card"><h3>E se o gerador nunca terminar?</h3><p>Cada jeito tem um limite. Passou dele, você recebe o aviso vermelho com o motivo, em vez de esperar para sempre. E se o próprio vigia parar, a vistoria de hora em hora avisa: veja <a href="#silencio">E se travar?</a></p></div>
-<div class="card"><h3>Funciona com outra IA?</h3><p>Sim. O vigia chama o comando que você escolher para a fase 2; o exemplo usa o Claude Code, e dá para trocar pelo Codex.</p></div>
-</div>
-<p class="sub" style="margin-top:28px">Qual trabalho seu ainda prende você na frente da tela esperando? Venha contar e ver outros kits grátis no <a href="https://inema.club" rel="noopener" target="_blank">inema.club</a>, direto na internet.</p>
-</div></section>
-</main>
-<footer><div class="wrap">
-<span class="pill">grátis</span><span class="pill">código aberto</span><span class="pill">aviso pelo Telegram</span><span class="pill">qualquer IA</span>
-<p><a href="https://github.com/inematds/espera-sem-voce" rel="noopener" target="_blank">github.com/inematds/espera-sem-voce</a> · <a href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a></p>
-</div></footer>
-<script>
-(function(){var b=document.body,t=document.getElementById('themeToggle');
-try{if(localStorage.getItem('tema')==='light'){b.classList.add('light');t.textContent='☀️'}}catch(e){}
-t.onclick=function(){b.classList.toggle('light');var l=b.classList.contains('light');t.textContent=l?'☀️':'🌙';try{localStorage.setItem('tema',l?'light':'dark')}catch(e){}};
-document.querySelectorAll('.copiar').forEach(function(bt){bt.onclick=function(){var p=bt.parentNode.querySelector('p');var txt=p.textContent;
-(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){bt.textContent='Copiado ✓'},function(){var r=document.createRange();r.selectNodeContents(p);var s=getSelection();s.removeAllRanges();s.addRange(r);bt.textContent='Selecionado: Ctrl+C'});setTimeout(function(){bt.textContent='Copiar'},2500)}});})();
 
+<!-- ========== PERGUNTAS ========== -->
+<section id="perguntas"><div class="wrap"><div class="col">
+  <p class="kicker">Perguntas</p>
+  <h2>Perguntas antes de começar</h2>
+  <div class="faq">
+    <details><summary>Preciso programar?</summary><p>Não. Você cola o pedido e a sua IA monta o vigia para os seus trabalhos. Você só diz sim.</p></details>
+    <details><summary>Custa alguma coisa?</summary><p>O kit é grátis e aberto. A espera não gasta nada. A parte final usa a sua IA (a assinatura do Claude ou do Codex), como qualquer outro trabalho dela.</p></details>
+    <details><summary>Preciso deixar o computador ligado?</summary><p>Sim. A máquina onde o vigia roda fica ligada e sem dormir; o que você fecha é a conversa.</p></details>
+    <details><summary>Qual dos três eu uso?</summary><p>Trabalho que você começa conversando com a IA: o vigia. Produção que se repete com aprovação: o fluxo com portão. Pedido do dia a dia: a fila. O pedido acima faz a IA escolher com você.</p></details>
+    <details><summary>Funciona com outra IA?</summary><p>Sim. O vigia chama o comando que você escolher para a parte final; o exemplo usa o Claude Code, e dá para trocar pelo Codex.</p></details>
+  </div>
+</div></div></section>
+
+<!-- ========== FECHO ========== -->
+<section class="fecho"><div class="wrap">
+  <h2>E você: qual trabalho ainda te prende na frente da tela?</h2>
+  <p>Venha contar e ver outros kits grátis no <a href="https://inema.club" target="_blank" rel="noopener">inema.club</a>, direto na internet.</p>
+  <div class="cta"><a class="btn" href="#comecar">Ir para o pedido</a></div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <nav aria-label="Rodapé">
+    <span>Vigia — Espera sem você · kit do INEMA</span>
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <a href="https://github.com/inematds/espera-sem-voce" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <button class="tema" id="tema" type="button">Tema claro</button>
+</div></footer>
+
+<script>
+(function(){
+  /* tema: sai do topo e vai para o rodapé */
+  var K='espera-sem-voce-theme', b=document.body, t=document.getElementById('tema');
+  function rot(){ t.textContent = b.classList.contains('light') ? 'Tema escuro' : 'Tema claro'; }
+  try{ if(localStorage.getItem(K)==='light') b.classList.add('light'); }catch(e){}
+  rot();
+  t.addEventListener('click',function(){
+    var l=b.classList.toggle('light'); rot();
+    try{ localStorage.setItem(K, l?'light':'dark'); }catch(e){}
+  });
+
+  /* copiar o pedido: cópia direta primeiro (funciona com a página aberta como arquivo), depois a área de transferência */
+  var bt=document.getElementById('copiar'), lb=document.getElementById('copiarTxt'),
+      tx=document.getElementById('pedidoTxt'), av=document.getElementById('aviso'), orig=lb.textContent, timer;
+  function ok(){ lb.textContent='Copiado'; av.textContent='Pedido copiado.'; clearTimeout(timer);
+    timer=setTimeout(function(){ lb.textContent=orig; av.textContent=''; },2500); }
+  function falhou(){ lb.textContent='Selecione o texto e copie'; var r=document.createRange(); r.selectNodeContents(tx);
+    var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+  function direto(){
+    var a=document.createElement('textarea'); a.value=tx.textContent; a.setAttribute('readonly','');
+    a.style.position='fixed'; a.style.opacity='0'; document.body.appendChild(a); a.select();
+    var feito=false; try{ feito=document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(a); return feito;
+  }
+  bt.addEventListener('click',function(){
+    if(direto()){ ok(); return; }
+    var resolvido=false;
+    function fim(f){ return function(){ if(!resolvido){ resolvido=true; f(); } }; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      try{ navigator.clipboard.writeText(tx.textContent).then(fim(ok), fim(falhou)); }catch(e){ fim(falhou)(); }
+      setTimeout(fim(falhou),1500);   /* se o navegador não responder, deixa o texto selecionado */
+    }else{ falhou(); }
+  });
+})();
+</script>
+<script>
 /* Diagramas: um único loop rAF, pausado fora da tela; movimento reduzido = estado final parado. */
 (function(){
   var reduz=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
